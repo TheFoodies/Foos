@@ -3,8 +3,11 @@ var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
   items : {
-    type: String,
-    ref: "Cart"
+    item: {
+      type: String,
+      ref: "Cart"
+    },
+    specialInstructions: String
   },
   quantity: {
     type: Number,

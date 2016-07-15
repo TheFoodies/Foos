@@ -17,6 +17,10 @@ var userSchema = new Schema({
   phone: {
     type: Number,
     required: true
+  },
+  userType: {
+    type: String,
+    required: true
   }
 });
 

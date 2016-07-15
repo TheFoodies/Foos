@@ -17,6 +17,12 @@ var foodSchema = new Schema({
   images: {
     type: Array,
     required: true
+  },
+  allergyInfo: {
+    type: String
+  },
+  size: {
+    type: String
   }
 });
 
