@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var cartSchema = new Schema({
   items : {
     type: String,
-    ref: Cart
+    ref: "Food"
   },
   quantity: {
     type: Number,

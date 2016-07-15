@@ -16,7 +16,7 @@ var restaurantSchema = new Schema({
   },
   menu: {
     type: Array,
-    ref: Food
+    ref: "Food"
   },
   location: {
     type: String,
@@ -24,7 +24,7 @@ var restaurantSchema = new Schema({
   },
   orders: {
     type: Array,
-    ref: Order
+    ref: "Order"
   }
 });
 

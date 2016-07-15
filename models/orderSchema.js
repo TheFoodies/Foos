@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var orderSchema = new Schema({
   items : {
     type: String,
-    ref: Cart
+    ref: "Cart"
   },
   quantity: {
     type: Number,
