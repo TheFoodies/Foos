@@ -12,6 +12,13 @@ var Order = require('./models/orderSchema');
 var Restaurant = require('./models/restaurantSchema');
 var User = require('./models/userSchema');
 
+//controllers
+
+var cartController = require('./serverControllers/cartController');
+var foodController = require('./serverControllers/foodController');
+// var orderController = require('./serverControllers/orderController');
+var restaurantController = require('./serverControllers/restaurantController');
+// var userController = require('./serverControllers/userController');
 
 //mongoose setup
 
@@ -36,139 +43,34 @@ app.use(express.static('public'));
 
 
 //Cart
-app.get('/api/cart/:id', function(req, res, next) {
-  Cart.findById(req.params.id, function(err, cartResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(cartResponse)
-    }
-  })
-})
+app.get('/api/cart/:id', cartController.show)
 
-app.post('/api/cart/', function(req, res, next) {
-  Cart.create(function(err, cartResponse) {
-    var newCart = new Cart(req.body);
-    newCart.save(function(err, saved) {
-      if(err) {
-        console.log(err)
-      } else {
-        res.status(200).json(saved)
-      }
-    })
-  })
-})
+app.post('/api/cart/', cartController.create)
 
-app.put('/api/cart/:id', function(req, res, next) {
-  Cart.findByIdAndUpdate(req.params.id, req.body, function(err, cartResponse) {
-    if(err) {
-      console.log(err)
-    } else {
-      res.status(200).json(cartResponse)
-    }
-  })
-})
+app.put('/api/cart/:id', cartController.update)
 
-app.delete('/api/cart/:id', function(req, res, next) {
-  Cart.findByIdAndRemove(req.params.id, function(err, cartResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(cartResponse)
-    }
-  })
-})
+app.delete('/api/cart/:id', cartController.destroy)
 
 //Food
-app.get('/api/food/:id', function(req, res, next) {
-  Food.findById(req.params.id, function(err, foodResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(foodResponse)
-    }
-  })
-})
+app.get('/api/food/:id', foodController.show)
 
-app.post('/api/food/', function(req, res, next) {
-  Food.create(function(err, foodResponse) {
-    var newFood = new Food(req.body);
-    newFood.save(function(err, saved) {
-      if(err) {
-        console.log(err)
-      } else {
-        res.status(200).json(saved)
-      }
-    })
-  })
-})
+app.post('/api/food/', foodController.create)
 
-app.put('/api/food/:id', function(req, res, next) {
-  Food.findByIdAndUpdate(req.params.id, req.body, function(err, foodResponse) {
-    if(err) {
-      console.log(err)
-    } else {
-      res.status(200).json(foodResponse)
-    }
-  })
-})
+app.put('/api/food/:id', foodController.update)
 
-app.delete('/api/food/:id', function(req, res, next) {
-  Food.findByIdAndRemove(req.params.id, function(err, foodResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(foodResponse)
-    }
-  })
-})
+app.delete('/api/food/:id', foodController.destroy)
 
 //Order
 
 
 //Restaurant
-app.get('/api/restaurant/:id', function(req, res, next) {
-  Restaurant.findById(req.params.id, function(err, restaurantResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(restaurantResponse)
-    }
-  })
-})
+app.get('/api/restaurant/:id', restaurantController.show)
 
-app.post('/api/restaurant/', function(req, res, next) {
-  Restaurant.create(function(err, restaurantResponse) {
-    var newRestaurant = new Restaurant(req.body);
-    newRestaurant.save(function(err, saved) {
-      if(err) {
-        console.log(err)
-      } else {
-        res.status(200).json(saved)
-      }
-    })
-  })
-})
+app.post('/api/restaurant/', restaurantController.create)
 
-app.put('/api/restaurant/:id', function(req, res, next) {
-  Restaurant.findByIdAndUpdate(req.params.id, req.body, function(err, restaurantResponse) {
-    if(err) {
-      console.log(err)
-    } else {
-      res.status(200).json(restaurantResponse)
-    }
-  })
-})
+app.put('/api/restaurant/:id', restaurantController.update)
 
-app.delete('/api/restaurant/:id', function(req, res, next) {
-  Restaurant.findByIdAndRemove(req.params.id, function(err, restaurantResponse) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.status(200).json(restaurantResponse)
-    }
-  })
-})
+app.delete('/api/restaurant/:id', restaurantController.destroy)
 
 //User
 
