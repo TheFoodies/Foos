@@ -21,8 +21,8 @@ var foodSchema = new Schema({
   allergyInfo: {
     type: String
   },
-  size: {
-    type: String
+  sizes: {
+    type: Array
   }
 });
 
