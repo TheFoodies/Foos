@@ -25,6 +25,9 @@ var restaurantSchema = new Schema({
   orders: {
     type: Array,
     ref: "Order"
+  },
+  yelpId: {
+    type: String,
   }
 });
 
