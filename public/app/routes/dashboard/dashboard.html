@@ -1,0 +1,18 @@
+<!-- NAVBAR HERE I THINK -->
+
+<!-- this can change but Ill do this for now -->
+
+<div class="display-info-class">
+  {{restaurantInfo.name}}
+  {{restaurantInfo.email}}
+  {{restaurantInfo.phone}}
+</div>
+
+<div class="">
+  <form ng-submit="updateRestaurantInfo(restInfo)">
+    <input placeholder="name" ng-model="restInfo.name">
+    <input placeholder="email" ng-model="restInfo.email">
+    <input placeholder="phone" ng-model="restInfo.phone">
+    <button type="submit">update restaurant information</button>
+  </form>
+</div>
