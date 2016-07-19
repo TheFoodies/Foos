@@ -23,4 +23,13 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/order/order.html',
         controller: 'orderController'
       })
+      .state('dashboard', {
+        url: '/dashboard',
+        templateUrl: './app/routes/dashboard/dashboard.html',
+        controller: 'dashboardCtrl'
+      })
+      .state('faq', {
+        url: '/faq',
+        templateUrl: './app/routes/faq/faq.html'
+      })
   })
