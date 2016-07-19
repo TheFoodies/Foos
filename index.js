@@ -1,6 +1,6 @@
+var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var express = require('express');
 var mongoose = require('mongoose');
 var session = require('express-session');
 
@@ -18,29 +18,59 @@ var cartController = require('./serverControllers/cartController');
 var foodController = require('./serverControllers/foodController');
 // var orderController = require('./serverControllers/orderController');
 var restaurantController = require('./serverControllers/restaurantController');
-// var userController = require('./serverControllers/userController');
+var userController = require('./serverControllers/userController');
 
 //mongoose setup
 
 mongoose.connect("mongodb://localhost/foos");
 
-
 //express setup
+
+//***************Local Auth Requires****************************
+var config = require('./config');
+
+//*************Local Auth Controller****************************
+var UserCtrl = require('./serverControllers/userController');
+
+//*************Local Auth Service*******************************
+var passport = require('./serverControllers/passportController');
+
+//*************Local Auth Policy********************************
+var isAuthed = function(req, res, next) {
+  if (!req.isAuthenticated()) return res.status(401).send();
+  return next();
+};
+//*****************Local Auth Requires End**********************
 
 var app = express();
 app.use(bodyParser.json());
+app.use(session({
+  secret: config.SESSION_SECRET,
+  saveUninitialized: false,
+  resave: false
+}));
 app.use(cors());
 app.use(express.static('public'));
 
-//***************Todo Set Up LocalAuth Here*************************
+//***********Local Auth*************************
+app.use(passport.initialize());
+app.use(passport.session());
 
+//*************Local Auth Endpoints***********
+app.post('/users', UserCtrl.register);
+app.get('/me', isAuthed, UserCtrl.me);
+app.put('/users/:_id', isAuthed, UserCtrl.update);
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/me'
+}));
 
-
-
+app.get('/logout', function(req, res, next) {
+  req.logout();
+  return res.status(200).send('logged out');
+});
 
 //**************Endpoints***************
-
 
 //Cart
 app.get('/api/cart/:id', cartController.show)
