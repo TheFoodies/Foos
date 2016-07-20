@@ -16,12 +16,12 @@
     <section class="main-nav">
       <nav>
         <ul class="navbar">
-          <li>FOOS</li>
-          <li>F.O.O.S.</li>
-          <li>LOGO</li>
-          <li>LINK</li>
-          <li>Logo</li>
-          <li>Link</li>
+          <li><a ui-sref="home">HOME Page</a></li>
+          <li><a ui-sref="restaurants">restaurants</a></li>
+          <li><a ui-sref="menu">MENU</a></li>
+          <li><a ui-sref="order">order</a></li>
+          <li><a ui-sref="dashboard">dashboard</a></li>
+          <li><a ui-sref="faq">faq</a></li>
         </ul>
       </nav>
     </section>
@@ -29,6 +29,7 @@
     <ui-view></ui-view>
 
     <script src="./dependencies.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
     <script src="./bundle.js" charset="utf-8"></script>
 
 
