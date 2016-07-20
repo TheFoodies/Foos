@@ -17,6 +17,7 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
+
       .state('menu.information', {
         url: '/info',
         templateUrl: './app/routes/menu/menu-information.html',
@@ -36,5 +37,21 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         url: '/cart',
         templateUrl: './app/routes/cart/cart.html',
         controller: 'cartController'
+      })
+      .state('order', {
+        // url: '/restaurant/:restaurantID',
+        url: '/order',
+        templateUrl: './app/routes/order/order.html',
+        controller: 'orderController'
+      })
+      .state('dashboard', {
+        url: '/dashboard',
+        templateUrl: './app/routes/dashboard/dashboard.html',
+        controller: 'dashboardCtrl'
+      })
+      .state('faq', {
+        url: '/faq',
+        templateUrl: './app/routes/faq/faq.html'
+
       })
   })
