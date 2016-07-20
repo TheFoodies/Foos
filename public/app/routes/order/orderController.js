@@ -1,5 +1,9 @@
-angular.module("foodie").controller("orderController", function($scope) {
+angular.module("foodie").controller("orderController", function($scope, $http) {
 
-  $scope.test = "Bob Johnson"
+  $scope.orderFeed = function(){
+    service.getOrder().then(function (response){
+      $scope.orderFeed = response;
+    })
+  }
 
 })

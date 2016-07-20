@@ -91,7 +91,7 @@ app.put('/api/food/:id', foodController.update)
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
-app.get('/api/order/:id', orderController.show)
+app.get('/api/order/', orderController.show)
 
 app.post('/api/order/', orderController.create)
 
