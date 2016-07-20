@@ -1,0 +1,19 @@
+.navbar-header-everypage {
+  width: 100vw;
+  height: 80px;
+  background: #333333;
+  border-bottom: 16px solid #00b3a1;
+}
+
+.navbar-header-everypage nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+.navbar-header-everypage nav a {
+  color: white;
+}

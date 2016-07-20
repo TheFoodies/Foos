@@ -42,6 +42,8 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     templateUrl: './app/routes/faq/faq.html'
 
   });
+
+  $urlRouterProvider.otherwise('/');
 }]);
 // angular.module("foodie").directive('slickSlider',function($timeout){
 //  return {
@@ -24335,6 +24337,7 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   // }
 
 }]);
+angular.module("foodie").service("restaurantService", function () {});
 angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $http) {
 
   this.getYelpData = function (restaurant) {
@@ -24346,6 +24349,12 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
   $scope.cart = {};
@@ -24425,7 +24434,71 @@ angular.module("foodie").controller("menuController", ["$scope", "yelpService", 
 
   // $scope.getRestaurant();
 }]);
-angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
+angular.module('foodie').service('userService', ["$http", function ($http) {
 
-  $scope.test = "Bob Johnson";
+  // something to post to users cart
+  // someting to get posted items
+  // something to delete items in the cart
+
+  //probs for restaurant
+  this.getUser = function () {
+    return $http({
+      method: 'GET',
+      url: 'URL'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  // POST AKA SIGNUP
+  // this.getUser = function () {
+  //   return $http({
+  //     method: 'GET',
+  //     url: 'URL'
+  //   })
+  //   .then(function (response) {
+  //     return response.data;
+  //   })
+  // }
+
+  //changes user info
+  this.updateUser = function () {
+    return $http({
+      method: 'PUT',
+      url: 'URL'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  this.deleteAccount = function () {
+    return $http({
+      method: 'DELETE',
+      url: 'URL'
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  //ending
+}]);
+angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
+
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+    });
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get" + response);
+      return response.data;
+    });
+  };
 }]);
