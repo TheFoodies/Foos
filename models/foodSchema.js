@@ -23,9 +23,6 @@ var foodSchema = new Schema({
   },
   sizes: {
     type: Array
-  },
-  category: {
-    type: String
   }
 });
 
