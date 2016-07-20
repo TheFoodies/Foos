@@ -12,9 +12,6 @@ var orderSchema = new Schema({
   quantity: {
     type: Number,
     min: 1
-  },
-  time: {
-    type: String
   }
 });
 

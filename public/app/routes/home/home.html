@@ -1,0 +1,24 @@
+<img src="../images/home-temp.jpg">
+<!-- /Users/jordangroff/Desktop/Foos/Foos/public/images/home-temp.jpg -->
+
+<nav-dir></nav-dir>
+<section class="parent">
+<section class="login-bar">
+<h1>ENTER YOUR LOG-IN</h1>
+<form ng-submit="login(user)">
+  Username: <input type="string" ng-model="user.username" required/>
+  Password: <input type="password" ng-model="user.password" required/>
+  <button type="submit">Login</button>
+  </form>
+  </section>
+<br><br><br>
+<section class="create-box">
+<h1>CREATE A NEW ACCOUNT</h1>
+<form ng-submit="register(newUser)">
+  Username: <input type="text" ng-model="newUser.username" required/>
+  Email: <input type="email" ng-model="newUser.email" required/>
+  Password: <input type="password" ng-model="newUser.password" required/>
+  <button type="submit">Register</button>
+</form>
+</section>
+</section>
