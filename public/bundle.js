@@ -12,7 +12,6 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     url: '/restaurant/:restaurantID',
     templateUrl: './app/routes/menu/menu.html',
     controller: 'menuController'
-<<<<<<< HEAD
   }).state('menu.information', {
     url: '/info',
     templateUrl: './app/routes/menu/menu-information.html',
@@ -32,14 +31,7 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
   }).state('order', {
     // url: '/restaurant/:restaurantID',
     url: '/order',
-    templateUrl: './app/routes/order/order.html',
-    controller: 'orderController'
-=======
-  }).state('order', {
-    // url: '/restaurant/:restaurantID',
-    url: '/order',
     templateUrl: './app/routes/order/order.html'
->>>>>>> master
   }).state('dashboard', {
     url: '/dashboard',
     templateUrl: './app/routes/dashboard/dashboard.html',
@@ -21412,7 +21404,6 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         return Slick;
     }();
 
-<<<<<<< HEAD
     Slick.prototype.activateADA = function () {
         var _ = this;
 
@@ -24255,7 +24246,7 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         e = a.length;for (f = 0; e > f; f++) if ("object" == typeof c || "undefined" == typeof c ? a[f].slick = new b(a[f], c) : g = a[f].slick[c].apply(a[f].slick, d), "undefined" != typeof g) return g;return a;
   };
 });
-
+angular.module("foodie").service("cartService", ["$http", "$q", function ($http, $q) {}]);
 angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $http) {
 
   this.getYelpData = function (restaurant) {
@@ -24266,6 +24257,18 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
       return response.data;
     });
   };
+}]);
+angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
+
+  $scope.cart = {};
+
+  $scope.getCart = function () {
+    cartService.getCart().then(function (cart) {
+      $scope.cart = cart;
+    });
+  };
+
+  // $scope.getCart();
 }]);
 angular.module('foodie').controller('dashboardCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
 
@@ -24312,18 +24315,6 @@ angular.module('foodie').controller('dashboardService', ["$http", function ($htt
 
   //ending
 }]);
-angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
-
-  $scope.cart = {};
-
-  $scope.getCart = function () {
-    cartService.getCart().then(function (cart) {
-      $scope.cart = cart;
-    });
-  };
-
-  // $scope.getCart();
-}]);
 angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
 
   // $scope.getYelpData = function() {
@@ -24343,15 +24334,8 @@ angular.module("foodie").controller("menuController", ["$scope", "yelpService", 
   };
 
   // $scope.getRestaurant();
-=======
-  $scope.getYelpData = function () {
-    yelpService.getYelpData($scope.restaurant).then(function (data) {
-      $scope.yelpData = data;
-    });
-  };
 }]);
 angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
 
   $scope.test = "order controller";
->>>>>>> master
 }]);
