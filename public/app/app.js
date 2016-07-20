@@ -17,4 +17,24 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
+      .state('menu.information', {
+        url: '/info',
+        templateUrl: './app/routes/menu/menu-information.html',
+        controller: 'menuController'
+      })
+      .state('menu.photos', {
+        url: '/photos',
+        templateUrl: './app/routes/menu/menu-photos.html',
+        controller: 'menuController'
+      })
+      .state('menu.map', {
+        url: '/map',
+        templateUrl: './app/routes/menu/menu-map.html',
+        controller: 'menuController'
+      })
+      .state('cart', {
+        url: '/cart',
+        templateUrl: './app/routes/cart/cart.html',
+        controller: 'cartController'
+      })
   })
