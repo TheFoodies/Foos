@@ -1,85 +1,33 @@
-#hamburger-mainpage-img {
-  width: 100vw;
-  height: 400px;
+.parent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-left: 170px;
 }
 
-.catch-phrase-ondemand {
-  // border: red dashed 1px;
-  height: 10px;
-  position: absolute;
-  top: 270px;
-  color: white;
-  font-size: 40px;
-  left: 510px;
+.login-bar {
+	padding: 90px 0 0 700px;
+	width: 75%;
+	height: 300px;
+	align-items: flex-end;
+	background: white;
 }
 
-
-
-
-.three-card-definitions-container {
-  // border: red dashed 1px;
-  width: 80%;
-  height: 400px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
+.create-box {
+	padding: 90px 0 0 700px;
+	width: 75%;
+	height: 300px;
+	align-items: flex-end;
+	background-color: white;
 }
 
-.three-card-definitions {
-  width: 30%;
-  height: 400px;
-  // border: blue dashed 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.three-card-definitions h2 {
-  margin-top: 20px;
-  font-size: 40px;
-}
-
-.three-card-definitions p {
-  margin: 20px;
-  margin-top: 20px;
-  text-align: center;
-}
-
-
-
-
-
-.instructions-container {
-  // border: green dashed 1px;
-  height: 1100px;
-  width: 80%;
-  margin: auto;
-  // margin-top: 20px;
-
-
-}
-
-.instruction {
-  margin: auto;
-  margin-top: 30px;
-  // border: red dashed 2px;
-  height: 300px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  img {
-    width: 67%;
-    height: 100%;
-  }
-  p {
-    margin: 50px;
-    text-align: center;
-
-  }
-}
-
-.instruction p span {
-  color: #00b3a1;
-  font-size: 16px;
-}
+// @media {
+// 	.login-bar {
+// 		padding: 90px 0 0 400px;
+// 	}
+//
+// 	.create-box {
+// 		padding: 90px 0 0 400px;
+// 	}
+// }
