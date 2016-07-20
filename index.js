@@ -16,7 +16,7 @@ var User = require('./models/userSchema');
 
 var cartController = require('./serverControllers/cartController');
 var foodController = require('./serverControllers/foodController');
-// var orderController = require('./serverControllers/orderController');
+var orderController = require('./serverControllers/orderController');
 var restaurantController = require('./serverControllers/restaurantController');
 var userController = require('./serverControllers/userController');
 
@@ -91,7 +91,13 @@ app.put('/api/food/:id', foodController.update)
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
+app.get('/api/order/:id', orderController.show)
 
+app.post('/api/order/', orderController.create)
+
+app.put('/api/order/:id', orderController.update)
+
+app.delete('/api/order/:id', orderController.destroy)
 
 //Restaurant
 app.get('/api/restaurant/:id', restaurantController.show)
