@@ -31,7 +31,8 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
   }).state('order', {
     // url: '/restaurant/:restaurantID',
     url: '/order',
-    templateUrl: './app/routes/order/order.html'
+    templateUrl: './app/routes/order/order.html',
+    controller: 'orderController'
   }).state('dashboard', {
     url: '/dashboard',
     templateUrl: './app/routes/dashboard/dashboard.html',
@@ -41,6 +42,51 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     templateUrl: './app/routes/faq/faq.html'
 
   });
+}]);
+// angular.module("foodie").directive('slickSlider',function($timeout){
+//  return {
+//    restrict: 'A',
+//    link: function(scope, element, attrs) {
+//      $timeout(function() {
+//          $(element).slick(scope.$eval(attrs.slickSlider));
+//      });
+//    }
+//  }
+// });
+
+angular.module("foodie").directive('slickSliderFor', ["$timeout", function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            $timeout(function () {
+                $(element).slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '.slider-nav',
+                    autoplay: true
+                });
+            });
+        }
+    };
+}]);
+angular.module("foodie").directive('slickSliderNav', ["$timeout", function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            $timeout(function () {
+                $(element).slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.slider-for',
+                    arrows: true,
+                    centerMode: true,
+                    focusOnSelect: true
+                });
+            });
+        }
+    };
 }]);
 /**
  * @license AngularJS v1.5.7
@@ -24201,51 +24247,6 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         e = a.length;for (f = 0; e > f; f++) if ("object" == typeof c || "undefined" == typeof c ? a[f].slick = new b(a[f], c) : g = a[f].slick[c].apply(a[f].slick, d), "undefined" != typeof g) return g;return a;
   };
 });
-// angular.module("foodie").directive('slickSlider',function($timeout){
-//  return {
-//    restrict: 'A',
-//    link: function(scope, element, attrs) {
-//      $timeout(function() {
-//          $(element).slick(scope.$eval(attrs.slickSlider));
-//      });
-//    }
-//  }
-// });
-
-angular.module("foodie").directive('slickSliderFor', ["$timeout", function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            $timeout(function () {
-                $(element).slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    fade: true,
-                    asNavFor: '.slider-nav',
-                    autoplay: true
-                });
-            });
-        }
-    };
-}]);
-angular.module("foodie").directive('slickSliderNav', ["$timeout", function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            $timeout(function () {
-                $(element).slick({
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                    asNavFor: '.slider-for',
-                    arrows: true,
-                    centerMode: true,
-                    focusOnSelect: true
-                });
-            });
-        }
-    };
-}]);
 
 angular.module('foodie').service('foodService', ["$http", "$stateParams", function ($http, $stateParams) {
 
@@ -24403,85 +24404,6 @@ angular.module('foodie').controller('dashboardService', ["$http", function ($htt
   //ending
 }]);
 angular.module('foodie').controller('foodFeedController', ["$scope", "foodService", function ($scope, foodService) {}]);
-<<<<<<< HEAD
-angular.module('foodie').service('foodService', ["$http", "$stateParams", function ($http, $stateParams) {
-=======
-angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
->>>>>>> master
-
-  this.createFood = function (food) {
-    return $http({
-      method: "POST",
-      url: "/api/food",
-      data: food
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.updateFood = function (id, food) {
-    return $http({
-      method: "PUT",
-      url: "/api/food" + id,
-      data: food
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.deleteFood = function (id) {
-    return $http({
-      method: "DELETE",
-      url: "/api/food" + id
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.editFood = function (id, food) {
-    return $http({
-      method: "PUT",
-      url: "/api/food" + id,
-      data: food
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.getFood = function (id, food) {
-    return $http({
-      method: "GET",
-      url: "/api/food?_id=" + id
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.getFoods = function () {
-    return $http({
-      method: "GET",
-      url: "/api/food"
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  this.getFoodByCategory = function (category) {
-    return $http({
-      method: "GET",
-      url: "/api/food?category=" + category
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-}]);
 angular.module('foodie').controller('homeController', ["$scope", function ($scope) {}]);
 angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
 
@@ -24505,5 +24427,5 @@ angular.module("foodie").controller("menuController", ["$scope", "yelpService", 
 }]);
 angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
 
-  $scope.test = "order controller";
+  $scope.test = "Bob Johnson";
 }]);
