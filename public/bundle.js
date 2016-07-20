@@ -12,6 +12,7 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     url: '/restaurant/:restaurantID',
     templateUrl: './app/routes/menu/menu.html',
     controller: 'menuController'
+<<<<<<< HEAD
   }).state('menu.information', {
     url: '/info',
     templateUrl: './app/routes/menu/menu-information.html',
@@ -33,6 +34,12 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     url: '/order',
     templateUrl: './app/routes/order/order.html',
     controller: 'orderController'
+=======
+  }).state('order', {
+    // url: '/restaurant/:restaurantID',
+    url: '/order',
+    templateUrl: './app/routes/order/order.html'
+>>>>>>> master
   }).state('dashboard', {
     url: '/dashboard',
     templateUrl: './app/routes/dashboard/dashboard.html',
@@ -21405,6 +21412,7 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         return Slick;
     }();
 
+<<<<<<< HEAD
     Slick.prototype.activateADA = function () {
         var _ = this;
 
@@ -24335,4 +24343,15 @@ angular.module("foodie").controller("menuController", ["$scope", "yelpService", 
   };
 
   // $scope.getRestaurant();
+=======
+  $scope.getYelpData = function () {
+    yelpService.getYelpData($scope.restaurant).then(function (data) {
+      $scope.yelpData = data;
+    });
+  };
+}]);
+angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
+
+  $scope.test = "order controller";
+>>>>>>> master
 }]);

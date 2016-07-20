@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .cart-main-container {
   width: 80vw;
   margin: 0px auto;
@@ -146,3 +147,140 @@
 
 .slider-nav img {
   height: 100%; }
+=======
+
+.order-main-container {
+  width: 100vw;
+  font-family: Oswald; }
+
+.order-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 80vw;
+  margin: 0px 60px 0px 60px; }
+
+.left-col {
+  width: 65vw;
+  margin: 0px;
+  /*margin: auto;*/ }
+
+.right-col {
+  width: 35vw;
+  margin: 0px 0px 0px 20px;
+  /*margin: auto;*/ }
+
+.order-qty {
+  margin-left: 15px;
+  font-family: roboto condensed; }
+
+.item-info {
+  height: auto;
+  font-family: Oswald;
+  margin: 0px 20px 12px 0px; }
+
+.item-desc {
+  font-family: Oswald;
+  margin: 0px 0px 0px 0px; }
+
+.item-name {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 0px 0px 23px; }
+
+.order-title {
+  text-align: left;
+  font-size: 30px;
+  padding: 26px 10px 10px 0px;
+  border-bottom: 2px solid #00b3a1; }
+
+.new-order-container {
+  width: 52vw;
+  height: auto;
+  margin: auto;
+  border-bottom: 2px solid #00b3a1;
+  text-align: left; }
+
+.order-info-bar {
+  width: 52vw;
+  height: auto;
+  margin: auto; }
+
+.order-info-bar li {
+  font-family: Oswald; }
+
+.info-bar {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px 10px 0px;
+  margin: 20px; }
+
+.info-bar-1 {
+  text-align: left;
+  width: 50vw;
+  height: auto;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px 0px 20px; }
+
+.info-bar div {
+  font-family: roboto condensed; }
+
+.info-bar-1 div {
+  font-family: roboto condensed; }
+
+.one-width {
+  text-align: left;
+  width: 14vw;
+  font-size: 22px; }
+
+.two-width {
+  text-align: left;
+  width: 30vw;
+  font-size: 22px;
+  position: relative; }
+
+.four-width {
+  text-align: left;
+  width: 52vw;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  text-align: left; }
+
+.five-width {
+  width: 15vw;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  text-align: left; }
+
+.order-items-container {
+  margin-left: 5vw; }
+
+.order-button {
+  text-align: center;
+  width: 12vw;
+  height: 45px;
+  font-size: 22px;
+  border: 0px solid #e62e00;
+  background-color: #e62e00;
+  font-family: roboto condensed;
+  margin: 15px 15px 15px 315px; }
+
+.remove-button {
+  text-align: center;
+  width: 12vw;
+  height: 45px;
+  font-size: 22px;
+  border: 0px solid #e62e00;
+  background-color: #e62e00;
+  font-family: roboto condensed;
+  margin: 15px 0px 15px 100px; }
+
+.complete-orders {
+  display: flex;
+  flex-direction: column; }
+>>>>>>> master
