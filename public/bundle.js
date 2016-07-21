@@ -207,18 +207,6 @@ angular.module('foodie').directive('navbar', function () {
     templateUrl: './app/directives/navbar/navbar.html'
   };
 });
-angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
-
-  $scope.cart = {};
-
-  $scope.getCart = function () {
-    cartService.getCart().then(function (cart) {
-      $scope.cart = cart;
-    });
-  };
-
-  // $scope.getCart();
-}]);
 angular.module('foodie').controller('dashboardCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
 
   $scope.restaurantInfo = function () {
@@ -263,6 +251,18 @@ angular.module('foodie').service('dashboardService', ["$http", function ($http) 
   };
 
   //ending
+}]);
+angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
+
+  $scope.cart = {};
+
+  $scope.getCart = function () {
+    cartService.getCart().then(function (cart) {
+      $scope.cart = cart;
+    });
+  };
+
+  // $scope.getCart();
 }]);
 angular.module('foodie').controller('homeController', ["$scope", function ($scope) {}]);
 angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
