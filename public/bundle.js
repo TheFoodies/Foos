@@ -24425,7 +24425,23 @@ angular.module("foodie").controller("menuController", ["$scope", "yelpService", 
 
   // $scope.getRestaurant();
 }]);
-angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
+angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
 
-  $scope.test = "Bob Johnson";
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+    });
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get" + response);
+      return response.data;
+    });
+  };
 }]);

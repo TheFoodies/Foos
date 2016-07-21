@@ -9,7 +9,7 @@ var restaurantSchema = new Schema({
   username: {
     type: String,
     required: true
-  }
+  },
   email: {
     type: String,
     required: true
@@ -17,7 +17,7 @@ var restaurantSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
   phone: {
     type: Number,
     required: true
@@ -36,7 +36,7 @@ var restaurantSchema = new Schema({
   },
   yelpId: {
     type: String,
-  }
+  },
 });
 
 module.exports = mongoose.model('restaurant', restaurantSchema);

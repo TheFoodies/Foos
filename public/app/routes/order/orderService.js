@@ -4,9 +4,10 @@ angular.module("foodie")
     this.getOrder = function(){
       return $http({
           method: 'GET',
-          url: '/api/order/' 
+          url: '/api/order/'
         }).then(function (response) {
           console.log("get" + response);
           return response.data;
         })
-    },
+    }
+})
