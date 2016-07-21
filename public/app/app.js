@@ -42,7 +42,7 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         // url: '/restaurant/:restaurantID',
         url: '/order',
         templateUrl: './app/routes/order/order.html',
-        // controller: 'orderController'
+        controller: 'orderController'
       })
       .state('dashboard', {
         url: '/dashboard',
@@ -54,4 +54,6 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/faq/faq.html'
 
       })
+
+      $urlRouterProvider.otherwise('/');
   })

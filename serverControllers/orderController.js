@@ -5,7 +5,7 @@ var Order = require('../models/orderSchema');
 module.exports = {
 
   show: function(req, res, next) {
-    Order.findById(req.params.id, function(err, orderResponse) {
+    Order.find({restaurant: req.user._id}, function(err, orderResponse) {
       if (err) {
         console.log(err)
       } else {
