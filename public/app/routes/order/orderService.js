@@ -9,5 +9,6 @@ angular.module("foodie")
           console.log("get" + response);
           return response.data;
         })
+        console.log(response.data);
     };
   });

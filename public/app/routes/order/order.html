@@ -1,6 +1,6 @@
 <section class="order-main-container">
   <section class="order-content">
-    <section class="left-col" ng-repeat="data in orderFeed">
+    <section class="left-col">
     <h2 class="order-title">ORDERS</h2>
 
             <table class="order-table">
@@ -35,7 +35,7 @@
             </tr>
           </table>
 
-          <table class="order-table">
+          <table class="order-table" ng-repeat="data in orderFeed">
             <tr><td class="tdata">ORDER#:</td><td class="mini-data"> 237</td></tr><br>
             <tr><td class="tdata">PICKUP:</td><td class="mini-data"> 5:05p</td></tr><br>
             <tr><td class="tdata">NAME:</td><td class="mini-data">John Stamos</td></tr><br>
@@ -73,7 +73,7 @@
             <button class="remove-button" type="button" name="button">REMOVE</button>
           </div>
 
-          <div class="complete-orders">
+          <div class="complete-orders" ng-repeat="data in orderFeed">
             <table class="info-bar">
                 <tr><td class="order-data">4:58p</td></tr>
                 <tr><td class="order-data">Chuck Stanley</td></tr>

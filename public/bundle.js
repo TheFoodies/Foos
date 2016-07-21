@@ -24482,12 +24482,14 @@ angular.module('foodie').service('userService', ["$http", function ($http) {
 
   //ending
 }]);
-angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
+angular.module("foodie").controller("orderController", ["$scope", "$http", "orderService", function ($scope, $http, orderService) {
 
   $scope.orderFeed = function () {
     service.getOrder().then(function (response) {
       $scope.orderFeed = response;
+      console.log(response);
     });
+    console.log(orderFeed);
   };
 }]);
 angular.module("foodie").service("orderService", ["$http", function ($http) {
@@ -24500,5 +24502,6 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
       console.log("get" + response);
       return response.data;
     });
+    console.log(response.data);
   };
 }]);
