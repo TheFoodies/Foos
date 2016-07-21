@@ -6,7 +6,7 @@ module.exports = {
 
   show: function(req, res, next) {
     Order.find({restaurant: req.user._id}
-      .populate("food") 
+      .populate("food")
       .exec(function(err, orderResponse) {
       if (err) {
         console.log(err)
@@ -17,7 +17,6 @@ module.exports = {
     })
   )
   },
-
 
   create: function(req, res, next) {
     Order.create(function(err, orderResponse) {
