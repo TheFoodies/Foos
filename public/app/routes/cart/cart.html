@@ -1,23 +1,23 @@
 <section class="cart-main-container">
     <div class="cart-listing">
-        <h3>Your Cart</h3>
-        <ul class="cart-items">
+        <h3>Your Cart for {{cart.restaurant}}</h3>
+        <ul class="cart-items" ng-repeat="item in cart.items">
             <ul class="cart-product-info">
-                <li>Tacos</li>
-                <li>12345</li>
-                <li>12345</li>
-                <li>12345</li>
+                <li>Name: {{item.item.name}}</li>
+                <li>Description: {{item.item.description}}</li>
+                <li ng-if="item.item.size.length">Size: {{item.item.size}}</li>
+                <li ng-if="item.item.allergyInfo.length">Allergy Info: {{item.item.allergyInfo}}</li>
             </ul>
-        <li><input type="number" name="name" value="1" min="0"></li>
-        <li>$20</li>
+        <li><input type="number" name="name" value="{{item.quantity}}" min="0"></li>
+        <li>{{item.item.price | currency}}</li>
         <li class="cart-order-controls">
-            <button>Update</button>
-            <button>Remove</button>
+            <button ng-click="updateCart(item.item._id)">Update</button>
+            <button ng-click="removeFromCart(item.item._id)">Remove</button>
         </li>
     </ul>
     <hr>
     <div class="cart-total">
-        <h4>Total $300</h4>
+        <h4>Total {{total | currency}}</h4>
     </div>
 </div>
 <aside class="cart-cart">
