@@ -31,6 +31,7 @@ var config = require('./config');
 
 //*************Local Auth Controller****************************
 var UserCtrl = require('./serverControllers/userController');
+var RestaurantCtrl = require('./serverControllers/restaurantController');
 
 //*************Local Auth Service*******************************
 var passport = require('./serverControllers/passportController');
@@ -56,16 +57,31 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//*************Local Auth Endpoints***********
-app.post('/users', UserCtrl.register);
-app.get('/me', isAuthed, UserCtrl.me);
-app.put('/users/:_id', isAuthed, UserCtrl.update);
+//*************Local Auth Endpoints User***********
+app.post('/register/user', UserCtrl.register);
+app.get('/me/user', UserCtrl.me);
+app.put('/users/:_id/user', isAuthed, UserCtrl.update);
 
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/me'
+app.post('/login/user', passport.authenticate('user', {
+  successRedirect: '/me/user'
 }));
 
-app.get('/logout', function(req, res, next) {
+app.get('/logout/user', function(req, res, next) {
+  req.logout();
+  return res.status(200).send('logged out');
+});
+
+
+//*************Local Auth Endpoints Restaurant***********
+app.post('/register/restaurant', RestaurantCtrl.register);
+app.get('/me/restaurant', RestaurantCtrl.me);
+app.put('/users/:_id/restaurant', isAuthed, RestaurantCtrl.update);
+
+app.post('/login/restaurant', passport.authenticate('restaurant', {
+  successRedirect: '/me/restaurant'
+}));
+
+app.get('/logout/restaurant', function(req, res, next) {
   req.logout();
   return res.status(200).send('logged out');
 });
@@ -111,8 +127,29 @@ app.delete('/api/restaurant/:id', restaurantController.destroy)
 //User
 
 
+app.get('/allusers', function (req, res, next) {
+  User.find(req.user).exec(function (error, resp) {
+    if (error) {
+      return res.status(500).send(error)
+    }
+    else {
+      return res.status(200).json(resp);
+    }
+  })
+})
 
 
+
+//make user - need to put this in sigh up function
+app.post('/user', function (req, res) { // THIS IS HOW I'VE BEEN MAKING NEW USERS
+  var newUser = new User(req.body);
+  newUser.save(req.body, function (error, response) {
+    if (error) {
+      return res.status(500).send(error);
+    }
+    return res.status(200).json(response);
+  })
+}) // THIS IS HOW ILL CREATE ACCOUNTS FROM POSTMAN
 
 
 

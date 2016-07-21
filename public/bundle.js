@@ -24337,7 +24337,88 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   // }
 
 }]);
-angular.module("foodie").service("restaurantService", function () {});
+angular.module("foodie").service("restaurantService", ["$http", function ($http) {
+
+  this.loginRest = function (restaurant) {
+    return $http({
+      method: 'POST',
+      url: '/login/restaurant',
+      data: restaurant
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.logoutRest = function () {
+    return $http({
+      method: 'GET',
+      url: '/logout/restaurant'
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.getCurrentRestaurant = function () {
+    return $http({
+      method: 'GET',
+      url: '/me/restaurant'
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.registerRestaurant = function (user) {
+    return $http({
+      method: 'POST',
+      url: '/register/restaurant',
+      data: user
+    }).then(function (response) {
+      return response;
+    });
+  };
+}]);
+angular.module('foodie').service('userService', ["$http", function ($http) {
+
+  this.login = function (user) {
+    return $http({
+      method: 'POST',
+      url: '/login/user',
+      data: user
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.logout = function () {
+    return $http({
+      method: 'GET',
+      url: '/logout/user'
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.getCurrentUser = function () {
+    return $http({
+      method: 'GET',
+      url: '/me/user'
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.registerUser = function (user) {
+    return $http({
+      method: 'POST',
+      url: '/register/user',
+      data: user
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  //ending
+}]);
 angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $http) {
 
   this.getYelpData = function (restaurant) {
@@ -24413,74 +24494,81 @@ angular.module('foodie').controller('dashboardService', ["$http", function ($htt
   //ending
 }]);
 angular.module('foodie').controller('foodFeedController', ["$scope", "foodService", function ($scope, foodService) {}]);
-angular.module('foodie').controller('homeController', ["$scope", function ($scope) {}]);
-angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
+angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", function ($scope, userService, restaurantService, $state) {
 
-  // $scope.getYelpData = function() {
-  //   yelpService.getYelpData($scope.restaurant).then(function(data) {
-  //     $scope.yelpData = data;
-  //   })
-  // }
-  //
-  // $scope.getYelpData();
+  // $scope.user = user;
 
-  $scope.restaurant = {};
-
-  $scope.getRestaurant = function () {
-    restaurantService.getRestaurant($state.id).then(function (restaurant) {
-      $scope.restaurant = restaurant;
+  $scope.login = function (user) {
+    userService.login(user).then(function (response) {
+      if (!response.data) {
+        alert('User does not exist');
+        $scope.user.password = '';
+      } else {
+        $state.go('faq');
+      }
+    }).catch(function (err) {
+      alert('Unable to login');
     });
   };
 
-  // $scope.getRestaurant();
-}]);
-angular.module('foodie').service('userService', ["$http", function ($http) {
-
-  // something to post to users cart
-  // someting to get posted items
-  // something to delete items in the cart
-
-  //probs for restaurant
-  this.getUser = function () {
-    return $http({
-      method: 'GET',
-      url: 'URL'
-    }).then(function (response) {
-      return response.data;
+  $scope.register = function (user) {
+    userService.registerUser(user).then(function (response) {
+      if (!response.data) {
+        alert('Unable to create user');
+      } else {
+        alert('User Created');
+        $scope.newUser = {};
+      }
+    }).catch(function (err) {
+      alert('Unable to create user');
     });
   };
 
-  // POST AKA SIGNUP
-  // this.getUser = function () {
-  //   return $http({
-  //     method: 'GET',
-  //     url: 'URL'
-  //   })
-  //   .then(function (response) {
-  //     return response.data;
-  //   })
-  // }
-
-  //changes user info
-  this.updateUser = function () {
-    return $http({
-      method: 'PUT',
-      url: 'URL'
-    }).then(function (response) {
-      return response.data;
+  $scope.logout = function (user) {
+    userService.logout().then(function (response) {
+      setTimeout(function () {
+        $state.go('menu');
+        return response;
+      }, 300);
     });
   };
 
-  this.deleteAccount = function () {
-    return $http({
-      method: 'DELETE',
-      url: 'URL'
-    }).then(function (response) {
-      return response.data;
+  ///////////
+
+  $scope.loginRest = function (restaurant) {
+    restaurantService.loginRest(restaurant).then(function (response) {
+      if (!response.data) {
+        alert('User does not exist');
+        $scope.restaurant.password = '';
+      } else {
+        $state.go('faq');
+      }
+    }).catch(function (err) {
+      alert('Unable to login');
     });
   };
 
-  //ending
+  $scope.registerRest = function (restaurant) {
+    restaurantService.registerRestaurant(restaurant).then(function (response) {
+      if (!response.data) {
+        alert('Unable to create restaurant');
+      } else {
+        alert('Restaurant Created');
+        $scope.newRestaurant = {};
+      }
+    }).catch(function (err) {
+      alert('Unable to create restaurant');
+    });
+  };
+
+  $scope.logoutRest = function (restaurant) {
+    restaurantService.logoutRest().then(function (response) {
+      setTimeout(function () {
+        $state.go('menu');
+        return response;
+      }, 300);
+    });
+  };
 }]);
 angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
 
@@ -24501,4 +24589,24 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
       return response.data;
     });
   };
+}]);
+angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
+
+  // $scope.getYelpData = function() {
+  //   yelpService.getYelpData($scope.restaurant).then(function(data) {
+  //     $scope.yelpData = data;
+  //   })
+  // }
+  //
+  // $scope.getYelpData();
+
+  $scope.restaurant = {};
+
+  $scope.getRestaurant = function () {
+    restaurantService.getRestaurant($state.id).then(function (restaurant) {
+      $scope.restaurant = restaurant;
+    });
+  };
+
+  // $scope.getRestaurant();
 }]);
