@@ -38,6 +38,11 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/cart/cart.html',
         controller: 'cartController'
       })
+      .state('cartSuccess', {
+        url: '/success',
+        templateUrl: './app/routes/success/success.html',
+        controller: 'cartController'
+      })
       .state('order', {
         // url: '/restaurant/:restaurantID',
         url: '/order',

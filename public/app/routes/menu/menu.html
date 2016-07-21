@@ -27,6 +27,6 @@
             <li ng-click="openProductModal(item)">{{item.name}}</li>
         </ul>
     <div ng-if="!cart.items.length">Your Cart is Empty</div>
-    <button class="menu-checkout-button" type="button" name="button">Checkout</button>
+    <button class="menu-checkout-button" type="button" name="button" ui-sref="cart">Checkout</button>
 </aside>
 </section>
