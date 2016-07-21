@@ -495,3 +495,26 @@ td {
 .complete-orders {
   display: flex;
   flex-direction: column; }
+
+.success-main-container {
+  width: 80vw;
+  margin: 20px auto;
+  text-align: center; }
+
+.success-main-container h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 20px 0; }
+
+.success-main-container h4 {
+  margin-bottom: 20px; }
+
+.success-main-container ul {
+  text-align: left; }
+
+.success-main-container p {
+  margin-bottom: 10px; }
+
+.success-main-container a {
+  text-decoration: none;
+  color: #00b3a1; }
