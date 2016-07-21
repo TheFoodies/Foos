@@ -4,11 +4,16 @@ angular.module('foodie')
     // this.getGoogleData = function(restaurant) {
     //   return $http({
     //     method: 'GET',
+<<<<<<< HEAD
     //     url: 'https://google.com'
+=======
+    //     url: ''
+>>>>>>> master
     //   }).then(function(response){
     //     return response.data;
     //   })
     // }
+<<<<<<< HEAD
 //     function initMap() {
 //   var myLatLng = {lat: -25.363, lng: 131.044};
 //
@@ -26,5 +31,7 @@ angular.module('foodie')
 //     title: 'Hello World!'
 //   });
 // }
+=======
+>>>>>>> master
 
   })

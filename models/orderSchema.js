@@ -2,20 +2,27 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
-  items : {
+  items : [{
     item: {
-      type: String,
-      ref: "Cart"
+      type: Schema.Types.ObjectId,
+      ref: "food"
     },
-    specialInstructions: String
+    specialInstructions: {
+      type: String
+    },
+    quantity: {
+      type: Number,
+      min: 1
+    },
+  }],
+  customer: {
+    type: Schema.Types.ObjectId,
+    ref: "user"
   },
-  quantity: {
-    type: Number,
-    min: 1
+  restaurant: {
+    type: Schema.Types.ObjectId,
+    ref: "restaurant"
   },
-  time: {
-    type: String
-  }
 });
 
 module.exports = mongoose.model('order', orderSchema);

@@ -14,19 +14,20 @@ var foodSchema = new Schema({
     type: String,
     required: true
   },
-  images: {
-    type: Array,
-    required: true
-  },
+  // images: {
+  //   type: Array,
+  //   required: false
+  // },
   allergyInfo: {
     type: String
   },
   sizes: {
     type: Array
   },
-  category: {
-    type: String
-  }
+  restaurant: {
+    type: Schema.Types.ObjectId,
+    ref: "restaurant"
+  },
 });
 
 module.exports = mongoose.model('food', foodSchema);
