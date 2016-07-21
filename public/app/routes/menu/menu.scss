@@ -16,6 +16,8 @@
 
 .menu-main-container hr {
   background: #00B3A1;
+  border: none;
+  height: 1px;
 }
 
 .menu-all-restaurant-info {
@@ -26,24 +28,56 @@
   padding-right: 5px;
 }
 
+.menu-buttons {
+  margin-top: 5px;
+}
+
+.menu-buttons button {
+  background: #00B3A1;
+  padding: 2px 5px;
+  border: none;
+  border-radius: 3px;
+}
+
 .menu-menu {
   width: 90%;
   margin: 20px auto;
   text-align: center;
 }
 
-.menu-menu h3 {
-  font-size: 1.5rem;
-}
+.menu-menu {
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
 
-.menu-menu ul {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-}
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
 
-.menu-menu ul li {
-  width: 50%;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0px;
+  }
+
+  ul li {
+    width: 50%;
+    text-align: left;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ul li:hover {
+    background: lightgray;
+    border-top: 1px solid #00B3A1;
+  }
+
+  ul li p {
+    margin: 0px 10%;
+  }
 }
 
 .menu-ui {
@@ -59,8 +93,7 @@
 
 .menu-side-cart {
   width: calc(80%  / 3);
-  height: 100%;
-  background: gray;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,8 +105,10 @@
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
+  background: #00B3A1;
+  padding: 10px 25px;
+  border: none;
 }
-
 
 /*---Slider---*/
 .slider-for {
@@ -99,4 +134,12 @@
 
 .slider-nav img {
   height: 100%;
+}
+
+// ---Modal---
+
+.menu-curtain {
+  background: red;
+  height: 100%;
+  width: 100%;
 }
