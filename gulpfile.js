@@ -11,7 +11,7 @@ var babel = require('gulp-babel');
 var paths = {
   jsSource: ['public/app/**/*.js', '!/public/app/lib'],
   sassSource: ['public/app/**/*.sass', 'public/app/**/*.scss'],
-  dependenciesSource: ['public/app/lib/**/*.js']
+  dependenciesSource: ['public/lib/**/*.js']
 }
 
 gulp.task('scripts', function () {

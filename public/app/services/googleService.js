@@ -4,34 +4,21 @@ angular.module('foodie')
     // this.getGoogleData = function(restaurant) {
     //   return $http({
     //     method: 'GET',
-<<<<<<< HEAD
-    //     url: 'https://google.com'
-=======
-    //     url: ''
->>>>>>> master
+    //     url: 'https://maps.google.com/maps/api/js'
     //   }).then(function(response){
     //     return response.data;
     //   })
     // }
-<<<<<<< HEAD
-//     function initMap() {
-//   var myLatLng = {lat: -25.363, lng: 131.044};
-//
-//   // Create a map object and specify the DOM element for display.
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//     center: myLatLng,
-//     scrollwheel: false,
-//     zoom: 4
-//   });
-//
-//   // Create a marker and set its position.
-//   var marker = new google.maps.Marker({
-//     map: map,
-//     position: myLatLng,
-//     title: 'Hello World!'
-//   });
-// }
-=======
->>>>>>> master
+
 
   })
+
+  // <div class="map"map-lazy-load="https://maps.google.com/maps/api/js">
+  //    <ng-map zoom="12" center="[{{userLocations[userLocations.length - 1].latitude}},{{userLocations[userLocations.length - 1].longitude}}]">
+  //      <marker position="[{{userLocations[userLocations.length - 1].latitude}},{{userLocations[userLocations.length - 1].longitude}}]" title="employee" ></marker>
+  //    </ng-map>
+  // </div>
+  //
+  // <script src="https://maps.google.com/maps/api/js?key=AIzaSyCE-IsoxmgBiFRKXn0ZgZcYlLZ1FSvpJns"></script>
+  //
+  // ng-map
