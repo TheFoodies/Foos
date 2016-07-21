@@ -14,10 +14,10 @@ var orderSchema = new Schema({
       type: Number,
       min: 1
     },
-  }]
+  }],
   customer: {
     type: Schema.Types.ObjectId,
-    ref: "user"}
+    ref: "user"
   },
   restaurant: {
     type: Schema.Types.ObjectId,
