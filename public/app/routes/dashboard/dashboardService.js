@@ -1,4 +1,4 @@
-angular.module('foodie').controller('dashboardService', function ($http) {
+angular.module('foodie').service('dashboardService', function ($http) {
 
 
 //gets restaurant info
@@ -33,4 +33,4 @@ this.updateRestaurantInfoCall = function (restaurantObj) {
 
 
 //ending
-})
+});
