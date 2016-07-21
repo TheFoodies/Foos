@@ -12,7 +12,6 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     url: '/restaurant/:restaurantID',
     templateUrl: './app/routes/menu/menu.html',
     controller: 'menuController'
-<<<<<<< HEAD
   }).state('menu.information', {
     url: '/info',
     templateUrl: './app/routes/menu/menu-information.html',
@@ -32,14 +31,7 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
   }).state('order', {
     // url: '/restaurant/:restaurantID',
     url: '/order',
-    templateUrl: './app/routes/order/order.html',
-    controller: 'orderController'
-=======
-  }).state('order', {
-    // url: '/restaurant/:restaurantID',
-    url: '/order',
     templateUrl: './app/routes/order/order.html'
->>>>>>> master
   }).state('dashboard', {
     url: '/dashboard',
     templateUrl: './app/routes/dashboard/dashboard.html',
@@ -21412,7 +21404,6 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         return Slick;
     }();
 
-<<<<<<< HEAD
     Slick.prototype.activateADA = function () {
         var _ = this;
 
@@ -24255,7 +24246,43 @@ if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
         e = a.length;for (f = 0; e > f; f++) if ("object" == typeof c || "undefined" == typeof c ? a[f].slick = new b(a[f], c) : g = a[f].slick[c].apply(a[f].slick, d), "undefined" != typeof g) return g;return a;
   };
 });
+angular.module("foodie").service("cartService", ["$http", "$q", function ($http, $q) {
 
+  this.getCart = function (id) {
+    $http({
+      method: 'GET',
+      url: '/api/cart/' + id
+    }).then(function (cart) {
+      return cart.data;
+    });
+  };
+
+  this.addToCart = function (product, quantity, id) {
+    $http({
+      method: 'POST',
+      url: '/api/cart/' + id,
+      data: {
+        "product": product,
+        "quantity": quantity
+      }
+    }).then(function (cart) {
+      return cart.data;
+    });
+  };
+
+  this.updateCart = function (product, quantity, id) {
+    $http({
+      method: 'PUT',
+      url: '/api/cart/' + id,
+      data: {
+        "product": product,
+        "quantity": quantity
+      }
+    }).then(function (cart) {
+      return cart.data;
+    });
+  };
+}]);
 angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $http) {
 
   this.getYelpData = function (restaurant) {
@@ -24264,6 +24291,24 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
       url: 'https://api.yelp.com/v2/business/' + restaurant + '?oauth_consumer_key=riPZBq-T0VWZErth_LDJKA&oauth_token=aZhOuGATxOIkkbPm6dk8vtpGIxuNECGp&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1468452808&oauth_nonce=IDKw02&oauth_version=1.0&oauth_signature=/XrNG5Ej3kVuygKB8fR71iz3TB0='
     }).then(function (response) {
       return response.data;
+    });
+  };
+}]);
+angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
+
+  $scope.cart = [];
+
+  $scope.getCart = function () {
+    cartService.getCart($scope.user._id).then(function (cart) {
+      $scope.cart = cart;
+    });
+  };
+
+  $scope.getCart();
+
+  $scope.updateCart = function (products, quantity) {
+    cartService.updateCart(products, quantity, $scope.user._id).then(function (cart) {
+      $scope.cart = cart;
     });
   };
 }]);
@@ -24312,46 +24357,150 @@ angular.module('foodie').controller('dashboardService', ["$http", function ($htt
 
   //ending
 }]);
-angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
+angular.module('foodie').controller('foodFeedController', ["$scope", "foodService", function ($scope, foodService) {}]);
+angular.module('foodie').service('foodService', ["$http", "$stateParams", function ($http, $stateParams) {
 
-  $scope.cart = {};
-
-  $scope.getCart = function () {
-    cartService.getCart().then(function (cart) {
-      $scope.cart = cart;
+  this.createFood = function (food) {
+    return $http({
+      method: "POST",
+      url: "/api/food",
+      data: food
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
     });
   };
 
-  // $scope.getCart();
+  this.updateFood = function (id, food) {
+    return $http({
+      method: "PUT",
+      url: "/api/food" + id,
+      data: food
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.deleteFood = function (id) {
+    return $http({
+      method: "DELETE",
+      url: "/api/food" + id
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.editFood = function (id, food) {
+    return $http({
+      method: "PUT",
+      url: "/api/food" + id,
+      data: food
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.getFood = function (id, food) {
+    return $http({
+      method: "GET",
+      url: "/api/food?_id=" + id
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.getFoods = function () {
+    return $http({
+      method: "GET",
+      url: "/api/food"
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.getFoodByCategory = function (category) {
+    return $http({
+      method: "GET",
+      url: "/api/food?category=" + category
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
 }]);
-angular.module("foodie").controller("menuController", ["$scope", "yelpService", "restaurantService", function ($scope, yelpService, restaurantService) {
+angular.module('foodie').controller('homeController', ["$scope", function ($scope) {}]);
+angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
 
-  // $scope.getYelpData = function() {
-  //   yelpService.getYelpData($scope.restaurant).then(function(data) {
-  //     $scope.yelpData = data;
-  //   })
-  // }
-  //
-  // $scope.getYelpData();
+    // $scope.getYelpData = function() {
+    //   yelpService.getYelpData($scope.restaurant).then(function(data) {
+    //     $scope.yelpData = data;
+    //   })
+    // }
+    //
+    // $scope.getYelpData();
 
-  $scope.restaurant = {};
+    // $scope.restaurant = {};
+    //
+    // $scope.getRestaurant = function() {
+    //   restaurantService.getRestaurant($state.id).then(function(restaurant) {
+    //     $scope.restaurant = restaurant;
+    //   })
+    // }
 
-  $scope.getRestaurant = function () {
-    restaurantService.getRestaurant($state.id).then(function (restaurant) {
-      $scope.restaurant = restaurant;
-    });
-  };
+    // $scope.getRestaurant();
 
-  // $scope.getRestaurant();
-=======
-  $scope.getYelpData = function () {
-    yelpService.getYelpData($scope.restaurant).then(function (data) {
-      $scope.yelpData = data;
-    });
-  };
+
+    $scope.menu = [{
+        name: "pizza",
+        items: [{ name: "Pizza",
+            price: 25,
+            description: "a delicious pizza",
+            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+            sizes: ["S", "M", "L"] }, { name: "Pizza",
+            price: 25,
+            description: "a delicious pizza",
+            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+            sizes: ["S", "M", "L"] }, { name: "Pizza",
+            price: 25,
+            description: "a delicious pizza",
+            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+            sizes: ["S", "M", "L"] }]
+    }, {
+        name: "better pizza",
+        items: [{ name: "Better Pizza",
+            price: 50,
+            description: "a more delicious pizza",
+            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+            sizes: ["S", "M", "L", "XL"] }]
+    }];
+
+    $scope.cart = {
+        items: []
+    };
+
+    $scope.addToCart = function (item) {
+        cartService.addToCart(item, $scope.quantity, $scope.user.id).then(function (cart) {
+            $scope.cart = cart;
+        });
+    };
+
+    $scope.restaurantImage = 'https://www.cicis.com/media/1137/pizza_trad_alfredo.png';
+
+    $scope.openProductModal = function (item) {
+        var newScope = $scope.$new();
+        newScope.item = item;
+        ngDialog.open({
+            template: './app/routes/menu/item-modal.html',
+            scope: newScope
+        });
+    };
 }]);
 angular.module("foodie").controller("orderController", ["$scope", function ($scope) {
 
   $scope.test = "order controller";
->>>>>>> master
 }]);

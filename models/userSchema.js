@@ -22,6 +22,10 @@ var userSchema = new Schema({
   userType: {
     type: String,
     required: true
+  },
+  cart: {
+    type: Array,
+    ref: "Cart"
   }
 });
 

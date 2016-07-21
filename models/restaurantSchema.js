@@ -15,8 +15,13 @@ var restaurantSchema = new Schema({
     required: true
   },
   menu: {
-    type: Array,
-    ref: "Food"
+    category: {
+      type: String
+    },
+    items: {
+      type: Array,
+      ref: "Food"
+    }
   },
   location: {
     type: String,
