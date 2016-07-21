@@ -10,24 +10,23 @@
         <div class="menu-menu">
             <h3>Restaurant Name's Menu</h3>
             <hr>
-            <div class="menu-menu-category">
-                <h4>Category</h4>
+            <div class="menu-menu-category" ng-repeat="category in menu">
+                <h4>{{category.name}}</h4>
                 <ul>
-                    <li>Menu Item</li>
-                    <li>Menu Item</li>
-                    <li>Menu Item</li>
-                    <li>Menu Item</li>
+                    <li ng-repeat="item in category.items">
+                        <p>{{item.name}}</p>
+                        <p>{{item.price | currency}}</p>
+                    </li>
                 </ul>
                 <hr>
             </div>
         </div>
     </section>
     <aside class="menu-side-cart">
-        <ul class="menu-side-cart-products">
-            <li>{{product.name}}</li>
-            <li>Your Cart is Empty</li>
+        <ul class="menu-side-cart-products" ng-repeat="item in cart">
+            <li ng-click="openProductModal(item)">{{item.name}}</li>
         </ul>
-        <button class="menu-checkout-button" type="button" name="button">Go To Checkout</button>
-    </aside>
-    <script src=".\app\lib\slick.min.js" charset="utf-8"></script>
+    <div ng-if="!cart.items.length">Your Cart is Empty</div>
+    <button class="menu-checkout-button" type="button" name="button">Checkout</button>
+</aside>
 </section>

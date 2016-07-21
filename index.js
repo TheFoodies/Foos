@@ -91,7 +91,7 @@ app.get('/logout/restaurant', function(req, res, next) {
 //Cart
 app.get('/api/cart/:id', cartController.show)
 
-app.post('/api/cart/', cartController.create)
+app.post('/api/cart/:id', cartController.create)
 
 app.put('/api/cart/:id', cartController.update)
 
