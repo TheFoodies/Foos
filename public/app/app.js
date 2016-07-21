@@ -9,7 +9,7 @@ angular.module("foodie", ["ui.router", "ngDialog"])
       })
       .state('restaurants', {
         url: '/restaurants',
-        templateUrl: './app/routes/restaurants/restaurants.html',
+        templateUrl: './app/routes/restaurant/restaurant.html',
         controller: 'restaurantController'
       })
       .state('menu', {
