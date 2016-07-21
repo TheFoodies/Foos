@@ -17,6 +17,7 @@
   "homepage": "https://github.com/TheFoodies/Foos#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
     "express": "^4.14.0",
@@ -27,14 +28,14 @@
   },
   "description": "",
   "devDependencies": {
-  "gulp": "^3.9.0",
-  "gulp-babel": "^6.1.2",
-  "gulp-concat": "^2.6.0",
-  "gulp-less": "^3.1.0",
-  "gulp-ng-annotate": "^1.1.0",
-  "gulp-plumber": "^1.0.1",
-  "gulp-sass": "^2.1.1",
-  "gulp-uglify": "^1.5.1",
-  "gulp-watch": "^4.3.5"
-}
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.1.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.1",
+    "gulp-watch": "^4.3.5"
+  }
 }
