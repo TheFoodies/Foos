@@ -1,5 +1,4 @@
-
-angular.module("foodie").directive('slickSlider', function($timeout) {
+angular.module("foodie").directive('slick', function($timeout) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -9,7 +8,7 @@ angular.module("foodie").directive('slickSlider', function($timeout) {
                     slidesToScroll: 1,
                     arrows: false,
                     dots: true,
-                    fade: true,
+                    fade: true
                 });
             });
         }
