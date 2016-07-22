@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
 var restaurantSchema = new Schema({
@@ -22,10 +23,10 @@ var restaurantSchema = new Schema({
     type: Number,
     required: true
   },
-  menu: {
-    type: Array,
+  menu: [{
+    type: Schema.Types.ObjectId,
     ref: "Food"
-  },
+  }],
   location: {
     lat: {type: Number},
     long: {type: Number}
@@ -33,10 +34,26 @@ var restaurantSchema = new Schema({
   orders: {
     type: Array,
     ref: "Order"
+    type: String,
+    required: false
   },
   yelpId: {
     type: String,
   }
 });
+
+restaurantSchema.pre('save', function(next) {
+	var restaurant = this;
+	if (!restaurant.isModified('password'))	return next();
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(restaurant.password, salt);
+  restaurant.password = hash;
+  return next(null, restaurant);
+});
+
+restaurantSchema.methods.verifyPassword = function(reqBodyPassword) {
+  var restaurant = this;
+  return bcrypt.compareSync(reqBodyPassword, restaurant.password);
+};
 
 module.exports = mongoose.model('restaurant', restaurantSchema);
