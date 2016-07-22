@@ -5,11 +5,22 @@ angular.module("foodie", ["ui.router", "ngDialog"])
       .state('home', {
         url: '/',
         templateUrl: './app/routes/home/home.html',
-        controller: 'homeController'
+        controller: 'homeController',
+        // resolve: {
+        //   user: function(authService, $state) {
+        //     return authService.getCurrentUser().then(function(response) {
+        //       if (!response.data)
+        //         $state.go('login');
+        //       return response.data;
+        //     }).catch(function(err) {
+        //       $state.go('login');
+        //     });
+        //   }
+        // }
       })
       .state('restaurants', {
         url: '/restaurants',
-        templateUrl: './app/routes/restaurants/restaurants.html',
+        templateUrl: './app/routes/restaurant/restaurant.html',
         controller: 'restaurantController'
       })
       .state('menu', {
@@ -17,7 +28,6 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
-
       .state('menu.information', {
         url: '/info',
         templateUrl: './app/routes/menu/menu-information.html',
@@ -52,6 +62,7 @@ angular.module("foodie", ["ui.router", "ngDialog"])
       .state('faq', {
         url: '/faq',
         templateUrl: './app/routes/faq/faq.html'
-
       })
-  })
+      
+$urlRouterProvider.otherwise('/');
+})

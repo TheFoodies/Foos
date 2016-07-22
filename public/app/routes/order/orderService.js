@@ -6,8 +6,8 @@ angular.module("foodie")
           method: 'GET',
           url: '/api/order/'
         }).then(function (response) {
-          console.log("get" + response);
-          return response.data;
+          console.log("get order" + response);
+          return response;
         })
-    }
-})
+    };
+  });
