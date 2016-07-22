@@ -76,43 +76,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/faq/faq.html'
       })
 
-.state('menu.information', {
-    url: '/info',
-    templateUrl: './app/routes/menu/menu-information.html',
-    controller: 'menuController'
-  })
-  .state('menu.photos', {
-    url: '/photos',
-    templateUrl: './app/routes/menu/menu-photos.html',
-    controller: 'menuController'
-  })
-  .state('menu.map', {
-    url: '/map',
-    templateUrl: './app/routes/menu/menu-map.html',
-    controller: 'menuController'
-  })
-  .state('cart', {
-    url: '/cart',
-    templateUrl: './app/routes/cart/cart.html',
-    controller: 'cartController'
-  })
-  .state('order', {
-    // url: '/restaurant/:restaurantID',
-    url: '/order',
-    templateUrl: './app/routes/order/order.html',
-    controller: 'orderController'
-  })
-  .state('dashboard', {
-    url: '/dashboard',
-    templateUrl: './app/routes/dashboard/dashboard.html',
-    controller: 'dashboardCtrl'
-  })
-  .state('faq', {
-    url: '/faq',
-    templateUrl: './app/routes/faq/faq.html'
 
-
-  })
 
 $urlRouterProvider.otherwise('/');
 })

@@ -33,7 +33,7 @@ var restaurantSchema = new Schema({
   },
   orders: {
     type: Array,
-    ref: "Order"
+    ref: "Order",
     type: String,
     required: false
   },
