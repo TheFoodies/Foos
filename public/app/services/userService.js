@@ -1,38 +1,38 @@
-angular.module("foodie").service("restaurantService", function($http) {
+angular.module('foodie').service('userService', function ($http) {
 
-  this.loginRest = function(restaurant) {
+  this.login = function(user) {
     return $http({
       method: 'POST',
-      url: '/login/restaurant',
-      data: restaurant
+      url: '/login/user',
+      data: user
     }).then(function(response) {
       return response;
     });
   };
 
-  this.logoutRest = function() {
+  this.logout = function() {
     return $http({
       method: 'GET',
-      url: '/logout/restaurant'
+      url: '/logout/user'
     }).then(function(response) {
       return response;
     });
   };
 
 
-  this.getCurrentRestaurant = function() {
+  this.getCurrentUser = function() {
   return $http({
     method: 'GET',
-    url: '/me/restaurant'
+    url: '/me/user'
   }).then(function(response) {
     return response;
   });
 };
 
-this.registerRestaurant = function(user) {
+this.registerUser = function(user) {
   return $http({
     method: 'POST',
-    url: '/register/restaurant',
+    url: '/register/user',
     data: user
   }).then(function(response) {
     return response;
@@ -40,5 +40,5 @@ this.registerRestaurant = function(user) {
 };
 
 
-
-});
+//ending
+})
