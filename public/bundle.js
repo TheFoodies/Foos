@@ -536,37 +536,16 @@ angular.module("foodie").controller("orderController", ["$scope", "$http", "orde
     console.log(response);
   };
 }]);
-<<<<<<< HEAD
-angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
-
-  $scope.orderFeed = function () {
-    service.getOrder().then(function (response) {
-      $scope.orderFeed = response;
-    });
-  };
-}]);
 angular.module("foodie").service("orderService", ["$http", function ($http) {
 
-=======
-angular.module("foodie").service("orderService", ["$http", function ($http) {
-
->>>>>>> master
   this.getOrder = function () {
     return $http({
       method: 'GET',
       url: '/api/order/'
     }).then(function (response) {
-<<<<<<< HEAD
-      console.log("get" + response);
-      return response.data;
-    });
-  };
-}]);
-=======
       console.log("get order" + response);
       return response;
     });
   };
 }]);
 angular.module('foodie').controller('restaurantController', ["$scope", "foodService", function ($scope, foodService) {}]);
->>>>>>> master
