@@ -35,14 +35,14 @@
             </tr>
           </table>
 
-          <table class="order-table" ng-repeat="data in orderFeed">
+          <table class="order-table">
             <tr><td class="tdata">ORDER#:</td><td class="mini-data"> 237</td></tr><br>
             <tr><td class="tdata">PICKUP:</td><td class="mini-data"> 5:05p</td></tr><br>
             <tr><td class="tdata">NAME:</td><td class="mini-data">John Stamos</td></tr><br>
               <tr><td class="tdata">ITEMS:</td>
                 <td>
                   <table>
-                    <tr><td class="mini-data">Greek Fries with a side</td><td>QTY:2</td></tr>
+                    <tr><td class="mini-data">{{data}}</td><td>QTY:2</td></tr>
                     <tr><td class="mini-data">Gyros</td><td>QTY:3</td></tr>
                   </table>
                   <button class="order-button" type="button" name="button">COMPLETE</button>

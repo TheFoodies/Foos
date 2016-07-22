@@ -13,7 +13,6 @@ module.exports = {
       } else {
         res.status(200).json(orderResponse)
       }
-      console.log(req.user._id);
     })
   )
   },

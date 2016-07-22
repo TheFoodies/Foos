@@ -3,6 +3,9 @@ angular.module("foodie").controller("orderController", function($scope, $http, o
   $scope.orderFeed = function(){
     service.getOrder().then(function (response){
       $scope.orderFeed = response;
+      console.log(response);
     })
+    console.log(response);
+
   }
 })
