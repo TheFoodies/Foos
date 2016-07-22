@@ -1,4 +1,4 @@
-angular.module("foodie", ["ui.router", "ngDialog"])
+angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
@@ -66,9 +66,20 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/dashboard/dashboard.html',
         controller: 'dashboardCtrl'
       })
+      .state('dashboard.map', {
+        url: '/map',
+        templateUrl: './app/routes/dashboard/map.html',
+        controller: 'dashboardCtrl'
+      })
+      .state('dashboard.menu', {
+        url: '/menu',
+        templateUrl: './app/routes/dashboard/menu.html',
+        controller: 'dashboardCtrl'
+      })
       .state('faq', {
         url: '/faq',
         templateUrl: './app/routes/faq/faq.html'
+      })
 
 .state('menu.information', {
     url: '/info',
@@ -104,6 +115,7 @@ angular.module("foodie", ["ui.router", "ngDialog"])
   .state('faq', {
     url: '/faq',
     templateUrl: './app/routes/faq/faq.html'
+
 
   })
 

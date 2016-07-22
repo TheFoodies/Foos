@@ -31,6 +31,5 @@ this.updateRestaurantInfoCall = function (restaurantObj) {
 
 
 
-
 //ending
 });

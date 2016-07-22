@@ -2,6 +2,7 @@
 .container {
   width: 80vw;
   margin: 0px auto;
+  object-fit: contain;
 }
 .block {
   background: white;
@@ -9,6 +10,10 @@
   height: 200px;
   float: left;
   overflow: hidden;
+}
+.block img {
+  height: 1024px;
+  width: 100%;
 }
 .inner-block {
     width: 100%;
