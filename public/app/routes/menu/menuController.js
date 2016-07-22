@@ -63,10 +63,10 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
     }
 
 
-    $scope.restaurantImage = 'https://www.cicis.com/media/1137/pizza_trad_alfredo.png';
+    $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
 
 
-    $scope.openProductModal = function(item) {
+    $scope.clickToOpen = function(item) {
         var newScope = $scope.$new();
         newScope.item = item;
         ngDialog.open({
@@ -74,6 +74,19 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
             scope: newScope
         });
     };
+
+    $scope.quantity = 1;
+
+    $scope.addQuantity = function() {
+      $scope.quantity++;
+    }
+
+    $scope.removeQuantity = function() {
+      if ($scope.quantity > 1) {
+        $scope.quantity--;
+      }
+    }
+
 
 
 
