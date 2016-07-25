@@ -28,6 +28,12 @@ var restaurantSchema = new Schema({
     ref: "Food"
   }],
   location: {
+    lat: {type: Number},
+    long: {type: Number}
+  },
+  orders: {
+    type: Array,
+    ref: "Order",
     type: String,
     required: false
   },

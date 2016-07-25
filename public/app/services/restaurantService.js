@@ -1,5 +1,24 @@
 angular.module("foodie").service("restaurantService", function($http) {
 
+  this.getRestaurantInfo = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurant'
+    }).then(function (response){
+      console.log(response);
+      return response.data;
+    })
+  }
+  this.updateRestaurantInfo = function(name, phone, location) {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurant',
+      data: {"name": name, "phone": phone, "location": location}
+    }).then(function (response){
+      console.log(response);
+      return response.data;
+    })
+  }
   this.loginRest = function(restaurant) {
     return $http({
       method: 'POST',
