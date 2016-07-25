@@ -557,8 +557,8 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
         items: []
     };
 
-    $scope.addToCart = function (item) {
-        cartService.addToCart(item, $scope.quantity, $scope.user.id).then(function (cart) {
+    $scope.addToCart = function (item, quantity) {
+        cartService.addToCart(item, quantity, $scope.user.id).then(function (cart) {
             $scope.cart = cart;
         });
     };
