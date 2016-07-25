@@ -4,6 +4,22 @@ angular.module("foodie", ["ui.router", "ngDialog"]).config(["$stateProvider", "$
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
+  }).state('usersignup', {
+    url: '/user/signup',
+    templateUrl: './app/routes/home/userSignup.html',
+    controller: 'homeController'
+  }).state('userlogin', {
+    url: '/user/login',
+    templateUrl: './app/routes/home/userLogin.html',
+    controller: 'homeController'
+  }).state('trucksignup', {
+    url: '/truck/signup',
+    templateUrl: './app/routes/home/truckSignup.html',
+    controller: 'homeController'
+  }).state('trucklogin', {
+    url: '/truck/login',
+    templateUrl: './app/routes/home/truckLogin.html',
+    controller: 'homeController'
   }).state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
@@ -317,12 +333,6 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
   $scope.cart = [];
@@ -341,6 +351,12 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
     });
   };
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
 angular.module('foodie').controller('dashboardCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
 
   $scope.restaurantInfo = function () {
@@ -386,7 +402,7 @@ angular.module('foodie').service('dashboardService', ["$http", function ($http) 
 
   //ending
 }]);
-angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", function ($scope, userService, restaurantService, $state) {
+angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
 
   // $scope.user = user;
 
@@ -461,6 +477,32 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
       }, 300);
     });
   };
+
+  $scope.openLogin = function () {
+    ngDialog.open({
+      template: './app/routes/home/authModal.html'
+    });
+  };
+}]);
+angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
+
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+    });
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get" + response);
+      return response.data;
+    });
+  };
 }]);
 angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
 
@@ -524,26 +566,6 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
     ngDialog.open({
       template: './app/routes/menu/item-modal.html',
       scope: newScope
-    });
-  };
-}]);
-angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
-
-  $scope.orderFeed = function () {
-    service.getOrder().then(function (response) {
-      $scope.orderFeed = response;
-    });
-  };
-}]);
-angular.module("foodie").service("orderService", ["$http", function ($http) {
-
-  this.getOrder = function () {
-    return $http({
-      method: 'GET',
-      url: '/api/order/'
-    }).then(function (response) {
-      console.log("get" + response);
-      return response.data;
     });
   };
 }]);

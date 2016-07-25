@@ -1,64 +1,14 @@
 <section class="home-img-hamburger-container">
 
-<!-- USER is {{user}} -->
 
-  <form ng-submit="login(user)">
-    <!-- First Name: <input type="text" ng-model="user.firstName" required/>
-    Last Name: <input type="text" ng-model="user.lastName" required/> -->
-    Email: <input type="email" ng-model="user.email" required/>
-    <!-- Phone: <input type="text" ng-model="user.phone" required/> -->
-    Password: <input type="password" ng-model="user.password" required/>
-    <button type="submit">login</button>
-  </form>
+  <button ng-click="logout()">LOGOUT User</button>
 
-  <br><br><br>
+<div class="">
+  <button ng-click="openLogin()">OPEN auth thingy</button>
+</div>
 
-  <form ng-submit="register(newUser)">
-    First Name: <input type="text" ng-model="newUser.firstName" required/>
-    Last Name: <input type="text" ng-model="newUser.lastName" required/>
-    Email: <input type="email" ng-model="newUser.email" required/>
-    Phone: <input type="text" ng-model="newUser.phone" required/>
-    Password: <input type="password" ng-model="newUser.password" required/>
-    <button type="submit">Register as a user</button>
-  </form>
+<button ng-click="logoutRest()">LOGOUT Restaurant</button>
 
-  <button ng-click="logout()">LOGOUT</button>
-
-/USER
-
-<br><br><br>
-<br><br><br>
-<br><br><br>
-
-
-
-//////////
-
-RESTAURANT
-
-<form ng-submit="loginRest(restaurant)">
-  <!-- First Name: <input type="text" ng-model="user.firstName" required/>
-  Last Name: <input type="text" ng-model="user.lastName" required/> -->
-  Username: <input type="text" ng-model="restaurant.username" required/>
-  <!-- Phone: <input type="text" ng-model="user.phone" required/> -->
-  Password: <input type="password" ng-model="restaurant.password" required/>
-  <button type="submit">login</button>
-</form>
-
-<br><br><br>
-
-<form ng-submit="registerRest(newRestaurant)">
-  Name: <input type="text" ng-model="newRestaurant.name" required/>
-  Username: <input type="text" ng-model="newRestaurant.username" required/>
-  Email: <input type="email" ng-model="newRestaurant.email" required/>
-  Phone: <input type="number" ng-model="newRestaurant.phone" required/>
-  Password: <input type="password" ng-model="newRestaurant.password" required/>
-  <button type="submit">Register as Restaurant</button>
-</form>
-
-<button ng-click="logoutRest()">LOGOUT</button>
-
-/USER
 
 
 <img src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=5e61ca9c4bfd810c01a0a2d1519f4291" alt="hamburger photo" id="hamburger-mainpage-img"/>
