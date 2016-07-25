@@ -1,9 +1,9 @@
 angular.module("foodie").service("restaurantService", function($http) {
 
-  this.getRestaurantInfo = function() {
+  this.getRestaurantInfo = function(id) {
     return $http({
       method: 'GET',
-      url: '/api/restaurant'
+      url: '/api/restaurant/' + id
     }).then(function (response){
       console.log(response);
       return response.data;
