@@ -218,6 +218,16 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response.data;
     });
   };
+  this.updateRestaurantInfo = function (name, phone, location) {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurant',
+      data: { "name": name, "phone": phone, "location": location }
+    }).then(function (response) {
+      console.log(response);
+      return response.data;
+    });
+  };
   this.loginRest = function (restaurant) {
     return $http({
       method: 'POST',
@@ -363,17 +373,38 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
     //   })
     // }
 }]);
-angular.module('foodie').controller('dashboardCtrl', ["$scope", "dashboardService", function ($scope, dashboardService) {
+angular.module('foodie').controller('dashboardCtrl', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
   $scope.restaurantInfo = function () {
-    dashboardService.getRestaurantInfo().then(function (response) {
+    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
+      return response;
+    });
+  };
+  $scope.restaurantInfo();
+
+  $scope.updateRestaurantInfo = function (name, phone, location) {
+    restaurantService.updateRestaurantInfoCall(name, phone, location).then(function (response) {
+      $scope.restaurantInfo();
       return response;
     });
   };
 
-  $scope.updateRestaurantInfo = function (restaurant) {
-    dashboardService.updateRestaurantInfoCall(restaurant).then(function (response) {
-      $scope.restaurantInfo();
+  $scope.addFood = function (name, price, description, allergyInfo, sizes) {
+    foodService.createFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
+    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.deleteFood = function (id) {
+    foodService.deleteFood(id).then(function (response) {
+      $scope.getRestaurantInfo();
       return response;
     });
   };
@@ -400,6 +431,45 @@ angular.module('foodie').controller('dashboardCtrl', ["$scope", "dashboardServic
     }
   };
   $scope.getUserLocation();
+
+  $scope.menu = [{
+    name: "pizza",
+    items: [{ name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }]
+  }, {
+    name: "better pizza",
+    items: [{ name: "Better Pizza",
+      price: 50,
+      description: "a more delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L", "XL"] }]
+  }];
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/dashboard/menu-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.AddItem = function () {
+    ngDialog.open({
+      template: './app/routes/dashboard/newItem.html'
+    });
+  };
 
   //ending
 }]);
