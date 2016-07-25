@@ -1,4 +1,4 @@
-angular.module('foodie').controller('dashboardCtrl', function ($scope, $stateParams, restaurantService, foodService) {
+angular.module('foodie').controller('dashboardCtrl', function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
 
 $scope.restaurantInfo = function() {
@@ -18,29 +18,29 @@ $scope.updateRestaurantInfo = function (name, phone, location) {
 }
 
 $scope.addFood = function(name, price, description, allergyInfo, sizes){
-  foodService.createFood(name, price, description, allergyInfo, sizes, $stateParams.id){
+  foodService.createFood(name, price, description, allergyInfo, sizes, $stateParams.id)
     .then(function(response){
       $scope.getRestaurantInfo();
       return response;
     })
-  }
+
 }
 $scope.updateFood = function(name, price, description, allergyInfo, sizes){
-  foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id){
+  foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id)
     .then(function(response){
       $scope.getRestaurantInfo();
       return response;
     })
-  }
+
 }
 
 $scope.deleteFood = function (id){
-  foodService.deleteFood(id){
+  foodService.deleteFood(id)
     .then(function(response){
       $scope.getRestaurantInfo();
       return response;
     })
-  }
+
 }
 
 
@@ -68,6 +68,56 @@ $scope.getUserLocation = function() {
         }
       };
       $scope.getUserLocation();
+
+
+      $scope.menu = [
+        {
+          name: "pizza",
+          items: [
+                  {name: "Pizza",
+                  price: 25,
+                  description: "a delicious pizza",
+                  images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+                  sizes: ["S", "M", "L"]},
+                  {name: "Pizza",
+                  price: 25,
+                  description: "a delicious pizza",
+                  images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+                  sizes: ["S", "M", "L"]},
+                  {name: "Pizza",
+                  price: 25,
+                  description: "a delicious pizza",
+                  images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+                  sizes: ["S", "M", "L"]},
+          ]
+        },
+        {
+          name: "better pizza",
+          items: [
+                  {name: "Better Pizza",
+                  price: 50,
+                  description: "a more delicious pizza",
+                  images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+                  sizes: ["S", "M", "L", "XL"]},
+              ]
+        }
+      ]
+
+      $scope.clickToOpen = function(item) {
+          var newScope = $scope.$new();
+          newScope.item = item;
+          ngDialog.open({
+              template: './app/routes/dashboard/menu-modal.html',
+              scope: newScope
+          });
+      };
+
+      $scope.AddItem = function() {
+          ngDialog.open({
+              template: './app/routes/dashboard/newItem.html',
+          });
+      };
+
 
 //ending
 })
