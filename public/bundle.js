@@ -56,22 +56,6 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
 
   $urlRouterProvider.otherwise('/');
 }]);
-angular.module("foodie").directive('slick', ["$timeout", function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            $timeout(function () {
-                $(element).slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    dots: true,
-                    fade: true
-                });
-            });
-        }
-    };
-}]);
 angular.module("foodie").service("cartService", ["$http", "$q", function ($http, $q) {
 
   this.getCart = function (id) {
@@ -309,12 +293,22 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
+angular.module("foodie").directive('slick', ["$timeout", function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            $timeout(function () {
+                $(element).slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                    fade: true
+                });
+            });
+        }
+    };
+}]);
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
     $scope.cart = {
@@ -614,3 +608,9 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
   };
   $window.navigator.geolocation.getCurrentPosition(pos);
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
