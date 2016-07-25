@@ -1,0 +1,28 @@
+<div class="menu-curtain">
+  <div class="menu-modal">
+    <div class="menu-modal-close" ng-click="closeThisDialog()">X</div>
+    <div class="menu-item-info">
+      <div>Name: <input placeholder="Item Name" ng-model="foodInfo.name"> *Required</div>
+      <div>Price: <input placeholder="Item Price" ng-model="foodInfo.price"> *Required</div>
+    </div>
+    <p>
+      {{item.description}}
+    </p>
+    <div class="menu-modal-special-instructions">
+      <h4>Descritpion</h4>
+      <textarea name="name" rows="5" ng-model="description"></textarea>
+    </div>
+    <input type="textbox" name="allergyInfo" value="Allergy Info">
+    <div class="menu-modal-controls">
+      <div class="menu-modal-quantity-controls">
+        <h4>Size</h4>
+        <input type="checkbox" name="Size" value="Small">Small
+        <input type="checkbox" name="Size" value="Medium">Medium
+        <input type="checkbox" name="Size" value="Large">Large
+      </div>
+      <button type="button" name="button" class="menu-add-to-cart" ng-click="addFood(foodInfo.name, foodInfo.price, description, allergyInfo, sizes)"><h5>Add To Menu</h5></button>
+    </div>
+
+
+  </div>
+</div>
