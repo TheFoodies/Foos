@@ -4,7 +4,7 @@ angular.module('foodie')
     this.createFood = function(food){
       return $http({
         method: "POST",
-        url: "/api/food",
+        url: "/api/food/",
         data: food
       }).then(function(response){
         console.log(response.data);

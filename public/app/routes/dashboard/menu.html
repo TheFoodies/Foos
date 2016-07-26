@@ -1,19 +1,18 @@
 <div class="display-info-class">
-  {{restaurantInfo.name}}
-  {{restaurantInfo.email}}
-  {{restaurantInfo.phone}}
+  {{restaurantObj.name}}
+  {{restaurantObj.email}}
+  {{restaurantObj.phone}}
 </div>
 
 <div class="">
-  <form ng-submit="updateRestaurantInfo(restInfo)">
-    <input placeholder="name" ng-model="restInfo.name">
-    <input placeholder="location" ng-model="restInfo.location">
-    <input placeholder="phone" ng-model="restInfo.phone">
+  <form ng-submit="updateRestaurantInfo(restaurantObj)">
+    <input placeholder="name" ng-model="restaurantObj.name">
+    <!-- <input placeholder="location" ng-model="restaurantObj.location"> -->
+    <input placeholder="phone" ng-model="restaurantObj.phone">
     <!-- location thing that updates it and says that in user feed -->
-    <button ng-click="updateRestaurantInfo" type="submit">update restaurant information</button>
+    <button type="submit">update restaurant information</button>
   </form>
 </div>
-
 
 <div class="menu-menu">
     <h3>{{restaurant.name}}Edit Menu</h3>
@@ -25,7 +24,7 @@
                 <p>{{item.name}}</p>
                 <p>{{item.price | currency}}</p>
             </li>
-            <li ng-click="AddItem()">Add new item</li>
+            <li ng-click="AddItem(category.name)">Add new item</li>
         </ul>
         <hr>
     </div>

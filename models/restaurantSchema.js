@@ -24,8 +24,13 @@ var restaurantSchema = new Schema({
     required: true
   },
   menu: [{
-    type: Schema.Types.ObjectId,
-    ref: "Food"
+    name: {
+      type: String
+    },
+    items: [{
+      type: Schema.Types.ObjectId,
+      ref: "food"
+    }]
   }],
   location: {
     lat: {type: Number},
