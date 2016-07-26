@@ -5,15 +5,17 @@ var Order = require('../models/orderSchema');
 module.exports = {
 
   show: function(req, res, next) {
-    Order.find({restaurant: req.user._id}, function(err, orderResponse) {
+    Order.find({restaurant: req.user._id}
+      .populate("food")
+      .exec(function(err, orderResponse) {
       if (err) {
         console.log(err)
       } else {
         res.status(200).json(orderResponse)
       }
     })
+  )
   },
-
 
   create: function(req, res, next) {
     Order.create(function(err, orderResponse) {

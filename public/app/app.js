@@ -49,7 +49,6 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
-
       .state('menu.information', {
         url: '/info',
         templateUrl: './app/routes/menu/menu-information.html',
