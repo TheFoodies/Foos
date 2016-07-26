@@ -1,5 +1,5 @@
 angular.module('foodie')
-  .controller('homeController', function($scope, userService, restaurantService, $state) {
+  .controller('homeController', function($scope, userService, restaurantService, $state, ngDialog) {
 
 // $scope.user = user;
 
@@ -9,7 +9,8 @@ angular.module('foodie')
           alert('User does not exist');
           $scope.user.password = '';
         } else {
-          $state.go('faq');
+          $state.go('restaurants')
+          ngDialog.close();
         }
       }).catch(function(err) {
         alert('Unable to login');
@@ -49,7 +50,8 @@ angular.module('foodie')
           alert('User does not exist');
           $scope.restaurant.password = '';
         } else {
-          $state.go('faq');
+          $state.go('dashboard.menu', {id: response.data._id})
+          ngDialog.close();
         }
       }).catch(function(err) {
         alert('Unable to login');
@@ -77,5 +79,14 @@ angular.module('foodie')
         }, 300)
       })
     }
+
+
+
+    $scope.openLogin = function() {
+        ngDialog.open({
+            template: './app/routes/home/authModal.html'
+        });
+        $state.go('userlogin');
+    };
 
   });

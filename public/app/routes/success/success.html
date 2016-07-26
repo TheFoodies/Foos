@@ -1,0 +1,20 @@
+<section class="success-main-container">
+  <h3>Thank You For Your Order {{user.firstName}}!</h3>
+
+  <h4>Your Order Details:</h4>
+  <ul class="cart-items" ng-repeat="item in cart.items">
+      <ul class="cart-product-info">
+          <li>Name: {{item.item.name}}</li>
+          <li>Description: {{item.item.description}}</li>
+          <li ng-if="item.item.size.length">Size: {{item.item.size}}</li>
+          <li ng-if="item.item.allergyInfo.length">Allergy Info: {{item.item.allergyInfo}}</li>
+      </ul>
+  </ul>
+
+<p>Questions or problems with your order? Contact the restaurant at {{restaurant.phone}}.</p>
+
+<p><a ui-sref="home">Continue Shopping</a></p>
+
+
+
+</section>

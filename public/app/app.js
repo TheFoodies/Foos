@@ -1,4 +1,4 @@
-angular.module("foodie", ["ui.router", "ngDialog"])
+angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
@@ -17,6 +17,27 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         //     });
         //   }
         // }
+      })
+
+      .state('usersignup', {
+        url: '/user/signup',
+        templateUrl: './app/routes/home/userSignup.html',
+        controller: 'homeController'
+      })
+      .state('userlogin', {
+        url: '/user/login',
+        templateUrl: './app/routes/home/userLogin.html',
+        controller: 'homeController'
+      })
+      .state('trucksignup', {
+        url: '/truck/signup',
+        templateUrl: './app/routes/home/truckSignup.html',
+        controller: 'homeController'
+      })
+      .state('trucklogin', {
+        url: '/truck/login',
+        templateUrl: './app/routes/home/truckLogin.html',
+        controller: 'homeController'
       })
       .state('restaurants', {
         url: '/restaurants',
@@ -48,6 +69,11 @@ angular.module("foodie", ["ui.router", "ngDialog"])
         templateUrl: './app/routes/cart/cart.html',
         controller: 'cartController'
       })
+      .state('cartSuccess', {
+        url: '/success',
+        templateUrl: './app/routes/success/success.html',
+        controller: 'cartController'
+      })
       .state('order', {
         // url: '/restaurant/:restaurantID',
         url: '/order',
@@ -57,12 +83,22 @@ angular.module("foodie", ["ui.router", "ngDialog"])
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: './app/routes/dashboard/dashboard.html',
-        controller: 'dashboardCtrl'
+      })
+      .state('dashboard.map', {
+        url: '/map',
+        templateUrl: './app/routes/dashboard/map.html',
+        controller: 'mapController'
+      })
+      .state('dashboard.menu', {
+        url: '/menu/:id',
+        templateUrl: './app/routes/dashboard/menu.html',
+        controller: 'dashboardMenuController'
       })
       .state('faq', {
         url: '/faq',
         templateUrl: './app/routes/faq/faq.html'
       })
-      
+
 $urlRouterProvider.otherwise('/');
+
 })

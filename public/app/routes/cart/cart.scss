@@ -23,12 +23,21 @@
 }
 
 .cart-listing input {
-  width: 2rem;
+  width: 2.5rem;
 }
 
 .cart-items {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cart-items ul {
+  flex: 40%;
+}
+
+.cart-items li {
+  flex: 1;
 }
 
 .cart-order-controls {
@@ -54,6 +63,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-left: 1px solid #00B3A1;
 }
 
 .cart-cart-content {

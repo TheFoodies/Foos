@@ -1,156 +1,155 @@
 <div class="container">
 
-<div class="block">
-</div>
+    <div class="block">
+        <img src="https://arlingtonva.s3.amazonaws.com/wp-content/uploads/sites/25/2013/12/foodtruck.jpeg"/>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div ng-repeat="restaurant in restaurants">
+        <div class="block">
+            <div class="inner-block" id="overlay">
+                <h3 class="plus">{{restaurant.name}}</h3>
+                <span>{{restaurant.category}}
+                    {{yelp.price}}</span>
+                <p ng-if="restaurant.deal" class="deal">{{restaurant.deal}}</p>
+            </div>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <!-- <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">{{restaurant.name}}</h3>
+            <span>{{restaurant.category}}
+                {{yelp.price}}</span>
+            <p class="deal">{{restaurant.deal}}</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
-<div class="block">
-  <div class="inner-block" id="overlay">
-    <h3 class="plus">Restaurant</h3>
-      <span>Type of Food  $$</span>
-      <p class="deal">DEAL</p>
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block" id="overlay">
+            <h3 class="plus">Restaurant</h3>
+            <span>Type of Food $$</span>
+            <p class="deal">DEAL</p>
+        </div>
+    </div>
 
+    <div class="block">
+        <div class="inner-block"></div>
+    </div>
 
-<div class="block">
-  <div class="inner-block">
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block"></div>
+    </div>
 
-<div class="block">
-  <div class="inner-block">
-  </div>
-</div>
+    <div class="block">
+        <div class="inner-block"></div>
+    </div>
 
-<div class="block">
-  <div class="inner-block">
-  </div>
-</div>
-
-<div class="block">
-  <div class="inner-block">
-  </div>
-</div>
-
+    <div class="block">
+        <div class="inner-block"></div>
+    </div> -->
 
 </div>
