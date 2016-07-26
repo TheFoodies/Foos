@@ -44,7 +44,7 @@ var restaurantSchema = new Schema({
   },
   yelpId: {
     type: String,
-  }
+  },
 });
 
 restaurantSchema.pre('save', function(next) {
