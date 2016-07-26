@@ -120,7 +120,9 @@ app.get('/api/restaurant/:id', restaurantController.show)
 
 app.post('/api/restaurant/', restaurantController.create)
 
-app.put('/api/restaurant/:id', restaurantController.update)
+app.put('/api/restaurant/', restaurantController.update)
+
+app.put('/api/restaurant/:category', restaurantController.addToMenu)
 
 app.delete('/api/restaurant/:id', restaurantController.destroy)
 
