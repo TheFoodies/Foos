@@ -21,8 +21,10 @@ var foodSchema = new Schema({
   allergyInfo: {
     type: String
   },
-  sizes: {
-    type: Array
+  size: {
+    small: {type: Boolean, default: false},
+    medium: {type: Boolean, default: false},
+    large: {type: Boolean, default: false}
   },
   restaurant: {
     type: Schema.Types.ObjectId,
