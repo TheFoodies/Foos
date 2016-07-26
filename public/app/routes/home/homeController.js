@@ -1,5 +1,5 @@
 angular.module('foodie')
-  .controller('homeController', function($scope, userService, restaurantService, $state) {
+  .controller('homeController', function($scope, userService, restaurantService, $state, ngDialog) {
 
 // $scope.user = user;
 
@@ -77,5 +77,13 @@ angular.module('foodie')
         }, 300)
       })
     }
+
+
+
+    $scope.openLogin = function() {
+        ngDialog.open({
+            template: './app/routes/home/authModal.html'
+        });
+    };
 
   });

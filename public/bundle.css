@@ -1,3 +1,20 @@
+.navbar-header-everypage {
+  width: 100vw;
+  height: 80px;
+  background: #333333;
+  border-bottom: 16px solid #00b3a1; }
+
+.navbar-header-everypage nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto; }
+
+.navbar-header-everypage nav a {
+  color: white; }
+
 .cart-main-container {
   width: 80vw;
   margin: 0px auto;
@@ -89,6 +106,82 @@
   height: 300px;
   align-items: flex-end;
   background-color: white; }
+
+#hamburger-mainpage-img {
+  width: 100vw;
+  height: 400px; }
+
+.catch-phrase-ondemand {
+  height: 10px;
+  position: absolute;
+  top: 270px;
+  color: white;
+  font-size: 40px;
+  left: 510px; }
+
+.three-card-definitions-container {
+  width: 80%;
+  height: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px; }
+
+.three-card-definitions {
+  width: 30%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.three-card-definitions h2 {
+  margin-top: 20px;
+  font-size: 40px; }
+
+.three-card-definitions p {
+  margin: 20px;
+  margin-top: 20px;
+  text-align: center; }
+
+.instructions-container {
+  height: 1100px;
+  width: 80%;
+  margin: auto; }
+
+.instruction {
+  margin: auto;
+  margin-top: 30px;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  .instruction img {
+    width: 67%;
+    height: 100%; }
+  .instruction p {
+    margin: 50px;
+    text-align: center; }
+
+.instruction p span {
+  color: #00b3a1;
+  font-size: 16px; }
+
+.modal-container {
+  background: gray;
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  position: absolute; }
+
+.modal-box {
+  background: green;
+  height: 80vh;
+  width: 70vw;
+  margin: auto;
+  margin-top: 30px; }
+  .modal-box h2 {
+    text-align: center;
+    padding-top: 40px; }
 
 .menu-modal {
   width: 80vw;
@@ -575,20 +668,3 @@ td {
 .success-main-container a {
   text-decoration: none;
   color: #00b3a1; }
-
-.navbar-header-everypage {
-  width: 100vw;
-  height: 80px;
-  background: #333333;
-  border-bottom: 16px solid #00b3a1; }
-
-.navbar-header-everypage nav {
-  height: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-  margin: auto; }
-
-.navbar-header-everypage nav a {
-  color: white; }

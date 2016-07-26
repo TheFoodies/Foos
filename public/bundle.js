@@ -4,6 +4,22 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
+  }).state('usersignup', {
+    url: '/user/signup',
+    templateUrl: './app/routes/home/userSignup.html',
+    controller: 'homeController'
+  }).state('userlogin', {
+    url: '/user/login',
+    templateUrl: './app/routes/home/userLogin.html',
+    controller: 'homeController'
+  }).state('trucksignup', {
+    url: '/truck/signup',
+    templateUrl: './app/routes/home/truckSignup.html',
+    controller: 'homeController'
+  }).state('trucklogin', {
+    url: '/truck/login',
+    templateUrl: './app/routes/home/truckLogin.html',
+    controller: 'homeController'
   }).state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
@@ -501,7 +517,7 @@ angular.module('foodie').service('dashboardService', ["$http", function ($http) 
 
   //ending
 }]);
-angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", function ($scope, userService, restaurantService, $state) {
+angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
 
   // $scope.user = user;
 
@@ -575,6 +591,12 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
         $state.go('menu');
         return response;
       }, 300);
+    });
+  };
+
+  $scope.openLogin = function () {
+    ngDialog.open({
+      template: './app/routes/home/authModal.html'
     });
   };
 }]);
