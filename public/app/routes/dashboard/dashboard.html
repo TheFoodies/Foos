@@ -1,23 +1,7 @@
 <!-- NAVBAR HERE I THINK -->
 
 <!-- this can change but Ill do this for now -->
-
-<ng-map center="-25.363882,131.044922" zoom="4">
-  <marker position="-25.363882,131.044922" title="Doesn't matter"></marker>
-</ng-map>
-
-<div class="display-info-class">
-  {{restaurantInfo.name}}
-  {{restaurantInfo.email}}
-  {{restaurantInfo.phone}}
-</div>
-
-<div class="">
-  <form ng-submit="updateRestaurantInfo(restInfo)">
-    <input placeholder="name" ng-model="restInfo.name">
-    <input placeholder="email" ng-model="restInfo.email">
-    <input placeholder="phone" ng-model="restInfo.phone">
-    <!-- location thing that updates it and says that in user feed -->
-    <button type="submit">update restaurant information</button>
-  </form>
-</div>
+<button type="button" name="button" ui-sref="dashboard.map">Map</button>
+<button type="button" name="button" ui-sref="dashboard.menu">Menu</button>
+<button type="button" name="button" ui-sref="order">Orders</button>
+<div ui-view></div>
