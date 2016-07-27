@@ -69,6 +69,23 @@
 .cart-place-order h3 {
   font-size: 1.2rem; }
 
+.navbar-header-everypage {
+  width: 100vw;
+  height: 80px;
+  background: #333333;
+  border-bottom: 16px solid #00b3a1; }
+
+.navbar-header-everypage nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto; }
+
+.navbar-header-everypage nav a {
+  color: white; }
+
 .parent {
   display: flex;
   flex-direction: column;
@@ -165,101 +182,6 @@
   .modal-box h2 {
     text-align: center;
     padding-top: 40px; }
-
-.order-main-container {
-  width: 100vw;
-  font-family: Oswald; }
-
-.order-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 80vw;
-  margin: auto; }
-
-.order-title {
-  font-family: Oswald;
-  text-align: left;
-  font-size: 30px;
-  padding: 26px 10px 10px 0px;
-  border-bottom: 2px solid #00b3a1;
-  margin: 0px; }
-
-.left-col {
-  width: 45vw;
-  margin: 0px;
-  /*margin: auto;*/ }
-
-.right-col {
-  width: 35vw;
-  margin: 0px 0px 0px 40px;
-  /*margin: auto;*/ }
-
-.left-order-container {
-  width: auto;
-  height: auto;
-  margin: auto;
-  border-bottom: 2px solid #00b3a1;
-  text-align: left; }
-
-.right-order-container {
-  width: auto;
-  height: auto;
-  margin: auto;
-  border-bottom: 2px solid #00b3a1;
-  text-align: left; }
-
-.order-table {
-  margin: 5px 30px 5px 30px;
-  font-family: Oswald;
-  height: auto; }
-
-.tdata {
-  font-family: Oswald;
-  font-size: 22px;
-  width: auto;
-  height: 3vh;
-  padding: 0px 20px 0px 0px;
-  padding-bottom: 0px; }
-
-td {
-  font-size: 20px; }
-
-.mini-data {
-  width: auto;
-  font-family: roboto condensed;
-  padding-right: 9px; }
-
-.order-data {
-  font-family: roboto condensed;
-  font-size: 22px; }
-
-.complete-orders {
-  margin: 50px 0px 10px 30px; }
-
-.order-button {
-  text-align: center;
-  width: 12vw;
-  height: 45px;
-  font-size: 22px;
-  border: 0px solid #e62e00;
-  background-color: #e62e00;
-  font-family: roboto condensed;
-  margin: 5px 0px 0px 15vw; }
-
-.remove-button {
-  text-align: center;
-  width: 12vw;
-  height: 45px;
-  font-size: 22px;
-  border: 0px solid #e62e00;
-  background-color: #e62e00;
-  font-family: roboto condensed;
-  margin: 0px 0px 15px 15vw; }
-
-.complete-orders {
-  display: flex;
-  flex-direction: column; }
 
 .menu-modal {
   width: 80vw;
@@ -540,6 +462,101 @@ body.ngdialog-open,
 html.ngdialog-open {
   overflow: hidden; }
 
+.order-main-container {
+  width: 100vw;
+  font-family: Oswald; }
+
+.order-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 80vw;
+  margin: auto; }
+
+.order-title {
+  font-family: Oswald;
+  text-align: left;
+  font-size: 30px;
+  padding: 26px 10px 10px 0px;
+  border-bottom: 2px solid #00b3a1;
+  margin: 0px; }
+
+.left-col {
+  width: 45vw;
+  margin: 0px;
+  /*margin: auto;*/ }
+
+.right-col {
+  width: 35vw;
+  margin: 0px 0px 0px 40px;
+  /*margin: auto;*/ }
+
+.left-order-container {
+  width: auto;
+  height: auto;
+  margin: auto;
+  border-bottom: 2px solid #00b3a1;
+  text-align: left; }
+
+.right-order-container {
+  width: auto;
+  height: auto;
+  margin: auto;
+  border-bottom: 2px solid #00b3a1;
+  text-align: left; }
+
+.order-table {
+  margin: 5px 30px 5px 30px;
+  font-family: Oswald;
+  height: auto; }
+
+.tdata {
+  font-family: Oswald;
+  font-size: 22px;
+  width: auto;
+  height: 3vh;
+  padding: 0px 20px 0px 0px;
+  padding-bottom: 0px; }
+
+td {
+  font-size: 20px; }
+
+.mini-data {
+  width: auto;
+  font-family: roboto condensed;
+  padding-right: 9px; }
+
+.order-data {
+  font-family: roboto condensed;
+  font-size: 22px; }
+
+.complete-orders {
+  margin: 50px 0px 10px 30px; }
+
+.order-button {
+  text-align: center;
+  width: 12vw;
+  height: 45px;
+  font-size: 22px;
+  border: 0px solid #e62e00;
+  background-color: #e62e00;
+  font-family: roboto condensed;
+  margin: 5px 0px 0px 15vw; }
+
+.remove-button {
+  text-align: center;
+  width: 12vw;
+  height: 45px;
+  font-size: 22px;
+  border: 0px solid #e62e00;
+  background-color: #e62e00;
+  font-family: roboto condensed;
+  margin: 0px 0px 15px 15vw; }
+
+.complete-orders {
+  display: flex;
+  flex-direction: column; }
+
 .container {
   width: 80vw;
   margin: 0px auto;
@@ -657,20 +674,3 @@ html.ngdialog-open {
 .success-main-container a {
   text-decoration: none;
   color: #00b3a1; }
-
-.navbar-header-everypage {
-  width: 100vw;
-  height: 80px;
-  background: #333333;
-  border-bottom: 16px solid #00b3a1; }
-
-.navbar-header-everypage nav {
-  height: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-  margin: auto; }
-
-.navbar-header-everypage nav a {
-  color: white; }

@@ -416,6 +416,12 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
     //   })
     // }
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
 angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
   $scope.restaurantInfo = function () {
@@ -747,9 +753,3 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
   };
   $scope.getRestaurantInfo();
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
