@@ -10,10 +10,10 @@ angular.module("foodie").service("restaurantService", function($http) {
     })
   }
 
-  this.getAllRestaurantInfo = function(id) {
+  this.getAllRestaurantInfo = function() {
     return $http({
       method: 'GET',
-      url: '/api/restaurant/' + id
+      url: '/api/restaurant/'
     }).then(function (response){
       console.log(response);
       return response.data;
