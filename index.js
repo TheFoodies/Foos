@@ -129,6 +129,8 @@ app.put('/api/restaurant/:category', restaurantController.addToMenu)
 
 app.delete('/api/restaurant/:id', restaurantController.destroy)
 
+app.get('/api/restaurant/', restaurantController.getAllRestaurantInfo)
+
 //User
 
 

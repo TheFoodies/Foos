@@ -235,10 +235,10 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
     });
   };
 
-  this.getAllRestaurantInfo = function (id) {
+  this.getAllRestaurantInfo = function () {
     return $http({
       method: 'GET',
-      url: '/api/restaurant/' + id
+      url: '/api/restaurant/'
     }).then(function (response) {
       console.log(response);
       return response.data;
@@ -741,11 +741,11 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
 }]);
 angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
   $scope.getRestaurantInfo = function () {
-    restaurantService.getRestaurantInfo().then(function (response) {
+    restaurantService.getAllRestaurantInfo().then(function (response) {
       $scope.restaurants = response;
     });
   };
-  $window.navigator.geolocation.getCurrentPosition(pos);
+  $scope.getRestaurantInfo();
 }]);
 angular.module('foodie').directive('navbar', function () {
   return {
