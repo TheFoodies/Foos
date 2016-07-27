@@ -23,6 +23,9 @@ var restaurantSchema = new Schema({
     type: Number,
     required: true
   },
+  restaurantImage: {
+    type: String
+  },
   menu: [{
     name: {
       type: String

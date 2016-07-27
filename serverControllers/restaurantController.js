@@ -106,6 +106,17 @@ module.exports = {
         res.status(200).send(restaurantResponse)
       }
     })
+  },
+
+  getAllRestaurantInfo: function(req, res, next){
+    Restaurant.find({}, function(err, response){
+      if(err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(response)
+      }
+    })
   }
 
   // update: function(req, res, next) {
