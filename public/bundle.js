@@ -621,32 +621,27 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
     // $scope.getRestaurant();
 
 
-    $scope.menu = [{
-        name: "pizza",
-        items: [{ name: "Pizza",
-            price: 25,
-            description: "a delicious pizza",
-            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-            sizes: ["S", "M", "L"] }, { name: "Pizza",
-            price: 25,
-            description: "a delicious pizza",
-            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-            sizes: ["S", "M", "L"] }, { name: "Pizza",
-            price: 25,
-            description: "a delicious pizza",
-            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-            sizes: ["S", "M", "L"] }]
-    }, {
-        name: "better pizza",
-        items: [{ name: "Better Pizza",
-            price: 50,
-            description: "a more delicious pizza",
-            images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-            sizes: ["S", "M", "L", "XL"] }]
-    }];
+    $scope.findAveragePrice = function () {
+        var sum = 0;
+        var items = 0;
+        var average = 0;
+        for (var i = 0; i < menu.length; i++) {
 
-    $scope.cart = {
-        items: []
+            for (var j = 0; j < menu[i].items.length; j++) {
+                sum += menu[i].items[j].price;
+                items += 1;
+            }
+        }
+        average = sum / items;
+        if (average > 0 && average <= 10) {
+            $scope.averagePrice = "$";
+        } else if (average > 10 && average <= 20) {
+            $scope.averagePrice = "$$";
+        } else if (average > 20 && average <= 30) {
+            $scope.averagePrice = "$$$";
+        } else {
+            $scope.averagePrice = "$$$$";
+        }
     };
 
     $scope.addToCart = function (item, quantity) {
