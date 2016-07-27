@@ -1,20 +1,3 @@
-.navbar-header-everypage {
-  width: 100vw;
-  height: 80px;
-  background: #333333;
-  border-bottom: 16px solid #00b3a1; }
-
-.navbar-header-everypage nav {
-  height: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-  margin: auto; }
-
-.navbar-header-everypage nav a {
-  color: white; }
-
 .cart-main-container {
   width: 80vw;
   margin: 0px auto;
@@ -210,13 +193,19 @@
   padding-right: 5px; }
 
 .menu-buttons {
-  margin-top: 5px; }
+  width: 300px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between; }
 
 .menu-buttons button {
-  background: #00B3A1;
+  background-color: white;
   padding: 2px 5px;
   border: none;
   border-radius: 3px; }
+
+input button {
+  background-color: white; }
 
 .menu-menu {
   width: 90%;
@@ -668,3 +657,20 @@ td {
 .success-main-container a {
   text-decoration: none;
   color: #00b3a1; }
+
+.navbar-header-everypage {
+  width: 100vw;
+  height: 80px;
+  background: #333333;
+  border-bottom: 16px solid #00b3a1; }
+
+.navbar-header-everypage nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto; }
+
+.navbar-header-everypage nav a {
+  color: white; }

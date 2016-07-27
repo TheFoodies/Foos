@@ -26,25 +26,27 @@ $scope.addFood = function(newItemObj){
   newItemObj.restaurant = $stateParams.id;
   foodService.createFood(newItemObj)
     .then(function(response){
-      $scope.restaurantInfo();
+      // $scope.restaurantInfo();
       console.log(response);
       $scope.AddToMenu(response);
     })
 
 }
-$scope.updateFood = function(name, price, description, allergyInfo, sizes){
-  foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id)
+$scope.updateFood = function(menuObj){
+  foodService.updateFood(menuObj)
     .then(function(response){
-      $scope.getRestaurantInfo();
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     })
 
 }
 
-$scope.deleteFood = function (id){
-  foodService.deleteFood(id)
+$scope.deleteFood = function(food){
+  foodService.deleteFood(food._id)
     .then(function(response){
-      $scope.getRestaurantInfo();
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     })
 
@@ -56,6 +58,8 @@ $scope.AddToMenu = function (MenuObj) {
   restaurantService.AddToMenu($scope.category, MenuObj)
   .then(function (response) {
     return response;
+    $scope.restaurantInfo();
+    ngDialog.close();
   })
 }
 
@@ -78,6 +82,13 @@ $scope.AddToMenu = function (MenuObj) {
               scope: newScope
           });
       };
+
+  $scope.addCategory = function(category) {
+    console.log(category);
+    restaurantService.addCategory(category).then(function(response) {
+      $scope.restaurantInfo();
+    })
+  }
 
 
 //ending
