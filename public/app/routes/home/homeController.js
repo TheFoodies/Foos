@@ -9,7 +9,8 @@ angular.module('foodie')
           alert('User does not exist');
           $scope.user.password = '';
         } else {
-          $state.go('faq');
+          $state.go('restaurants')
+          ngDialog.close();
         }
       }).catch(function(err) {
         alert('Unable to login');
@@ -49,7 +50,8 @@ angular.module('foodie')
           alert('User does not exist');
           $scope.restaurant.password = '';
         } else {
-          $state.go('faq');
+          $state.go('dashboard.menu', {id: response.data._id})
+          ngDialog.close();
         }
       }).catch(function(err) {
         alert('Unable to login');
@@ -82,8 +84,9 @@ angular.module('foodie')
 
     $scope.openLogin = function() {
         ngDialog.open({
-            template: './app/routes/home/authModal.html'
+            template: './app/routes/home/authModal.html',
         });
+        $state.go('userlogin');
     };
 
   });

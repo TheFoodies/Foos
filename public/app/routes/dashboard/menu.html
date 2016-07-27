@@ -1,38 +1,42 @@
 <div class="display-info-class">
-  {{restaurantInfo.name}}
-  {{restaurantInfo.email}}
-  {{restaurantInfo.phone}}
+    {{restaurantObj.name}}
+    {{restaurantObj.email}}
+    {{restaurantObj.phone}}
 </div>
 
 <div class="">
-  <form ng-submit="updateRestaurantInfo(restInfo)">
-    <input placeholder="name" ng-model="restInfo.name">
-    <input placeholder="location" ng-model="restInfo.location">
-    <input placeholder="phone" ng-model="restInfo.phone">
-    <!-- location thing that updates it and says that in user feed -->
-    <button ng-click="updateRestaurantInfo" type="submit">update restaurant information</button>
-  </form>
+    <form ng-submit="updateRestaurantInfo(restaurantObj)">
+        <input placeholder="name" ng-model="restaurantObj.name">
+        <!-- <input placeholder="location" ng-model="restaurantObj.location"> -->
+        <input placeholder="phone" ng-model="restaurantObj.phone">
+        <!-- location thing that updates it and says that in user feed -->
+        <button type="submit">update restaurant information</button>
+    </form>
 </div>
-
 
 <div class="menu-menu">
     <h3>{{restaurant.name}}Edit Menu</h3>
     <hr>
     <div class="menu-menu-category" ng-repeat="category in menu">
-        <div><input ng-if="showCategoryEdit"  placeholder="{{category.name}}" ng-model="updateCategory"><h4 ng-click="showCategoryEdit = !showCategoryEdit">{{category.name}}</h4><div>
-        <ul>
-            <li ng-repeat="item in category.items" ng-click="clickToOpen(item)">
-                <p>{{item.name}}</p>
-                <p>{{item.price | currency}}</p>
-            </li>
-            <li ng-click="AddItem()">Add new item</li>
-        </ul>
-        <hr>
+        <div><input ng-if="showCategoryEdit" placeholder="{{category.name}}" ng-model="updateCategory">
+            <h4 ng-click="showCategoryEdit = !showCategoryEdit">{{category.name}}</h4>
+            <div>
+                <ul>
+                    <li ng-repeat="item in category.items" ng-click="clickToOpen(item)">
+                        <p>{{item.name}}</p>
+                        <p>{{item.price | currency}}</p>
+                    </li>
+                    <li ng-click="AddItem(category.name)">Add new item</li>
+                </ul>
+                <hr>
+            </div>
+
+        </div>
+
     </div>
-
-</div>
-
-</div>
-<button ng-click="showinput=!showinput" type="button" name="button">Add New Category +</button><input ng-if="showinput" type="text" name="name">
+    <button ng-click="showinput=!showinput" type="button" name="button">Add New Category +</button>
+    <!-- <input ng-if="showinput" ng-model="OneCategory" type="text" name="name"> -->
+    <input type="text" name="name" value="" ng-model="NewCategory">
+    <button ng-click="addCategory(NewCategory)" ng-if="showinput" type="button" name="button">Add</button>
 
 </div>

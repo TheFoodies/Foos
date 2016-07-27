@@ -5,7 +5,7 @@ var Restaurant = require('../models/restaurantSchema');
 module.exports = {
 
   show: function(req, res, next) {
-    Restaurant.findById(req.params.id, function(err, restaurantResponse) {
+    Restaurant.findById(req.params.id).populate('menu.items').exec( function(err, restaurantResponse) {
       if (err) {
         console.log(err)
       } else {
@@ -28,11 +28,14 @@ module.exports = {
   },
 
   update: function(req, res, next) {
-    Restaurant.findByIdAndUpdate(req.params.id, req.body, function(err, restaurantResponse) {
+    console.log('req.body: ',req.body);
+    Restaurant.findByIdAndUpdate(req.user._id, req.body, function(err, restaurantResponse) {
+      console.log('response: ', restaurantResponse);
       if(err) {
         console.log(err)
+        res.status(500).send(err);
       } else {
-        res.status(200).json(restaurantResponse)
+        res.status(200).send(restaurantResponse)
       }
     })
   },
@@ -42,7 +45,7 @@ module.exports = {
       if (err) {
         console.log(err)
       } else {
-        res.status(200).json(restaurantResponse)
+        res.status(200).send(restaurantResponse)
       }
     })
   },
@@ -57,17 +60,59 @@ module.exports = {
   },
 
   me: function(req, res, next) {
-    console.log(req.user);
-    if (!req.user) return res.status(401).send('current user not defined');
-    delete req.user.password;
-    return res.status(200).json(req.user);
+    Restaurant.findById(req.user._id).populate('menu.items').exec(function(err, restaurantResponse) {
+      if (err) {
+        console.log(err)
+      } else {
+        res.status(200).json(restaurantResponse)
+      }
+    })
   },
 
-  update: function(req, res, next) {
-    Restaurant.findByIdAndUpdate(req.params._id, req.body, function(err, result) {
-      if (err) next(err);
-      res.status(200).send('user updated');
-    });
+  addToMenu: function(req, res, next) {
+    var restaurant = req.user;
+    for (var i = 0; i < restaurant.menu.length; i++) {
+      if (req.params.category === restaurant.menu[i].name) {
+        restaurant.menu[i].items.push(req.body._id);
+      }
+    }
+    console.log(restaurant)
+    restaurant.save(function(err, restaurantResponse) {
+      console.log('response: ', restaurantResponse);
+      if(err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(restaurantResponse)
+      }
+    })
+  },
+
+  addCategory: function(req, res, next) {
+    var restaurant = req.user;
+    var flag = false;
+    for (var i = 0; i < restaurant.menu.length; i++) {
+      if (req.body.name === restaurant.menu[i].name) {
+        flag = true;
+      }
+    }
+    if (!flag) restaurant.menu.push(req.body);
+    console.log(restaurant);
+    restaurant.save(function(err, restaurantResponse) {
+      if(err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(restaurantResponse)
+      }
+    })
   }
+
+  // update: function(req, res, next) {
+  //   Restaurant.findByIdAndUpdate(req.params._id, req.body, function(err, result) {
+  //     if (err) next(err);
+  //     res.status(200).send('user updated');
+  //   });
+  // }
 
 }

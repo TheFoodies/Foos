@@ -16,7 +16,6 @@ module.exports = {
 
 
   create: function(req, res, next) {
-    Food.create(function(err, foodResponse) {
       var newFood = new Food(req.body);
       newFood.save(function(err, saved) {
         if(err) {
@@ -25,15 +24,17 @@ module.exports = {
           res.status(200).json(saved)
         }
       })
-    })
   },
 
   update: function(req, res, next) {
-    Food.findByIdAndUpdate(req.params.id, req.body, function(err, foodResponse) {
+    Food.findByIdAndUpdate(req.body._id, req.body, function(err, foodResponse) {
+      console.log(err, foodResponse);
+
       if(err) {
-        console.log(err)
+        // console.log('error:', err)
       } else {
-        res.status(200).json(foodResponse)
+        // console.log('response', foodResponse);
+        res.status(200).send(foodResponse);
       }
     })
   },

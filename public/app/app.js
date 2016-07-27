@@ -19,26 +19,26 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         // }
       })
 
-      .state('usersignup', {
-        url: '/user/signup',
-        templateUrl: './app/routes/home/userSignup.html',
-        controller: 'homeController'
-      })
-      .state('userlogin', {
-        url: '/user/login',
-        templateUrl: './app/routes/home/userLogin.html',
-        controller: 'homeController'
-      })
-      .state('trucksignup', {
-        url: '/truck/signup',
-        templateUrl: './app/routes/home/truckSignup.html',
-        controller: 'homeController'
-      })
-      .state('trucklogin', {
-        url: '/truck/login',
-        templateUrl: './app/routes/home/truckLogin.html',
-        controller: 'homeController'
-      })
+      // .state('usersignup', {
+      //   url: '/user/signup',
+      //   templateUrl: './app/routes/home/userSignup.html',
+      //   controller: 'homeController'
+      // })
+      // .state('userlogin', {
+      //   url: '/user/login',
+      //   templateUrl: './app/routes/home/userLogin.html',
+      //   controller: 'homeController'
+      // })
+      // .state('trucksignup', {
+      //   url: '/truck/signup',
+      //   templateUrl: './app/routes/home/truckSignup.html',
+      //   controller: 'homeController'
+      // })
+      // .state('trucklogin', {
+      //   url: '/truck/login',
+      //   templateUrl: './app/routes/home/truckLogin.html',
+      //   controller: 'homeController'
+      // })
       .state('restaurants', {
         url: '/restaurants',
         templateUrl: './app/routes/restaurant/restaurant.html',
@@ -49,7 +49,6 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
-
       .state('menu.information', {
         url: '/info',
         templateUrl: './app/routes/menu/menu-information.html',
@@ -84,17 +83,16 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: './app/routes/dashboard/dashboard.html',
-        controller: 'dashboardCtrl'
       })
       .state('dashboard.map', {
         url: '/map',
         templateUrl: './app/routes/dashboard/map.html',
-        controller: 'dashboardCtrl'
+        controller: 'mapController'
       })
       .state('dashboard.menu', {
-        url: '/menu',
+        url: '/menu/:id',
         templateUrl: './app/routes/dashboard/menu.html',
-        controller: 'dashboardCtrl'
+        controller: 'dashboardMenuController'
       })
       .state('faq', {
         url: '/faq',
