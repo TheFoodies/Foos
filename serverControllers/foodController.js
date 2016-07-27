@@ -27,11 +27,14 @@ module.exports = {
   },
 
   update: function(req, res, next) {
-    Food.findByIdAndUpdate(req.params.id, req.body, function(err, foodResponse) {
+    Food.findByIdAndUpdate(req.body._id, req.body, function(err, foodResponse) {
+      console.log(err, foodResponse);
+
       if(err) {
-        console.log(err)
+        // console.log('error:', err)
       } else {
-        res.status(200).json(foodResponse)
+        // console.log('response', foodResponse);
+        res.status(200).send(foodResponse);
       }
     })
   },
