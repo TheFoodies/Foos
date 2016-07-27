@@ -177,15 +177,14 @@ input button {
 
 .menu-modal-close {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 100px;
+  right: 262px;
   font-size: 1.5rem;
   padding: 10px 12px;
 }
 
 .menu-modal-close:hover {
-  border: 1px solid black;
-  border-radius: 50%;
+  border-bottom: 1px solid black;
 }
 
 .menu-modal {
