@@ -2,7 +2,8 @@
   width: 100vw;
   height: 80px;
   background: #002521;
-  border-bottom: 8px solid #00b3a1; }
+  border-bottom: 8px solid #00b3a1;
+  font-family: Oswald; }
 
 .navbar-header-everypage nav {
   height: 80px;
@@ -11,9 +12,6 @@
   align-items: center;
   width: 80%;
   margin: auto; }
-  .navbar-header-everypage nav button {
-    width: 40px;
-    height: 40px; }
 
 .navbar-header-everypage nav a {
   color: white; }
@@ -23,10 +21,14 @@
   box-sizing: content-box;
   text-align: right; }
 
-.nav-icon img {
-  width: 32px;
-  box-sizing: content-box;
-  text-align: right; }
+.nav-icon {
+  background-color: #002521;
+  border: 0px solid #002521;
+  outline: none; }
+  .nav-icon img {
+    width: 32px;
+    box-sizing: content-box;
+    text-align: right; }
 
 .footer {
   display: flex;
@@ -145,11 +147,11 @@
   padding-left: 170px; }
 
 .login-bar {
-  padding: 90px 0 0 700px;
-  width: 75%;
-  height: 300px;
-  align-items: flex-end;
-  background: white; }
+  margin: auto;
+  width: 70vw; }
+  .login-bar button {
+    border: 0px solid white;
+    background-color: white; }
 
 .create-box {
   padding: 90px 0 0 700px;
@@ -158,17 +160,21 @@
   align-items: flex-end;
   background-color: white; }
 
-#hamburger-mainpage-img {
+.hamburger-img {
   width: 100vw;
-  height: 400px; }
+  height: auto; }
 
 .catch-phrase-ondemand {
-  height: 10px;
+  margin: auto;
+  height: auto;
   position: absolute;
-  top: 270px;
+  top: 320px;
+  left: 0px;
   color: white;
-  font-size: 40px;
   left: 510px; }
+  .catch-phrase-ondemand p {
+    font-family: Oswald;
+    font-size: 70px; }
 
 .three-card-definitions-container {
   width: 80%;
@@ -708,7 +714,7 @@ td {
 .block:nth-child(1) {
   background: green;
   width: 100%;
-  height: 600px; }
+  height: 450px; }
 
 #overlay {
   background: transparent;

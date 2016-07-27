@@ -4,29 +4,23 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
-  })
-
-  // .state('usersignup', {
-  //   url: '/user/signup',
-  //   templateUrl: './app/routes/home/userSignup.html',
-  //   controller: 'homeController'
-  // })
-  // .state('userlogin', {
-  //   url: '/user/login',
-  //   templateUrl: './app/routes/home/userLogin.html',
-  //   controller: 'homeController'
-  // })
-  // .state('trucksignup', {
-  //   url: '/truck/signup',
-  //   templateUrl: './app/routes/home/truckSignup.html',
-  //   controller: 'homeController'
-  // })
-  // .state('trucklogin', {
-  //   url: '/truck/login',
-  //   templateUrl: './app/routes/home/truckLogin.html',
-  //   controller: 'homeController'
-  // })
-  .state('restaurants', {
+  }).state('usersignup', {
+    url: '/user/signup',
+    templateUrl: './app/routes/home/userSignup.html',
+    controller: 'homeController'
+  }).state('userlogin', {
+    url: '/user/login',
+    templateUrl: './app/routes/home/userLogin.html',
+    controller: 'homeController'
+  }).state('trucksignup', {
+    url: '/truck/signup',
+    templateUrl: './app/routes/home/truckSignup.html',
+    controller: 'homeController'
+  }).state('trucklogin', {
+    url: '/truck/login',
+    templateUrl: './app/routes/home/truckLogin.html',
+    controller: 'homeController'
+  }).state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
     controller: 'restaurantController'
@@ -241,10 +235,10 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
     });
   };
 
-  this.getAllRestaurantInfo = function (id) {
+  this.getAllRestaurantInfo = function () {
     return $http({
       method: 'GET',
-      url: '/api/restaurant/' + id
+      url: '/api/restaurant/'
     }).then(function (response) {
       console.log(response);
       return response.data;
@@ -377,7 +371,8 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
 angular.module('foodie').directive('navbar', function () {
   return {
     restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
+    templateUrl: './app/directives/navbar/navbar.html',
+    controller: 'homeController'
   };
 });
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
@@ -748,9 +743,9 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
 }]);
 angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
   $scope.getRestaurantInfo = function () {
-    restaurantService.getRestaurantInfo().then(function (response) {
+    restaurantService.getAllRestaurantInfo().then(function (response) {
       $scope.restaurants = response;
     });
   };
-  $window.navigator.geolocation.getCurrentPosition(pos);
+  $scope.getRestaurantInfo();
 }]);
