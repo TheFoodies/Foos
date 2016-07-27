@@ -137,10 +137,10 @@ angular.module('foodie').service('foodService', ["$http", "$stateParams", functi
     });
   };
 
-  this.updateFood = function (id, food) {
+  this.updateFood = function (food) {
     return $http({
       method: "PUT",
-      url: "/api/food" + id,
+      url: "/api/food/",
       data: food
     }).then(function (response) {
       console.log(response.data);
@@ -149,9 +149,10 @@ angular.module('foodie').service('foodService', ["$http", "$stateParams", functi
   };
 
   this.deleteFood = function (id) {
+    console.log(id);
     return $http({
       method: "DELETE",
-      url: "/api/food" + id
+      url: "/api/food/" + id
     }).then(function (response) {
       console.log(response.data);
       return response.data;
@@ -302,6 +303,17 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response;
     });
   };
+
+  this.addCategory = function (category) {
+    console.log(category);
+    return $http({
+      method: "PUT",
+      url: '/api/restaurant/category',
+      data: { name: category, items: [] }
+    }).then(function (response) {
+      return response;
+    });
+  };
 }]);
 angular.module('foodie').service('userService', ["$http", function ($http) {
 
@@ -356,6 +368,12 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
     $scope.cart = {
@@ -428,21 +446,23 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
     console.log(newItemObj);
     newItemObj.restaurant = $stateParams.id;
     foodService.createFood(newItemObj).then(function (response) {
-      $scope.restaurantInfo();
+      // $scope.restaurantInfo();
       console.log(response);
       $scope.AddToMenu(response);
     });
   };
-  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
-    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
-      $scope.getRestaurantInfo();
+  $scope.updateFood = function (menuObj) {
+    foodService.updateFood(menuObj).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     });
   };
 
-  $scope.deleteFood = function (id) {
-    foodService.deleteFood(id).then(function (response) {
-      $scope.getRestaurantInfo();
+  $scope.deleteFood = function (food) {
+    foodService.deleteFood(food._id).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     });
   };
@@ -452,6 +472,8 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
     console.log($scope.category);
     restaurantService.AddToMenu($scope.category, MenuObj).then(function (response) {
       return response;
+      $scope.restaurantInfo();
+      ngDialog.close();
     });
   };
 
@@ -472,6 +494,13 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
       template: './app/routes/dashboard/newItem.html',
       controller: 'dashboardMenuController',
       scope: newScope
+    });
+  };
+
+  $scope.addCategory = function (category) {
+    console.log(category);
+    restaurantService.addCategory(category).then(function (response) {
+      $scope.restaurantInfo();
     });
   };
 
@@ -529,6 +558,92 @@ angular.module("foodie").controller("mapController", ["$scope", function ($scope
     }
   };
   $scope.getUserLocation();
+}]);
+angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
+
+  // $scope.user = user;
+
+  $scope.login = function (user) {
+    userService.login(user).then(function (response) {
+      if (!response.data) {
+        alert('User does not exist');
+        $scope.user.password = '';
+      } else {
+        $state.go('restaurants');
+        ngDialog.close();
+      }
+    }).catch(function (err) {
+      alert('Unable to login');
+    });
+  };
+
+  $scope.register = function (user) {
+    userService.registerUser(user).then(function (response) {
+      if (!response.data) {
+        alert('Unable to create user');
+      } else {
+        alert('User Created');
+        $scope.newUser = {};
+      }
+    }).catch(function (err) {
+      alert('Unable to create user');
+    });
+  };
+
+  $scope.logout = function (user) {
+    userService.logout().then(function (response) {
+      setTimeout(function () {
+        $state.go('menu');
+        return response;
+      }, 300);
+    });
+  };
+
+  ///////////
+
+
+  $scope.loginRest = function (restaurant) {
+    restaurantService.loginRest(restaurant).then(function (response) {
+      if (!response.data) {
+        alert('User does not exist');
+        $scope.restaurant.password = '';
+      } else {
+        $state.go('dashboard.menu', { id: response.data._id });
+        ngDialog.close();
+      }
+    }).catch(function (err) {
+      alert('Unable to login');
+    });
+  };
+
+  $scope.registerRest = function (restaurant) {
+    restaurantService.registerRestaurant(restaurant).then(function (response) {
+      if (!response.data) {
+        alert('Unable to create restaurant');
+      } else {
+        alert('Restaurant Created');
+        $scope.newRestaurant = {};
+      }
+    }).catch(function (err) {
+      alert('Unable to create restaurant');
+    });
+  };
+
+  $scope.logoutRest = function (restaurant) {
+    restaurantService.logoutRest().then(function (response) {
+      setTimeout(function () {
+        $state.go('menu');
+        return response;
+      }, 300);
+    });
+  };
+
+  $scope.openLogin = function () {
+    ngDialog.open({
+      template: './app/routes/home/authModal.html'
+    });
+    $state.go('userlogin');
+  };
 }]);
 angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
 
@@ -635,96 +750,4 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
     });
   };
   $window.navigator.geolocation.getCurrentPosition(pos);
-}]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
-angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
-
-  // $scope.user = user;
-
-  $scope.login = function (user) {
-    userService.login(user).then(function (response) {
-      if (!response.data) {
-        alert('User does not exist');
-        $scope.user.password = '';
-      } else {
-        $state.go('restaurants');
-        ngDialog.close();
-      }
-    }).catch(function (err) {
-      alert('Unable to login');
-    });
-  };
-
-  $scope.register = function (user) {
-    userService.registerUser(user).then(function (response) {
-      if (!response.data) {
-        alert('Unable to create user');
-      } else {
-        alert('User Created');
-        $scope.newUser = {};
-      }
-    }).catch(function (err) {
-      alert('Unable to create user');
-    });
-  };
-
-  $scope.logout = function (user) {
-    userService.logout().then(function (response) {
-      setTimeout(function () {
-        $state.go('menu');
-        return response;
-      }, 300);
-    });
-  };
-
-  ///////////
-
-
-  $scope.loginRest = function (restaurant) {
-    restaurantService.loginRest(restaurant).then(function (response) {
-      if (!response.data) {
-        alert('User does not exist');
-        $scope.restaurant.password = '';
-      } else {
-        $state.go('dashboard.menu', { id: response.data._id });
-        ngDialog.close();
-      }
-    }).catch(function (err) {
-      alert('Unable to login');
-    });
-  };
-
-  $scope.registerRest = function (restaurant) {
-    restaurantService.registerRestaurant(restaurant).then(function (response) {
-      if (!response.data) {
-        alert('Unable to create restaurant');
-      } else {
-        alert('Restaurant Created');
-        $scope.newRestaurant = {};
-      }
-    }).catch(function (err) {
-      alert('Unable to create restaurant');
-    });
-  };
-
-  $scope.logoutRest = function (restaurant) {
-    restaurantService.logoutRest().then(function (response) {
-      setTimeout(function () {
-        $state.go('menu');
-        return response;
-      }, 300);
-    });
-  };
-
-  $scope.openLogin = function () {
-    ngDialog.open({
-      template: './app/routes/home/authModal.html'
-    });
-    $state.go('userlogin');
-  };
 }]);

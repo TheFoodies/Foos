@@ -1,18 +1,58 @@
 <div class="menu-curtain">
-  <div class="menu-modal">
+  <form class="menu-modal" ng-submit="updateFood(item)">
     <div class="menu-modal-close" ng-click="closeThisDialog()">X</div>
     <div class="menu-item-info">
-      <h2>{{item.name}}</h2>
-      <h3>{{item.price | currency}}</h3>
+      <h2>{{item.name}}</h2><input type="text" name="name" value="Update Title" ng-model="item.name">
+      <h3>{{item.price | currency}}</h3><input type="text" name="name" value="Update Price" ng-model="item.price">
     </div>
     <p>
       {{item.description}}
     </p>
-    <div class="menu-modal-controls">
+    <input type="text" name="name" value="Update Description" ng-model="item.description">
 
-      <button type="button" name="button" class="menu-add-to-cart"><h5>Update</h5></button>
+    <input type="checkbox" name="Size" value="Small" ng-model="item.size.small">Small
+    <input type="checkbox" name="Size" value="Medium" ng-model="item.size.medium">Medium
+    <input type="checkbox" name="Size" value="Large" ng-model="item.size.large">Large
+
+
+  <div class="menu-modal-controls">
+
+    <button type="button" name="button" class="menu-add-to-cart" ng-click="updateFood(item)"><h5>Update</h5></button>
+    <button type="button" name="button" class="menu-add-to-cart" ng-click="deleteFood(item)"><h5>Delete</h5></button>
+  </div>
+
+</form>
+</div>
+
+
+
+
+<!-- <div class="menu-curtain">
+  <form class="menu-modal" ng-submit="addFood(MenuObj)">
+    <div class="menu-modal-close" ng-click="closeThisDialog()">X</div>
+    <div class="menu-item-info">
+      <div>Name: <input placeholder="Item Name" ng-model="MenuObj.name"> *Required</div>
+      <div>Price: <input placeholder="Item Price" ng-model="MenuObj.price"> *Required</div>
+    </div>
+    <p>
+      {{item.description}}
+    </p>
+    <div class="menu-modal-special-instructions">
+      <h4>Descritpion</h4>
+      <textarea name="name" rows="5" ng-model="MenuObj.description"></textarea>
+    </div>
+    <input type="textbox" name="allergyInfo" value="Allergy Info" ng-model="MenuObj.allergyInfo">
+    <div class="menu-modal-controls">
+      <div class="menu-modal-quantity-controls">
+        <h4>Size {{category}}</h4>
+        <!-- <select ng-model="MenuObj.size" name="">
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
+        </select> -->
+
+      <!-- <button type="submit" name="button" class="menu-add-to-cart" ng-click="console.log(MenuObj)"><h5>Add To Menu</h5></button>
     </div>
 
-
-  </div>
-</div>
+  </form>
+</div>  -->
