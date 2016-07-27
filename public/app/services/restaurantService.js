@@ -80,6 +80,17 @@ this.AddToMenu = function(category, menuObj){
   });
 };
 
+this.addCategory = function(category) {
+  console.log(category)
+  return $http({
+    method: "PUT",
+    url: '/api/restaurant/category',
+    data: {name: category, items: []}
+  }).then(function(response){
+    return response;
+  });
+};
+
 
 
 });

@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var secret = require('./secrets/nodeSecrets.js');
 
 //models
 
@@ -22,7 +23,7 @@ var userController = require('./serverControllers/userController');
 
 //mongoose setup
 
-mongoose.connect("mongodb://localhost/foos");
+mongoose.connect(secret);
 
 //express setup
 
@@ -102,12 +103,12 @@ app.get('/api/food/:id', foodController.show)
 
 app.post('/api/food/', foodController.create)
 
-app.put('/api/food/:id', foodController.update)
+app.put('/api/food/', foodController.update)
 
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
-app.get('/api/order/', orderController.show)
+app.get('/api/order/restaurant', orderController.show)
 
 app.post('/api/order/', orderController.create)
 
@@ -121,6 +122,8 @@ app.get('/api/restaurant/:id', restaurantController.show)
 app.post('/api/restaurant/', restaurantController.create)
 
 app.put('/api/restaurant/', restaurantController.update)
+
+app.put('/api/restaurant/category', restaurantController.addCategory)
 
 app.put('/api/restaurant/:category', restaurantController.addToMenu)
 

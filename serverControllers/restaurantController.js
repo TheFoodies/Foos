@@ -86,6 +86,26 @@ module.exports = {
         res.status(200).send(restaurantResponse)
       }
     })
+  },
+
+  addCategory: function(req, res, next) {
+    var restaurant = req.user;
+    var flag = false;
+    for (var i = 0; i < restaurant.menu.length; i++) {
+      if (req.body.name === restaurant.menu[i].name) {
+        flag = true;
+      }
+    }
+    if (!flag) restaurant.menu.push(req.body);
+    console.log(restaurant);
+    restaurant.save(function(err, restaurantResponse) {
+      if(err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(restaurantResponse)
+      }
+    })
   }
 
   // update: function(req, res, next) {

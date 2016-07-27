@@ -12,10 +12,10 @@ angular.module('foodie')
       })
     }
 
-    this.updateFood = function(id, food){
+    this.updateFood = function(food){
       return $http({
         method: "PUT",
-        url: "/api/food" + id,
+        url: "/api/food/",
         data: food
       }).then(function(response){
         console.log(response.data);
@@ -24,9 +24,10 @@ angular.module('foodie')
     }
 
     this.deleteFood = function(id){
+      console.log(id);
       return $http({
         method: "DELETE",
-        url: "/api/food" + id
+        url: "/api/food/" + id
       }).then(function(response){
         console.log(response.data);
         return response.data;

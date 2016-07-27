@@ -137,10 +137,10 @@ angular.module('foodie').service('foodService', ["$http", "$stateParams", functi
     });
   };
 
-  this.updateFood = function (id, food) {
+  this.updateFood = function (food) {
     return $http({
       method: "PUT",
-      url: "/api/food" + id,
+      url: "/api/food/",
       data: food
     }).then(function (response) {
       console.log(response.data);
@@ -149,9 +149,10 @@ angular.module('foodie').service('foodService', ["$http", "$stateParams", functi
   };
 
   this.deleteFood = function (id) {
+    console.log(id);
     return $http({
       method: "DELETE",
-      url: "/api/food" + id
+      url: "/api/food/" + id
     }).then(function (response) {
       console.log(response.data);
       return response.data;
@@ -301,6 +302,17 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response;
     });
   };
+
+  this.addCategory = function (category) {
+    console.log(category);
+    return $http({
+      method: "PUT",
+      url: '/api/restaurant/category',
+      data: { name: category, items: [] }
+    }).then(function (response) {
+      return response;
+    });
+  };
 }]);
 angular.module('foodie').service('userService', ["$http", function ($http) {
 
@@ -433,21 +445,23 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
     console.log(newItemObj);
     newItemObj.restaurant = $stateParams.id;
     foodService.createFood(newItemObj).then(function (response) {
-      $scope.restaurantInfo();
+      // $scope.restaurantInfo();
       console.log(response);
       $scope.AddToMenu(response);
     });
   };
-  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
-    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
-      $scope.getRestaurantInfo();
+  $scope.updateFood = function (menuObj) {
+    foodService.updateFood(menuObj).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     });
   };
 
-  $scope.deleteFood = function (id) {
-    foodService.deleteFood(id).then(function (response) {
-      $scope.getRestaurantInfo();
+  $scope.deleteFood = function (food) {
+    foodService.deleteFood(food._id).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
       return response;
     });
   };
@@ -457,6 +471,8 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
     console.log($scope.category);
     restaurantService.AddToMenu($scope.category, MenuObj).then(function (response) {
       return response;
+      $scope.restaurantInfo();
+      ngDialog.close();
     });
   };
 
@@ -477,6 +493,13 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
       template: './app/routes/dashboard/newItem.html',
       controller: 'dashboardMenuController',
       scope: newScope
+    });
+  };
+
+  $scope.addCategory = function (category) {
+    console.log(category);
+    restaurantService.addCategory(category).then(function (response) {
+      $scope.restaurantInfo();
     });
   };
 
