@@ -368,12 +368,6 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
     $scope.cart = {
@@ -559,112 +553,6 @@ angular.module("foodie").controller("mapController", ["$scope", function ($scope
   };
   $scope.getUserLocation();
 }]);
-angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
-
-  // $scope.getYelpData = function() {
-  //   yelpService.getYelpData($scope.restaurant).then(function(data) {
-  //     $scope.yelpData = data;
-  //   })
-  // }
-  //
-  // $scope.getYelpData();
-
-  // $scope.restaurant = {};
-  //
-  // $scope.getRestaurant = function() {
-  //   restaurantService.getRestaurant($state.id).then(function(restaurant) {
-  //     $scope.restaurant = restaurant;
-  //   })
-  // }
-
-  // $scope.getRestaurant();
-
-
-  $scope.menu = [{
-    name: "pizza",
-    items: [{ name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }, { name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }, { name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }]
-  }, {
-    name: "better pizza",
-    items: [{ name: "Better Pizza",
-      price: 50,
-      description: "a more delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L", "XL"] }]
-  }];
-
-  $scope.cart = {
-    items: []
-  };
-
-  $scope.addToCart = function (item) {
-    cartService.addToCart(item, $scope.quantity, $scope.user.id).then(function (cart) {
-      $scope.cart = cart;
-    });
-  };
-
-  $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
-
-  $scope.clickToOpen = function (item) {
-    var newScope = $scope.$new();
-    newScope.item = item;
-    ngDialog.open({
-      template: './app/routes/menu/item-modal.html',
-      scope: newScope
-    });
-  };
-
-  $scope.quantity = 1;
-
-  $scope.addQuantity = function () {
-    $scope.quantity++;
-  };
-
-  $scope.removeQuantity = function () {
-    if ($scope.quantity > 1) {
-      $scope.quantity--;
-    }
-  };
-}]);
-angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
-
-  $scope.orderFeed = function () {
-    service.getOrder().then(function (response) {
-      $scope.orderFeed = response;
-    });
-  };
-}]);
-angular.module("foodie").service("orderService", ["$http", function ($http) {
-
-  this.getOrder = function () {
-    return $http({
-      method: 'GET',
-      url: '/api/order/'
-    }).then(function (response) {
-      console.log("get" + response);
-      return response.data;
-    });
-  };
-}]);
-angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
-  $scope.getRestaurantInfo = function () {
-    restaurantService.getRestaurantInfo().then(function (response) {
-      $scope.restaurants = response;
-    });
-  };
-  $window.navigator.geolocation.getCurrentPosition(pos);
-}]);
 angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
 
   // $scope.user = user;
@@ -751,3 +639,117 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
     $state.go('userlogin');
   };
 }]);
+angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
+
+  // $scope.getYelpData = function() {
+  //   yelpService.getYelpData($scope.restaurant).then(function(data) {
+  //     $scope.yelpData = data;
+  //   })
+  // }
+  //
+  // $scope.getYelpData();
+
+  // $scope.restaurant = {};
+  //
+  // $scope.getRestaurant = function() {
+  //   restaurantService.getRestaurant($state.id).then(function(restaurant) {
+  //     $scope.restaurant = restaurant;
+  //   })
+  // }
+
+  // $scope.getRestaurant();
+
+
+  $scope.menu = [{
+    name: "pizza",
+    items: [{ name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }]
+  }, {
+    name: "better pizza",
+    items: [{ name: "Better Pizza",
+      price: 50,
+      description: "a more delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L", "XL"] }]
+  }];
+
+  $scope.cart = {
+    items: []
+  };
+
+  $scope.addToCart = function (item) {
+    cartService.addToCart(item, $scope.quantity, $scope.user.id).then(function (cart) {
+      $scope.cart = cart;
+    });
+  };
+
+  $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/menu/item-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.quantity = 1;
+
+  $scope.addQuantity = function () {
+    $scope.quantity++;
+  };
+
+  $scope.removeQuantity = function () {
+    if ($scope.quantity > 1) {
+      $scope.quantity--;
+    }
+  };
+}]);
+angular.module("foodie").controller("orderController", ["$scope", "$http", "orderService", function ($scope, $http, orderService) {
+
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+      console.log(response);
+    });
+    console.log(response);
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get order" + response);
+      return response;
+    });
+  };
+}]);
+angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
+  $scope.getRestaurantInfo = function () {
+    restaurantService.getRestaurantInfo().then(function (response) {
+      $scope.restaurants = response;
+    });
+  };
+  $window.navigator.geolocation.getCurrentPosition(pos);
+}]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
