@@ -61,6 +61,18 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     controller: 'orderController'
   }).state('dashboard', {
     url: '/dashboard',
+<<<<<<< HEAD
+    templateUrl: './app/routes/dashboard/dashboard.html',
+    controller: 'dashboardCtrl'
+  }).state('dashboard.map', {
+    url: '/map',
+    templateUrl: './app/routes/dashboard/map.html',
+    controller: 'dashboardCtrl'
+  }).state('dashboard.menu', {
+    url: '/menu',
+    templateUrl: './app/routes/dashboard/menu.html',
+    controller: 'dashboardCtrl'
+=======
     templateUrl: './app/routes/dashboard/dashboard.html'
   }).state('dashboard.map', {
     url: '/map',
@@ -70,6 +82,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/menu/:id',
     templateUrl: './app/routes/dashboard/menu.html',
     controller: 'dashboardMenuController'
+>>>>>>> master
   }).state('faq', {
     url: '/faq',
     templateUrl: './app/routes/faq/faq.html'
@@ -217,6 +230,7 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   //   })
   // }
 
+
 }]);
 
 // <div class="map"map-lazy-load="https://maps.google.com/maps/api/js">
@@ -239,16 +253,26 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response.data;
     });
   };
+<<<<<<< HEAD
+  this.updateRestaurantInfo = function (name, phone, location) {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurant',
+      data: { "name": name, "phone": phone, "location": location }
+=======
 
   this.getAllRestaurantInfo = function (id) {
     return $http({
       method: 'GET',
       url: '/api/restaurant/' + id
+>>>>>>> master
     }).then(function (response) {
       console.log(response);
       return response.data;
     });
   };
+<<<<<<< HEAD
+=======
 
   this.updateRestaurantInfo = function (restaurantObj) {
     return $http({
@@ -260,6 +284,7 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response.data;
     });
   };
+>>>>>>> master
   this.loginRest = function (restaurant) {
     return $http({
       method: 'POST',
@@ -410,6 +435,7 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
             $scope.total += $scope.cart.items[i].item.price * $scope.cart.items[i].quantity;
         }
     };
+<<<<<<< HEAD
 
     $scope.getTotal();
 
@@ -426,6 +452,136 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
     //     $scope.cart = cart;
     //   })
     // }
+}]);
+angular.module('foodie').controller('dashboardCtrl', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
+
+  $scope.restaurantInfo = function () {
+    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
+      return response;
+    });
+  };
+  $scope.restaurantInfo();
+
+  $scope.updateRestaurantInfo = function (name, phone, location) {
+    restaurantService.updateRestaurantInfoCall(name, phone, location).then(function (response) {
+      $scope.restaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.addFood = function (name, price, description, allergyInfo, sizes) {
+    foodService.createFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
+    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.deleteFood = function (id) {
+    foodService.deleteFood(id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+=======
+
+    $scope.getTotal();
+
+    // $scope.getCart = function() {
+    //   cartService.getCart($scope.user._id).then(function(cart) {
+    //     $scope.cart = cart;
+    //   })
+    // }
+    //
+    // $scope.getCart();
+    //
+    // $scope.updateCart = function(products, quantity) {
+    //   cartService.updateCart(products, quantity, $scope.user._id).then(function(cart) {
+    //     $scope.cart = cart;
+    //   })
+    // }
+}]);
+angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
+
+  $scope.restaurantInfo = function () {
+    console.log('get restaurantInfo');
+
+    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
+      console.log(response.menu);
+      $scope.menu = response.menu;
+      $scope.restaurantObj = response;
+>>>>>>> master
+    });
+  };
+  $scope.restaurantInfo();
+
+<<<<<<< HEAD
+  navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+  });
+
+  $scope.getUserLocation = function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        $scope.lat = pos.coords.longitude.toFixed(2);
+        $scope.lon = pos.coords.latitude.toFixed(2);
+        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+        console.log($scope.location);
+      }, function (error) {
+        $scope.lat = $scope.user.location[1];
+        $scope.lon = $scope.user.location[0];
+      }, {
+        timeout: 5 * 1000,
+        maximumAge: 1000 * 60 * 15,
+        enableHighAccuracy: true
+      });
+    }
+  };
+  $scope.getUserLocation();
+
+  $scope.menu = [{
+    name: "pizza",
+    items: [{ name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }, { name: "Pizza",
+      price: 25,
+      description: "a delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L"] }]
+  }, {
+    name: "better pizza",
+    items: [{ name: "Better Pizza",
+      price: 50,
+      description: "a more delicious pizza",
+      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
+      sizes: ["S", "M", "L", "XL"] }]
+  }];
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/dashboard/menu-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.AddItem = function () {
+    ngDialog.open({
+      template: './app/routes/dashboard/newItem.html'
+    });
+  };
+
+  //ending
 }]);
 angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
@@ -458,6 +614,25 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
   };
   $scope.updateFood = function (menuObj) {
     foodService.updateFood(menuObj).then(function (response) {
+=======
+  $scope.updateRestaurantInfo = function (restaurantObj) {
+    restaurantService.updateRestaurantInfo(restaurantObj).then(function (response) {
+      $scope.restaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.addFood = function (newItemObj) {
+    console.log(newItemObj);
+    newItemObj.restaurant = $stateParams.id;
+    foodService.createFood(newItemObj).then(function (response) {
+      // $scope.restaurantInfo();
+      console.log(response);
+      $scope.AddToMenu(response);
+    });
+  };
+  $scope.updateFood = function (menuObj) {
+    foodService.updateFood(menuObj).then(function (response) {
       $scope.restaurantInfo();
       ngDialog.close();
       return response;
@@ -466,9 +641,54 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
 
   $scope.deleteFood = function (food) {
     foodService.deleteFood(food._id).then(function (response) {
+>>>>>>> master
       $scope.restaurantInfo();
       ngDialog.close();
       return response;
+    });
+  };
+
+<<<<<<< HEAD
+  $scope.deleteFood = function (food) {
+    foodService.deleteFood(food._id).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
+=======
+  $scope.AddToMenu = function (MenuObj) {
+    var category = $scope.category;
+    console.log($scope.category);
+    restaurantService.AddToMenu($scope.category, MenuObj).then(function (response) {
+>>>>>>> master
+      return response;
+      $scope.restaurantInfo();
+      ngDialog.close();
+    });
+  };
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/dashboard/menu-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.AddItem = function (category) {
+    var newScope = $scope.$new();
+    newScope.category = category;
+    console.log(category);
+    ngDialog.open({
+      template: './app/routes/dashboard/newItem.html',
+      controller: 'dashboardMenuController',
+      scope: newScope
+    });
+  };
+
+  $scope.addCategory = function (category) {
+    console.log(category);
+    restaurantService.addCategory(category).then(function (response) {
+      $scope.restaurantInfo();
     });
   };
 
@@ -606,6 +826,7 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
 
   ///////////
 
+
   $scope.loginRest = function (restaurant) {
     restaurantService.loginRest(restaurant).then(function (response) {
       if (!response.data) {
@@ -646,6 +867,109 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
     ngDialog.open({
       template: './app/routes/home/authModal.html'
     });
+<<<<<<< HEAD
+  };
+}]);
+angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
+
+    // $scope.getYelpData = function() {
+    //   yelpService.getYelpData($scope.restaurant).then(function(data) {
+    //     $scope.yelpData = data;
+    //   })
+    // }
+    //
+    // $scope.getYelpData();
+
+    // $scope.restaurant = {};
+    //
+    // $scope.getRestaurant = function() {
+    //   restaurantService.getRestaurant($state.id).then(function(restaurant) {
+    //     $scope.restaurant = restaurant;
+    //   })
+    // }
+
+    // $scope.getRestaurant();
+
+
+    $scope.findAveragePrice = function () {
+        var sum = 0;
+        var items = 0;
+        var average = 0;
+        for (var i = 0; i < menu.length; i++) {
+
+            for (var j = 0; j < menu[i].items.length; j++) {
+                sum += menu[i].items[j].price;
+                items += 1;
+            }
+        }
+        average = sum / items;
+        if (average > 0 && average <= 10) {
+            $scope.averagePrice = "$";
+        } else if (average > 10 && average <= 20) {
+            $scope.averagePrice = "$$";
+        } else if (average > 20 && average <= 30) {
+            $scope.averagePrice = "$$$";
+        } else {
+            $scope.averagePrice = "$$$$";
+        }
+    };
+
+    $scope.addToCart = function (item, quantity) {
+        cartService.addToCart(item, quantity, $scope.user.id).then(function (cart) {
+            $scope.cart = cart;
+        });
+    };
+
+    $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
+
+    $scope.clickToOpen = function (item) {
+        var newScope = $scope.$new();
+        newScope.item = item;
+        ngDialog.open({
+            template: './app/routes/menu/item-modal.html',
+            scope: newScope
+        });
+    };
+
+    $scope.quantity = 1;
+
+    $scope.addQuantity = function () {
+        $scope.quantity++;
+    };
+
+    $scope.removeQuantity = function () {
+        if ($scope.quantity > 1) {
+            $scope.quantity--;
+        }
+    };
+}]);
+angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
+
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+    });
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get" + response);
+      return response.data;
+    });
+  };
+}]);
+angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
+  $scope.getRestaurantInfo = function () {
+    restaurantService.getRestaurantInfo().then(function (response) {
+      $scope.restaurants = response;
+    });
+  };
+=======
     $state.go('userlogin');
   };
 }]);
@@ -754,5 +1078,6 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
       $scope.restaurants = response;
     });
   };
+>>>>>>> master
   $window.navigator.geolocation.getCurrentPosition(pos);
 }]);
