@@ -49,7 +49,6 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController'
       })
-
       .state('menu.information', {
         url: '/info',
         templateUrl: './app/routes/menu/menu-information.html',
@@ -84,17 +83,16 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: './app/routes/dashboard/dashboard.html',
-        controller: 'dashboardCtrl'
       })
       .state('dashboard.map', {
         url: '/map',
         templateUrl: './app/routes/dashboard/map.html',
-        controller: 'dashboardCtrl'
+        controller: 'mapController'
       })
       .state('dashboard.menu', {
-        url: '/menu',
+        url: '/menu/:id',
         templateUrl: './app/routes/dashboard/menu.html',
-        controller: 'dashboardCtrl'
+        controller: 'dashboardMenuController'
       })
       .state('faq', {
         url: '/faq',

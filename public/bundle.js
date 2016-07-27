@@ -55,22 +55,37 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     controller: 'orderController'
   }).state('dashboard', {
     url: '/dashboard',
-    templateUrl: './app/routes/dashboard/dashboard.html',
-    controller: 'dashboardCtrl'
+    templateUrl: './app/routes/dashboard/dashboard.html'
   }).state('dashboard.map', {
     url: '/map',
     templateUrl: './app/routes/dashboard/map.html',
-    controller: 'dashboardCtrl'
+    controller: 'mapController'
   }).state('dashboard.menu', {
-    url: '/menu',
+    url: '/menu/:id',
     templateUrl: './app/routes/dashboard/menu.html',
-    controller: 'dashboardCtrl'
+    controller: 'dashboardMenuController'
   }).state('faq', {
     url: '/faq',
     templateUrl: './app/routes/faq/faq.html'
   });
 
   $urlRouterProvider.otherwise('/');
+}]);
+angular.module("foodie").directive('slick', ["$timeout", function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            $timeout(function () {
+                $(element).slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                    fade: true
+                });
+            });
+        }
+    };
 }]);
 angular.module("foodie").service("cartService", ["$http", "$q", function ($http, $q) {
 
@@ -114,7 +129,7 @@ angular.module('foodie').service('foodService', ["$http", "$stateParams", functi
   this.createFood = function (food) {
     return $http({
       method: "POST",
-      url: "/api/food",
+      url: "/api/food/",
       data: food
     }).then(function (response) {
       console.log(response.data);
@@ -209,22 +224,33 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
 // ng-map
 angular.module("foodie").service("restaurantService", ["$http", function ($http) {
 
-  this.getRestaurantInfo = function () {
+  this.getRestaurantInfo = function (id) {
     return $http({
       method: 'GET',
-      url: '/api/restaurant'
+      url: '/api/restaurant/' + id
     }).then(function (response) {
       console.log(response);
       return response.data;
     });
   };
-  this.updateRestaurantInfo = function (name, phone, location) {
+
+  this.getAllRestaurantInfo = function (id) {
     return $http({
       method: 'GET',
-      url: '/api/restaurant',
-      data: { "name": name, "phone": phone, "location": location }
+      url: '/api/restaurant/' + id
     }).then(function (response) {
       console.log(response);
+      return response.data;
+    });
+  };
+
+  this.updateRestaurantInfo = function (restaurantObj) {
+    return $http({
+      method: 'PUT',
+      url: '/api/restaurant',
+      data: restaurantObj
+    }).then(function (response) {
+      console.log(response.menu);
       return response.data;
     });
   };
@@ -261,6 +287,17 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       method: 'POST',
       url: '/register/restaurant',
       data: user
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.AddToMenu = function (category, menuObj) {
+    console.log(menuObj);
+    return $http({
+      method: "PUT",
+      url: '/api/restaurant/' + category,
+      data: menuObj
     }).then(function (response) {
       return response;
     });
@@ -319,150 +356,12 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
-angular.module("foodie").directive('slick', ["$timeout", function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            $timeout(function () {
-                $(element).slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    dots: true,
-                    fade: true
-                });
-            });
-        }
-    };
-}]);
-angular.module('foodie').controller('dashboardCtrl', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
-
-  $scope.restaurantInfo = function () {
-    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
-      return response;
-    });
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
   };
-  $scope.restaurantInfo();
-
-  $scope.updateRestaurantInfo = function (name, phone, location) {
-    restaurantService.updateRestaurantInfoCall(name, phone, location).then(function (response) {
-      $scope.restaurantInfo();
-      return response;
-    });
-  };
-
-  $scope.addFood = function (name, price, description, allergyInfo, sizes) {
-    foodService.createFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
-      $scope.getRestaurantInfo();
-      return response;
-    });
-  };
-  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
-    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
-      $scope.getRestaurantInfo();
-      return response;
-    });
-  };
-
-  $scope.deleteFood = function (id) {
-    foodService.deleteFood(id).then(function (response) {
-      $scope.getRestaurantInfo();
-      return response;
-    });
-  };
-
-  navigator.geolocation.getCurrentPosition(function (position) {
-    console.log(position);
-  });
-
-  $scope.getUserLocation = function () {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        $scope.lat = pos.coords.longitude.toFixed(2);
-        $scope.lon = pos.coords.latitude.toFixed(2);
-        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
-        console.log($scope.location);
-      }, function (error) {
-        $scope.lat = $scope.user.location[1];
-        $scope.lon = $scope.user.location[0];
-      }, {
-        timeout: 5 * 1000,
-        maximumAge: 1000 * 60 * 15,
-        enableHighAccuracy: true
-      });
-    }
-  };
-  $scope.getUserLocation();
-
-  $scope.menu = [{
-    name: "pizza",
-    items: [{ name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }, { name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }, { name: "Pizza",
-      price: 25,
-      description: "a delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L"] }]
-  }, {
-    name: "better pizza",
-    items: [{ name: "Better Pizza",
-      price: 50,
-      description: "a more delicious pizza",
-      images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-      sizes: ["S", "M", "L", "XL"] }]
-  }];
-
-  $scope.clickToOpen = function (item) {
-    var newScope = $scope.$new();
-    newScope.item = item;
-    ngDialog.open({
-      template: './app/routes/dashboard/menu-modal.html',
-      scope: newScope
-    });
-  };
-
-  $scope.AddItem = function () {
-    ngDialog.open({
-      template: './app/routes/dashboard/newItem.html'
-    });
-  };
-
-  //ending
-}]);
-angular.module('foodie').service('dashboardService', ["$http", function ($http) {
-
-  //gets restaurant info
-  //also won't need id because of local auth
-  this.getRestaurantInfo = function () {
-    return $http({
-      method: 'GET',
-      url: '/api/restaurant'
-    }).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
-  };
-
-  //updates restaurant info
-  this.updateRestaurantInfoCall = function (restaurantObj) {
-    return $http({
-      method: 'PUT',
-      url: '/api/restaurant',
-      data: restaurantObj
-    }).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
-  };
-
-  //ending
-}]);
+});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
     $scope.cart = {
@@ -511,6 +410,132 @@ angular.module("foodie").controller("cartController", ["$scope", "cartService", 
     //   })
     // }
 }]);
+angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
+
+  $scope.restaurantInfo = function () {
+    console.log('get restaurantInfo');
+
+    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
+      console.log(response.menu);
+      $scope.menu = response.menu;
+      $scope.restaurantObj = response;
+    });
+  };
+  $scope.restaurantInfo();
+
+  $scope.updateRestaurantInfo = function (restaurantObj) {
+    restaurantService.updateRestaurantInfo(restaurantObj).then(function (response) {
+      $scope.restaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.addFood = function (newItemObj) {
+    console.log(newItemObj);
+    newItemObj.restaurant = $stateParams.id;
+    foodService.createFood(newItemObj).then(function (response) {
+      $scope.restaurantInfo();
+      console.log(response);
+      $scope.AddToMenu(response);
+    });
+  };
+  $scope.updateFood = function (name, price, description, allergyInfo, sizes) {
+    foodService.updateFood(name, price, description, allergyInfo, sizes, $stateParams.id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.deleteFood = function (id) {
+    foodService.deleteFood(id).then(function (response) {
+      $scope.getRestaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.AddToMenu = function (MenuObj) {
+    var category = $scope.category;
+    console.log($scope.category);
+    restaurantService.AddToMenu($scope.category, MenuObj).then(function (response) {
+      return response;
+    });
+  };
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/dashboard/menu-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.AddItem = function (category) {
+    var newScope = $scope.$new();
+    newScope.category = category;
+    console.log(category);
+    ngDialog.open({
+      template: './app/routes/dashboard/newItem.html',
+      controller: 'dashboardMenuController',
+      scope: newScope
+    });
+  };
+
+  //ending
+}]);
+angular.module('foodie').service('dashboardService', ["$http", function ($http) {
+
+  //gets restaurant info
+  //also won't need id because of local auth
+  this.getRestaurantInfo = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurant'
+    }).then(function (response) {
+      console.log(response);
+      return response.data;
+    });
+  };
+
+  //updates restaurant info
+  this.updateRestaurantInfoCall = function (restaurantObj) {
+    return $http({
+      method: 'PUT',
+      url: '/api/restaurant',
+      data: restaurantObj
+    }).then(function (response) {
+      console.log(response);
+      return response.data;
+    });
+  };
+
+  //ending
+}]);
+angular.module("foodie").controller("mapController", ["$scope", function ($scope) {
+
+  navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+  });
+
+  $scope.getUserLocation = function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        $scope.lat = pos.coords.longitude.toFixed(2);
+        $scope.lon = pos.coords.latitude.toFixed(2);
+        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+        console.log($scope.location);
+      }, function (error) {
+        $scope.lat = $scope.user.location[1];
+        $scope.lon = $scope.user.location[0];
+      }, {
+        timeout: 5 * 1000,
+        maximumAge: 1000 * 60 * 15,
+        enableHighAccuracy: true
+      });
+    }
+  };
+  $scope.getUserLocation();
+}]);
 angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
 
   // $scope.user = user;
@@ -521,7 +546,8 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
         alert('User does not exist');
         $scope.user.password = '';
       } else {
-        $state.go('faq');
+        $state.go('restaurants');
+        ngDialog.close();
       }
     }).catch(function (err) {
       alert('Unable to login');
@@ -559,7 +585,8 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
         alert('User does not exist');
         $scope.restaurant.password = '';
       } else {
-        $state.go('faq');
+        $state.go('dashboard.menu', { id: response.data._id });
+        ngDialog.close();
       }
     }).catch(function (err) {
       alert('Unable to login');
@@ -592,26 +619,7 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
     ngDialog.open({
       template: './app/routes/home/authModal.html'
     });
-  };
-}]);
-angular.module("foodie").controller("orderController", ["$scope", "$http", function ($scope, $http) {
-
-  $scope.orderFeed = function () {
-    service.getOrder().then(function (response) {
-      $scope.orderFeed = response;
-    });
-  };
-}]);
-angular.module("foodie").service("orderService", ["$http", function ($http) {
-
-  this.getOrder = function () {
-    return $http({
-      method: 'GET',
-      url: '/api/order/'
-    }).then(function (response) {
-      console.log("get" + response);
-      return response.data;
-    });
+    $state.go('userlogin');
   };
 }]);
 angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
@@ -692,6 +700,28 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
     }
   };
 }]);
+angular.module("foodie").controller("orderController", ["$scope", "$http", "orderService", function ($scope, $http, orderService) {
+
+  $scope.orderFeed = function () {
+    service.getOrder().then(function (response) {
+      $scope.orderFeed = response;
+      console.log(response);
+    });
+    console.log(response);
+  };
+}]);
+angular.module("foodie").service("orderService", ["$http", function ($http) {
+
+  this.getOrder = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/order/'
+    }).then(function (response) {
+      console.log("get order" + response);
+      return response;
+    });
+  };
+}]);
 angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
   $scope.getRestaurantInfo = function () {
     restaurantService.getRestaurantInfo().then(function (response) {
@@ -700,9 +730,3 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
   };
   $window.navigator.geolocation.getCurrentPosition(pos);
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});

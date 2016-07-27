@@ -1,21 +1,32 @@
 angular.module("foodie").service("restaurantService", function($http) {
 
-  this.getRestaurantInfo = function() {
+  this.getRestaurantInfo = function(id) {
     return $http({
       method: 'GET',
-      url: '/api/restaurant'
+      url: '/api/restaurant/' + id
     }).then(function (response){
       console.log(response);
       return response.data;
     })
   }
-  this.updateRestaurantInfo = function(name, phone, location) {
+
+  this.getAllRestaurantInfo = function(id) {
     return $http({
       method: 'GET',
-      url: '/api/restaurant',
-      data: {"name": name, "phone": phone, "location": location}
+      url: '/api/restaurant/' + id
     }).then(function (response){
       console.log(response);
+      return response.data;
+    })
+  }
+
+  this.updateRestaurantInfo = function(restaurantObj) {
+    return $http({
+      method: 'PUT',
+      url: '/api/restaurant',
+      data: restaurantObj
+    }).then(function (response){
+      console.log(response.menu);
       return response.data;
     })
   }
@@ -54,6 +65,17 @@ this.registerRestaurant = function(user) {
     url: '/register/restaurant',
     data: user
   }).then(function(response) {
+    return response;
+  });
+};
+
+this.AddToMenu = function(category, menuObj){
+  console.log(menuObj)
+  return $http({
+    method: "PUT",
+    url: '/api/restaurant/' + category,
+    data: menuObj
+  }).then(function(response){
     return response;
   });
 };

@@ -16,7 +16,6 @@ module.exports = {
 
 
   create: function(req, res, next) {
-    Food.create(function(err, foodResponse) {
       var newFood = new Food(req.body);
       newFood.save(function(err, saved) {
         if(err) {
@@ -25,7 +24,6 @@ module.exports = {
           res.status(200).json(saved)
         }
       })
-    })
   },
 
   update: function(req, res, next) {

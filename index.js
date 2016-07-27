@@ -107,7 +107,7 @@ app.put('/api/food/:id', foodController.update)
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
-app.get('/api/order/', orderController.show)
+app.get('/api/order/restaurant', orderController.show)
 
 app.post('/api/order/', orderController.create)
 
@@ -120,7 +120,9 @@ app.get('/api/restaurant/:id', restaurantController.show)
 
 app.post('/api/restaurant/', restaurantController.create)
 
-app.put('/api/restaurant/:id', restaurantController.update)
+app.put('/api/restaurant/', restaurantController.update)
+
+app.put('/api/restaurant/:category', restaurantController.addToMenu)
 
 app.delete('/api/restaurant/:id', restaurantController.destroy)
 
