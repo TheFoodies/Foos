@@ -1,3 +1,71 @@
+.navbar-header-everypage {
+  width: 100vw;
+  height: 80px;
+  background: #002521;
+  border-bottom: 8px solid #00b3a1; }
+
+.navbar-header-everypage nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto; }
+  .navbar-header-everypage nav button {
+    width: 40px;
+    height: 40px; }
+
+.navbar-header-everypage nav a {
+  color: white; }
+
+.nav-logo img {
+  width: 82px;
+  box-sizing: content-box;
+  text-align: right; }
+
+.nav-icon img {
+  width: 32px;
+  box-sizing: content-box;
+  text-align: right; }
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  background: #002521;
+  text-align: left;
+  margin: auto;
+  padding: 25px 0px 25px 0px;
+  width: 100vw;
+  height: auto; }
+  .footer td {
+    font-family: Oswald;
+    font-size: 12px;
+    padding: 4px 30px 5px 30px; }
+  .footer a {
+    color: gray; }
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: auto;
+  width: 50vw; }
+
+.truck {
+  display: inline-block;
+  height: 5vh;
+  width: auto; }
+
+.footer-info {
+  width: auto;
+  height: auto;
+  color: gray;
+  font-size: 12px;
+  text-align: right;
+  padding-top: 28px;
+  margin-left: -200px; }
+
 .cart-main-container {
   width: 80vw;
   margin: 0px auto;
@@ -149,22 +217,57 @@
   color: #00b3a1;
   font-size: 16px; }
 
-.modal-container {
-  background: gray;
-  height: 100vh;
-  width: 100vw;
-  margin: auto;
-  position: absolute; }
-
 .modal-box {
-  background: green;
-  height: 80vh;
-  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  opacity: 1;
+  height: auto;
+  width: 60vw;
   margin: auto;
-  margin-top: 30px; }
+  margin-top: 90px;
+  padding: 60px 20px 65px 20px;
+  border: 1px solid #00b3a1; }
   .modal-box h2 {
     text-align: center;
     padding-top: 40px; }
+
+.center-box {
+  margin: auto;
+  width: 30vw;
+  text-align: center; }
+  .center-box table {
+    margin: auto; }
+  .center-box td {
+    margin-right: 25px;
+    text-align: left; }
+  .center-box h1 {
+    font-size: 25px; }
+
+.login-form {
+  width: 30vw;
+  margin: auto; }
+
+.login-button {
+  border: 1px solid #00b3a1;
+  background-color: #00b3a1;
+  width: auto;
+  height: 30px;
+  padding: 0px 20px 0px 20px;
+  margin: 20px 0px 20px 0px; }
+
+.user-box {
+  width: 30vw;
+  margin: auto;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #00b3a1; }
+  .user-box a {
+    text-decoration: none;
+    margin-bottom: 15px;
+    display: inline-block; }
+
+a {
+  text-decoration: none; }
 
 .menu-modal {
   width: 80vw;
@@ -312,14 +415,13 @@ input button {
 
 .menu-modal-close {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 100px;
+  right: 262px;
   font-size: 1.5rem;
   padding: 10px 12px; }
 
 .menu-modal-close:hover {
-  border: 1px solid black;
-  border-radius: 50%; }
+  border-bottom: 1px solid black; }
 
 .menu-modal h2 {
   font-size: 2rem;
@@ -657,20 +759,3 @@ td {
 .success-main-container a {
   text-decoration: none;
   color: #00b3a1; }
-
-.navbar-header-everypage {
-  width: 100vw;
-  height: 80px;
-  background: #333333;
-  border-bottom: 16px solid #00b3a1; }
-
-.navbar-header-everypage nav {
-  height: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-  margin: auto; }
-
-.navbar-header-everypage nav a {
-  color: white; }

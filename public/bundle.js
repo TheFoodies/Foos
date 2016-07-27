@@ -4,23 +4,29 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
-  }).state('usersignup', {
-    url: '/user/signup',
-    templateUrl: './app/routes/home/userSignup.html',
-    controller: 'homeController'
-  }).state('userlogin', {
-    url: '/user/login',
-    templateUrl: './app/routes/home/userLogin.html',
-    controller: 'homeController'
-  }).state('trucksignup', {
-    url: '/truck/signup',
-    templateUrl: './app/routes/home/truckSignup.html',
-    controller: 'homeController'
-  }).state('trucklogin', {
-    url: '/truck/login',
-    templateUrl: './app/routes/home/truckLogin.html',
-    controller: 'homeController'
-  }).state('restaurants', {
+  })
+
+  // .state('usersignup', {
+  //   url: '/user/signup',
+  //   templateUrl: './app/routes/home/userSignup.html',
+  //   controller: 'homeController'
+  // })
+  // .state('userlogin', {
+  //   url: '/user/login',
+  //   templateUrl: './app/routes/home/userLogin.html',
+  //   controller: 'homeController'
+  // })
+  // .state('trucksignup', {
+  //   url: '/truck/signup',
+  //   templateUrl: './app/routes/home/truckSignup.html',
+  //   controller: 'homeController'
+  // })
+  // .state('trucklogin', {
+  //   url: '/truck/login',
+  //   templateUrl: './app/routes/home/truckLogin.html',
+  //   controller: 'homeController'
+  // })
+  .state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
     controller: 'restaurantController'
@@ -211,7 +217,6 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   //   })
   // }
 
-
 }]);
 
 // <div class="map"map-lazy-load="https://maps.google.com/maps/api/js">
@@ -368,6 +373,12 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html'
+  };
+});
 angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
 
     $scope.cart = {
@@ -595,7 +606,6 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
 
   ///////////
 
-
   $scope.loginRest = function (restaurant) {
     restaurantService.loginRest(restaurant).then(function (response) {
       if (!response.data) {
@@ -658,7 +668,6 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
   // }
 
   // $scope.getRestaurant();
-
 
   $scope.menu = [{
     name: "pizza",
@@ -747,9 +756,3 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
   };
   $window.navigator.geolocation.getCurrentPosition(pos);
 }]);
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html'
-  };
-});
