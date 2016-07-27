@@ -7,11 +7,12 @@
 	}
 
 	.login-bar {
-		padding: 90px 0 0 700px;
-		width: 75%;
-		height: 300px;
-		align-items: flex-end;
-		background: white;
+		margin: auto;
+		width: 70vw;
+		button{
+			border: 0px solid white;
+			background-color: white;
+		}
 	}
 
 	.create-box {
@@ -32,19 +33,23 @@
 // 	}
 // }
 
-	#hamburger-mainpage-img {
+	.hamburger-img {
 	   width: 100vw;
-	   height: 400px;
+	   height: auto;
 	 }
 
 	 .catch-phrase-ondemand {
-	   // border: red dashed 1px;
-	   height: 10px;
+		 margin: auto;
+	   height: auto;
 	   position: absolute;
-	   top: 270px;
+		 top: 320px;
+		 left: 0px;
 	   color: white;
-	   font-size: 40px;
 	   left: 510px;
+		 p{
+			 font-family: Oswald;
+			 font-size: 70px;
+		 }
 	 }
 
 	 .three-card-definitions-container {
