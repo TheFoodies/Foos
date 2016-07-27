@@ -3,7 +3,7 @@
   height: 80px;
   background:   #002521;
   border-bottom: 8px solid #00b3a1;
-
+  font-family: Oswald;
 }
 
 .navbar-header-everypage nav {
@@ -13,11 +13,10 @@
   align-items: center;
   width: 80%;
   margin: auto;
-  button{
-    // background-color: #002521;
-    width: 40px;
-    height: 40px;
-  }
+  // button{
+  //   width: 40px;
+  //   height: 40px;
+  // }
 }
 
 .navbar-header-everypage nav a {
@@ -32,6 +31,9 @@
   }
 }
 .nav-icon{
+  background-color: #002521;
+  border: 0px solid #002521;
+  outline: none;
   img{
   width: 32px;
   box-sizing: content-box;
