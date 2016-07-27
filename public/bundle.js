@@ -489,6 +489,90 @@ angular.module('foodie').controller('dashboardCtrl', ["$scope", "$stateParams", 
 
   //ending
 }]);
+angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
+
+  $scope.restaurantInfo = function () {
+    console.log('get restaurantInfo');
+
+    restaurantService.getRestaurantInfo($stateParams.id).then(function (response) {
+      console.log(response.menu);
+      $scope.menu = response.menu;
+      $scope.restaurantObj = response;
+    });
+  };
+  $scope.restaurantInfo();
+
+  $scope.updateRestaurantInfo = function (restaurantObj) {
+    restaurantService.updateRestaurantInfo(restaurantObj).then(function (response) {
+      $scope.restaurantInfo();
+      return response;
+    });
+  };
+
+  $scope.addFood = function (newItemObj) {
+    console.log(newItemObj);
+    newItemObj.restaurant = $stateParams.id;
+    foodService.createFood(newItemObj).then(function (response) {
+      // $scope.restaurantInfo();
+      console.log(response);
+      $scope.AddToMenu(response);
+    });
+  };
+  $scope.updateFood = function (menuObj) {
+    foodService.updateFood(menuObj).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
+      return response;
+    });
+  };
+
+  $scope.deleteFood = function (food) {
+    foodService.deleteFood(food._id).then(function (response) {
+      $scope.restaurantInfo();
+      ngDialog.close();
+      return response;
+    });
+  };
+
+  $scope.AddToMenu = function (MenuObj) {
+    var category = $scope.category;
+    console.log($scope.category);
+    restaurantService.AddToMenu($scope.category, MenuObj).then(function (response) {
+      return response;
+      $scope.restaurantInfo();
+      ngDialog.close();
+    });
+  };
+
+  $scope.clickToOpen = function (item) {
+    var newScope = $scope.$new();
+    newScope.item = item;
+    ngDialog.open({
+      template: './app/routes/dashboard/menu-modal.html',
+      scope: newScope
+    });
+  };
+
+  $scope.AddItem = function (category) {
+    var newScope = $scope.$new();
+    newScope.category = category;
+    console.log(category);
+    ngDialog.open({
+      template: './app/routes/dashboard/newItem.html',
+      controller: 'dashboardMenuController',
+      scope: newScope
+    });
+  };
+
+  $scope.addCategory = function (category) {
+    console.log(category);
+    restaurantService.addCategory(category).then(function (response) {
+      $scope.restaurantInfo();
+    });
+  };
+
+  //ending
+}]);
 angular.module('foodie').service('dashboardService', ["$http", function ($http) {
 
   //gets restaurant info
@@ -516,6 +600,31 @@ angular.module('foodie').service('dashboardService', ["$http", function ($http) 
   };
 
   //ending
+}]);
+angular.module("foodie").controller("mapController", ["$scope", function ($scope) {
+
+  navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+  });
+
+  $scope.getUserLocation = function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        $scope.lat = pos.coords.longitude.toFixed(2);
+        $scope.lon = pos.coords.latitude.toFixed(2);
+        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+        console.log($scope.location);
+      }, function (error) {
+        $scope.lat = $scope.user.location[1];
+        $scope.lon = $scope.user.location[0];
+      }, {
+        timeout: 5 * 1000,
+        maximumAge: 1000 * 60 * 15,
+        enableHighAccuracy: true
+      });
+    }
+  };
+  $scope.getUserLocation();
 }]);
 angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", function ($scope, userService, restaurantService, $state, ngDialog) {
 
