@@ -643,6 +643,14 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
     $state.go('userlogin');
   };
 }]);
+angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
+  $scope.getRestaurantInfo = function () {
+    restaurantService.getRestaurantInfo().then(function (response) {
+      $scope.restaurants = response;
+    });
+  };
+  $window.navigator.geolocation.getCurrentPosition(pos);
+}]);
 angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "yelpService", "cartService", function ($scope, ngDialog, yelpService, cartService) {
 
   // $scope.getYelpData = function() {
@@ -741,12 +749,4 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
       return response;
     });
   };
-}]);
-angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
-  $scope.getRestaurantInfo = function () {
-    restaurantService.getRestaurantInfo().then(function (response) {
-      $scope.restaurants = response;
-    });
-  };
-  $window.navigator.geolocation.getCurrentPosition(pos);
 }]);
