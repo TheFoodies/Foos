@@ -1,8 +1,9 @@
 .navbar-header-everypage {
   width: 100vw;
   height: 80px;
-  background: #333333;
-  border-bottom: 16px solid #00b3a1;
+  background:   #002521;
+  border-bottom: 8px solid #00b3a1;
+
 }
 
 .navbar-header-everypage nav {
@@ -12,8 +13,69 @@
   align-items: center;
   width: 80%;
   margin: auto;
+  button{
+    // background-color: #002521;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .navbar-header-everypage nav a {
   color: white;
+}
+
+.nav-logo {
+  img{
+  width: 82px;
+  box-sizing: content-box;
+  text-align: right;
+  }
+}
+.nav-icon{
+  img{
+  width: 32px;
+  box-sizing: content-box;
+  text-align: right;
+  }
+}
+
+.footer{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  background:   #002521;
+  text-align: left;
+  margin: auto;
+  padding: 25px 0px 25px 0px;
+  width: 100vw;
+  height: auto;
+  td{
+    font-family: Oswald;
+    font-size: 12px;
+    padding: 4px 30px 5px 30px;
+  }
+  a{
+    color: gray;
+  }
+}
+.footer-container{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: auto;
+  width: 50vw;
+}
+.truck{
+  display: inline-block;
+  height: 5vh;
+  width: auto;
+}
+.footer-info{
+  width: auto;
+  height: auto;
+  color: gray;
+  font-size: 12px;
+  text-align: right;
+  padding-top: 28px;
+  margin-left: -200px;
 }

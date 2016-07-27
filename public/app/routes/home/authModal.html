@@ -1,14 +1,7 @@
-<div class="modal-container">
+<div class="menu-curtain">
   <div class="modal-box">
-    <h2>ON Demand Delivery</h2>
-    <a ui-sref="usersignup">User Signup</a>
-    <a ui-sref="userlogin">User Login</a>
-    <a ui-sref="trucklogin">Truck Login</a>
-    <a ui-sref="trucksignup">Truck Signup</a>
+    <div class="menu-modal-close" ng-click="closeThisDialog()"> X </div>
 
-      <ui-view>
-      </ui-view>
+          <ui-view></ui-view>
   </div>
-
-
 </div>

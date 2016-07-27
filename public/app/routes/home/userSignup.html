@@ -1,10 +1,41 @@
-<div class="">
-  <form ng-submit="register(newUser)">
-    First Name: <input type="text" ng-model="newUser.firstName" required/>
-    Last Name: <input type="text" ng-model="newUser.lastName" required/>
-    Email: <input type="email" ng-model="newUser.email" required/>
-    Phone: <input type="text" ng-model="newUser.phone" required/>
-    Password: <input type="password" ng-model="newUser.password" required/>
-    <button type="submit">Register as a user</button>
+<div class="center-box">
+  <h1>USER SIGN UP</h1>
+
+  <form class="login-form" ng-submit="register(newUser)">
+
+    <table>
+      <tr>
+        <td>First Name:</td>
+        <td><input type="text" ng-model="newUser.firstName" required/></td>
+      </tr><br>
+
+      <tr>
+        <td>Last Name:</td>
+        <td><input type="text" ng-model="newUser.lastName" required/></td>
+      </tr>
+
+      <tr>
+        <td>Email:</td>
+        <td><input type="email" ng-model="newUser.email" required/></td>
+      </tr>
+
+      <tr>
+        <td>Phone:</td>
+        <td><input type="text" ng-model="newUser.phone" required/></td>
+      </tr>
+
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" ng-model="newUser.password" required/></td>
+      </tr>
+
+    </table>
+
+    <button class="login-button" type="submit">User Signup</button>
   </form>
+    <section class="user-box">
+        <a ui-sref="userlogin">User Log In</a>
+    </section>
+        <p>Looking for <a ui-sref="trucksignup">Restaurant Sign Up?</a></p>
+
 </div>
