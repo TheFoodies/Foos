@@ -84,7 +84,7 @@ angular.module('foodie')
 
     $scope.openLogin = function() {
         ngDialog.open({
-            template: './app/routes/home/authModal.html'
+            template: './app/routes/home/authModal.html',
         });
         $state.go('userlogin');
     };

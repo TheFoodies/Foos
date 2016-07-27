@@ -1,7 +1,24 @@
-<div class="">
-  <form ng-submit="loginRest(restaurant)">
-    Username: <input type="text" ng-model="restaurant.username" required/>
-    Password: <input type="password" ng-model="restaurant.password" required/>
-    <button type="submit">login</button>
+<div class="center-box">
+  <h1>RESTAURANT LOG IN</h1>
+
+  <form  class="login-form" ng-submit="loginRest(restaurant)">
+    <table>
+      <tr>
+        <td>Username:</td>
+        <td><input type="text" ng-model="restaurant.username" required/></td>
+      </tr><br>
+
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" ng-model="restaurant.password" required/></td>
+      </tr>
+
+    </table>
+    <button class="login-button" type="submit">Restaurant login</button>
   </form>
+  <section class="user-box">
+      <a ui-sref="trucksignup">Restaurant Sign Up</a>
+  </section>
+      <p>Looking for <a ui-sref="userlogin">User Login?</a></p>
+
 </div>
