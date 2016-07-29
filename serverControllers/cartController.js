@@ -28,24 +28,28 @@ module.exports = {
     })
   },
 
-  update: function(req, res, next) {
-    Cart.findByIdAndUpdate(req.params.id, req.body, function(err, cartResponse) {
-      if(err) {
-        console.log(err)
-      } else {
-        res.status(200).json(cartResponse)
-      }
-    })
-  },
-
-  destroy: function(req, res, next) {
-    Cart.findByIdAndRemove(req.params.id, function(err, cartResponse) {
-      if (err) {
-        console.log(err)
-      } else {
-        res.status(200).json(cartResponse)
-      }
-    })
-  }
+  // update: function(req, res, next) {
+  //   Cart.find({user: req.params.user, restauant: req.params.restauant}, function(err, cartResponse) {
+  //     if(err) {
+  //       Cart.create({item: req.body, user: req.params.user, restauant: req.params.restauant}, function(err, newCartResponse) {
+  //         res.status(200).send(newCartResponse)
+  //       })
+  //     } else {
+  //       cartResponse.items.push(req.body);
+  //       cartResponse.save();
+  //       res.status(200).send(cartResponse);
+  //     }
+  //   })
+  // },
+  //
+  // destroy: function(req, res, next) {
+  //   Cart.find({user: req.params.user, restauant: req.params.restauant} function(err, cartResponse) {
+  //     if (err) {
+  //       console.log(err)
+  //     } else {
+  //       res.status(200).json(cartResponse)
+  //     }
+  //   })
+  // }
 
 }

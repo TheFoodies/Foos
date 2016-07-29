@@ -16,12 +16,10 @@
       <div class="menu-modal-quantity-controls">
         <h4>Quantity</h4>
         <button type="button" name="button" ng-click="removeQuantity()">-</button>
-        <input type="text" name="name" value="{{quantity}}" >
+        <input type="text" name="name" value="{{quantity}}" ng-model="quantity">
         <button type="button" name="button" ng-click="addQuantity()">+</button>
       </div>
-      <button type="button" name="button" class="menu-add-to-cart"><h5>Add To Cart</h5></button>
+      <button type="button" name="button" class="menu-add-to-cart" ng-click="addToCart(item, quantity, specialInstructions)"><h5>Add To Cart</h5></button>
     </div>
-
-
   </div>
 </div>

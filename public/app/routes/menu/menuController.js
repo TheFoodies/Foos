@@ -1,4 +1,4 @@
-angular.module("foodie").controller("menuController", function($scope, ngDialog, yelpService, cartService) {
+angular.module("foodie").controller("menuController", function($scope, ngDialog, yelpService, cartService, restaurantService, $stateParams, user) {
 
     // $scope.getYelpData = function() {
     //   yelpService.getYelpData($scope.restaurant).then(function(data) {
@@ -8,58 +8,48 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
     //
     // $scope.getYelpData();
 
-    // $scope.restaurant = {};
-    //
-    // $scope.getRestaurant = function() {
-    //   restaurantService.getRestaurant($state.id).then(function(restaurant) {
-    //     $scope.restaurant = restaurant;
-    //   })
-    // }
-
-    // $scope.getRestaurant();
-
-
-    $scope.menu = [
-      {
-        name: "pizza",
-        items: [
-                {name: "Pizza",
-                price: 25,
-                description: "a delicious pizza",
-                images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-                sizes: ["S", "M", "L"]},
-                {name: "Pizza",
-                price: 25,
-                description: "a delicious pizza",
-                images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-                sizes: ["S", "M", "L"]},
-                {name: "Pizza",
-                price: 25,
-                description: "a delicious pizza",
-                images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-                sizes: ["S", "M", "L"]},
-        ]
-      },
-      {
-        name: "better pizza",
-        items: [
-                {name: "Better Pizza",
-                price: 50,
-                description: "a more delicious pizza",
-                images: ["https://www.cicis.com/media/1137/pizza_trad_alfredo.png", "http://www.mysticpizza.com/admin/resources/pizza-pepperoni-w857h456.jpg"],
-                sizes: ["S", "M", "L", "XL"]},
-            ]
-      }
-    ]
-
-    $scope.cart = {
-      items: []
-    };
-
-    $scope.addToCart = function(item) {
-      cartService.addToCart(item, $scope.quantity, $scope.user.id).then(function(cart) {
-        $scope.cart = cart;
+    $scope.getRestaurant = function() {
+      restaurantService.getRestaurantInfo($stateParams.restaurantID).then(function(restaurant) {
+        $scope.restaurant = restaurant;
+        $scope.menu = restaurant.menu;
       })
+    }
+
+    $scope.getRestaurant();
+
+
+    $scope.findAveragePrice = function() {
+        var sum = 0;
+        var items = 0;
+        var average = 0;
+        for (var i = 0; i < menu.length; i++) {
+
+            for (var j = 0; j < menu[i].items.length; j++) {
+                sum += menu[i].items[j].price;
+                items += 1;
+            }
+
+        }
+        average = sum / items;
+        if (average > 0 && average <= 10) {
+            $scope.averagePrice = "$";
+        } else if (average > 10 && average <= 20) {
+            $scope.averagePrice = "$$";
+        } else if (average > 20 && average <= 30) {
+            $scope.averagePrice = "$$$";
+        } else {
+            $scope.averagePrice = "$$$$";
+        }
+    }
+
+    $scope.addToCart = function(item, quantity, specialInstructions) {
+      var itemsObj = new Object();
+      itemsObj.item = item;
+      itemsObj.quantity = quantity;
+      itemsObj.specialInstructions = specialInstructions;
+        cartService.addToCart(itemsObj, $stateParams.restaurantID, user).then(function(cart) {
+            $scope.cart = cart;
+        })
     }
 
 
@@ -78,16 +68,16 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
     $scope.quantity = 1;
 
     $scope.addQuantity = function() {
-      $scope.quantity++;
+        $scope.quantity++;
     }
 
     $scope.removeQuantity = function() {
-      if ($scope.quantity > 1) {
-        $scope.quantity--;
-      }
+        if ($scope.quantity > 1) {
+            $scope.quantity--;
+        }
     }
 
-
+$scope.user = user;
 
 
 

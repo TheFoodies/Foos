@@ -9,14 +9,11 @@ angular.module("foodie").service("cartService", function($http, $q) {
     })
   }
 
-  this.addToCart = function(product, quantity, id) {
+  this.addToCart = function(itemObj, restaurant, user) {
     $http({
-      method: 'POST',
-      url: '/api/cart/' + id,
-      data: {
-        "product": product,
-        "quantity": quantity
-      }
+      method: 'PUT',
+      url: '/api/cart/' + restaurant + '/' + user,
+      data: itemObj
     }).then(function(cart) {
       return cart.data
     })

@@ -1,11 +1,16 @@
 <header class="navbar-header-everypage">
     <nav>
-      <a ui-sref="home">Home</a>
+      <a class="nav-logo" ui-sref="home">
+        <img src="../app/routes/images/truck.svg" width="30%" height="auto" alt="Foos Logo" />
+      </a>
+
       <a ui-sref="restaurants">Restaurants</a>
       <a ui-sref="menu">Menu</a>
       <a ui-sref="order">Order</a>
-      <a ui-sref="dashboard">Dashboard</a>
-      <a ui-sref="faq">faq</a>
+
+      <button ng-click="openLogin()" class="nav-icon">
+        <img src="../app/routes/images/avatar.svg" width="100%" height="100%" alt="" />
+      </button>
   </nav>
 
 </header>

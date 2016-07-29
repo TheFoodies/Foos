@@ -92,11 +92,11 @@ app.get('/logout/restaurant', function(req, res, next) {
 //Cart
 app.get('/api/cart/:id', cartController.show)
 
-app.post('/api/cart/:id', cartController.create)
+app.post('/api/cart/', cartController.create)
 
-app.put('/api/cart/:id', cartController.update)
+// app.put('/api/cart/:restauant/:user', cartController.update)
 
-app.delete('/api/cart/:id', cartController.destroy)
+// app.delete('/api/cart/:id', cartController.destroy)
 
 //Food
 app.get('/api/food/:id', foodController.show)
@@ -128,6 +128,8 @@ app.put('/api/restaurant/category', restaurantController.addCategory)
 app.put('/api/restaurant/:category', restaurantController.addToMenu)
 
 app.delete('/api/restaurant/:id', restaurantController.destroy)
+
+app.get('/api/restaurant/', restaurantController.getAllRestaurantInfo)
 
 //User
 
