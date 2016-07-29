@@ -4,6 +4,7 @@ angular.module('foodie')
       restaurantService.getAllRestaurantInfo()
       .then(function (response){
         $scope.restaurants = response;
+        console.log(response)
       })
     }
     $scope.getRestaurantInfo();
