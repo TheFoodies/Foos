@@ -25,7 +25,7 @@ angular.module('foodie').service('userService', function ($http) {
     method: 'GET',
     url: '/me/user'
   }).then(function(response) {
-    return response;
+    return response.data;
   });
 };
 

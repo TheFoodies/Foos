@@ -22,5 +22,6 @@ module.exports = {
       if (err) next(err);
       res.status(200).send('user updated');
     });
-  }
+  },
+
 };
