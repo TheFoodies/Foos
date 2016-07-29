@@ -90,13 +90,14 @@ app.get('/logout/restaurant', function(req, res, next) {
 //**************Endpoints***************
 
 //Cart
-app.get('/api/cart/:id', cartController.show)
+app.get('/api/cart/:restaurant/:user', cartController.show)
 
-app.post('/api/cart/:id', cartController.create)
+app.post('/api/cart/', cartController.create)
 
-app.put('/api/cart/:id', cartController.update)
+app.put('/api/cart/:restauant/:user', cartController.update)
 
-app.delete('/api/cart/:id', cartController.destroy)
+// app.delete('/api/cart/:id', cartController.destroy)
+
 
 //Food
 app.get('/api/food/:id', foodController.show)
@@ -108,13 +109,13 @@ app.put('/api/food/', foodController.update)
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
-app.get('/api/order/restaurant', orderController.show)
+app.get('/api/order/restaurant/', isAuthed, orderController.show)
 
-app.post('/api/order/', orderController.create)
+app.post('/api/order/', isAuthed, orderController.create)
 
-app.put('/api/order/:id', orderController.update)
+app.put('/api/order/:id', isAuthed, orderController.update)
 
-app.delete('/api/order/:id', orderController.destroy)
+app.delete('/api/order/:id', isAuthed, orderController.destroy)
 
 //Restaurant
 app.get('/api/restaurant/:id', restaurantController.show)

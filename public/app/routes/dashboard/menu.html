@@ -6,13 +6,13 @@
 
 <div class="">
     <form ng-submit="updateRestaurantInfo(restaurantObj)">
-        <input placeholder="name" ng-model="restaurantObj.name">
+        <input placeholder="Restaurant Name" ng-model="restaurantObj.name">
+        <input placeholder="Category" ng-model="restaurantObj.category">
         <!-- <input placeholder="location" ng-model="restaurantObj.location"> -->
-        <input placeholder="phone" ng-model="restaurantObj.phone">
+        <input placeholder="Phone" ng-model="restaurantObj.phone">
         <!-- location thing that updates it and says that in user feed -->
+        <input placeholder="Photos" ng-model="restaurantObj.restaurantImage">
         <button type="submit">Update Restaurant Information</button>
-        <input placeholder="photo" ng-model="restaurant.restaurantImage">
-        <button type="submit">Add Photo</button>
     </form>
 </div>
 
