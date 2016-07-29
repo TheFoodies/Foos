@@ -119,6 +119,8 @@ app.delete('/api/order/:id', isAuthed, orderController.destroy)
 //Restaurant
 app.get('/api/restaurant/:id', restaurantController.show)
 
+app.put('/api/restaurant/:category/:newCategory', restaurantController.editCategory)
+
 app.post('/api/restaurant/', restaurantController.create)
 
 app.put('/api/restaurant/', restaurantController.update)

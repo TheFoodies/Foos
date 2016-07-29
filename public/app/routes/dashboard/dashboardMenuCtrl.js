@@ -90,6 +90,14 @@ $scope.AddToMenu = function (MenuObj) {
     })
   }
 
+  $scope.editCategory = function(category, updatedCategoryName) {
+    console.log(category, $scope.updatedCategoryName)
+    restaurantService.editCategory(category, updatedCategoryName).then(function(response) {
+      $scope.restaurantInfo();
+    })
+  }
+
+
 
 //ending
 })
