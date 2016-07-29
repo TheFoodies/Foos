@@ -5,7 +5,8 @@ var Cart = require('../models/cartSchema');
 module.exports = {
 
   show: function(req, res, next) {
-    Cart.findById(req.params.id, function(err, cartResponse) {
+    console.log("received request")
+    Cart.findOne({customer: req.params.user, restaurant: req.params.restauant}).populate("items.item").exec(function(err, cartResponse) {
       if (err) {
         console.log(err)
       } else {
@@ -29,23 +30,46 @@ module.exports = {
   },
 
   update: function(req, res, next) {
-    Cart.findByIdAndUpdate(req.params.id, req.body, function(err, cartResponse) {
-      if(err) {
-        console.log(err)
+    console.log(req.params.user)
+    Cart.findOne({customer: req.params.user, restaurant: req.params.restauant}, function(err, cartResponse) {
+      if (err) {
+        return console.log(err)
+      }
+      console.log(cartResponse)
+      if(!cartResponse) {
+        Cart.create({items: [req.body], customer: req.params.user, restaurant: req.params.restauant})
+        .populate("items.item")
+        .exec(function(err, newCartResponse) {
+          res.status(200).send(newCartResponse)
+        })
       } else {
-        res.status(200).json(cartResponse)
+        cartResponse.items.push(req.body);
+        cartResponse.save(function(err, updatedCart) {
+          if (err) {
+            console.log(err)
+          }
+          updatedCart.populate('items.item', function(err, populatedCart) {
+            if (err) {
+              console.log(err)
+            }
+            else {
+              res.status(200).send(populatedCart);
+            }
+          })
+
+        });
       }
     })
   },
-
-  destroy: function(req, res, next) {
-    Cart.findByIdAndRemove(req.params.id, function(err, cartResponse) {
-      if (err) {
-        console.log(err)
-      } else {
-        res.status(200).json(cartResponse)
-      }
-    })
-  }
+  //
+  // destroy: function(req, res, next) {
+  //   Cart.find({user: req.params.user, restauant: req.params.restauant} function(err, cartResponse) {
+  //     if (err) {
+  //       console.log(err)
+  //     } else {
+  //       res.status(200).json(cartResponse)
+  //     }
+  //   })
+  // }
 
 }
