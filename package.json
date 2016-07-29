@@ -1,4 +1,4 @@
-{
+   {
   "name": "foos",
   "version": "1.0.0",
   "main": "index.js",
@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/TheFoodies/Foos#readme",
   "dependencies": {
+    "angular-modal-service": "^0.10.1",
     "bcrypt": "^0.8.7",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",

@@ -1,0 +1,161 @@
+<div class="overlay">
+  <div class="center-box">
+    <a href ng-click="userlogin = !userlogin" >1</a>
+    <a href ng-click="usersignup = !usersignup" >2</a>
+    <a href ng-click="show = !show" >3</a>
+    <a href ng-click="show = !show" >4</a>
+
+    <!-- ///////////div number one ////////// -->
+    <div ng-show="userlogin" class="one">
+
+        <h1>USER LOG IN</h1>
+
+      <form  class="login-form" ng-submit="login(user)">
+        <table>
+          <tr>
+            <td>Email:</td>
+            <td><input type="email" ng-model="user.email" required/></td>
+          </tr><br>
+
+          <tr>
+            <td>Password:</td>
+            <td><input type="password" ng-model="user.password" required/></td>
+          </tr>
+
+        </table>
+        <button class="login-button" type="submit">User login</button>
+      </form>
+      <section class="user-box">
+          <a ui-sref="usersignup">User Sign Up</a>
+      </section>
+          <p>Looking for <a ui-sref="trucklogin">Restaurant Login?</a></p>
+
+      </div>
+
+      <!-- ///////////div number two ////////// -->
+      <div ng-show="usersignup" class="two">
+        <div class="center-box">
+          <h1>USER SIGN UP</h1>
+
+          <form class="login-form" ng-submit="register(newUser)">
+
+            <table>
+              <tr>
+                <td>First Name:</td>
+                <td><input type="text" ng-model="newUser.firstName" required/></td>
+              </tr><br>
+
+              <tr>
+                <td>Last Name:</td>
+                <td><input type="text" ng-model="newUser.lastName" required/></td>
+              </tr>
+
+              <tr>
+                <td>Email:</td>
+                <td><input type="email" ng-model="newUser.email" required/></td>
+              </tr>
+
+              <tr>
+                <td>Phone:</td>
+                <td><input type="text" ng-model="newUser.phone" required/></td>
+              </tr>
+
+              <tr>
+                <td>Password:</td>
+                <td><input type="password" ng-model="newUser.password" required/></td>
+              </tr>
+
+            </table>
+
+            <button class="login-button" type="submit">User Signup</button>
+          </form>
+            <section class="user-box">
+                <a ui-sref="userlogin">User Log In</a>
+            </section>
+                <p>Looking for <a ui-sref="trucksignup">Restaurant Sign Up?</a></p>
+
+        </div>
+
+      </div>
+
+      <!-- ///////////div number three ////////// -->
+      <!-- <div class="three">
+        <div class="center-box">
+          <h1>RESTAURANT LOG IN</h1>
+
+          <form  class="login-form" ng-submit="loginRest(restaurant)">
+            <table>
+              <tr>
+                <td>Username:</td>
+                <td><input type="text" ng-model="restaurant.username" required/></td>
+              </tr><br>
+
+              <tr>
+                <td>Password:</td>
+                <td><input type="password" ng-model="restaurant.password" required/></td>
+              </tr>
+
+            </table>
+            <button class="login-button" type="submit">Restaurant login</button>
+          </form>
+          <section class="user-box">
+              <a ui-sref="trucksignup">Restaurant Sign Up</a>
+          </section>
+              <p>Looking for <a ui-sref="userlogin">User Login?</a></p>
+
+        </div>
+
+      </div> -->
+
+      <!-- ///////////div number four////////// -->
+      <!-- <div class="four">
+        <div class="center-box">
+          <h1>RESTAURANT SIGN UP</h1>
+
+          <form class="login-form" ng-submit="registerRest(newRestaurant)">
+
+            <table>
+              <tr>
+                <td>Name:</td>
+                <td><input type="text" ng-model="newRestaurant.name" required/></td>
+              </tr><br>
+
+              <tr>
+                <td>Username:</td>
+                <td><input type="text" ng-model="newRestaurant.username" required/></td>
+              </tr>
+
+              <tr>
+                <td>Email:</td>
+                <td><input type="text" ng-model="newRestaurant.email" required/></td>
+              </tr>
+
+              <tr>
+                <td>Phone:</td>
+                <td><input type="text" ng-model="newRestaurant.phone" required/></td>
+              </tr>
+
+              <tr>
+                <td>Password:</td>
+                <td><input type="text" ng-model="newRestaurant.password" required/></td>
+              </tr>
+
+            </table>
+
+            <button class="login-button" type="submit">Restaurant Signup</button>
+          </form>
+            <section class="user-box">
+                <a ui-sref="trucklogin">Restaurant Log In</a>
+            </section>
+                <p>Looking for <a ui-sref="usersignup">User Sign Up?</a></p>
+
+        </div>
+
+      </div> -->
+
+    </div>
+</div>
+
+<div ng-click="close()" class="fade">
+
+</div>

@@ -1,4 +1,4 @@
-angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
+angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService"])
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
@@ -6,6 +6,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         url: '/',
         templateUrl: './app/routes/home/home.html',
         controller: 'homeController',
+
         // resolve: {
         //   user: function(userService, $state) {
         //     return restaurantService.getRestaurantInfo().then(function(response) {
@@ -18,50 +19,29 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         //   }
         // }
       })
-      // .state('home.userSignup', {
-      //   url: '/usersignup',
-      //   templateUrl: './app/routes/home/userSignup.html',
-      //   controller: 'homeController',
-      // })
-      // .state('home.userlogin', {
-      //   url: '/userlogin',
-      //   templateUrl: './app/routes/home/userlogin.html',
-      //   controller: 'homeController',
-      // })
-      // .state('home.truckSignup', {
-      //   url: '/trucksignup',
-      //   templateUrl: './app/routes/home/truckSignup.html',
-      //   controller: 'homeController',
-      // })
-      // .state('home.trucklogin', {
-      //   url: '/trucklogin',
-      //   templateUrl: './app/routes/home/truckLogin.html',
-      //   controller: 'homeController',
-      // })
-
 
 
       // log in / sign up states //
-      .state('usersignup', {
-        url: '/user/signup',
-        templateUrl: './app/routes/home/userSignup.html',
-        controller: 'homeController'
-      })
-      .state('userlogin', {
-        url: '/user/login',
-        templateUrl: './app/routes/home/userLogin.html',
-        controller: 'homeController'
-      })
-      .state('trucksignup', {
-        url: '/truck/signup',
-        templateUrl: './app/routes/home/truckSignup.html',
-        controller: 'homeController'
-      })
-      .state('trucklogin', {
-        url: '/truck/login',
-        templateUrl: './app/routes/home/truckLogin.html',
-        controller: 'homeController'
-      })
+      // .state('usersignup', {
+      //   url: '/user/signup',
+      //   templateUrl: './app/routes/home/userSignup.html',
+      //   controller: 'homeController'
+      // })
+      // .state('userlogin', {
+      //   url: '/user/login',
+      //   templateUrl: './app/routes/home/userLogin.html',
+      //   controller: 'homeController'
+      // })
+      // .state('trucksignup', {
+      //   url: '/truck/signup',
+      //   templateUrl: './app/routes/home/truckSignup.html',
+      //   controller: 'homeController'
+      // })
+      // .state('trucklogin', {
+      //   url: '/truck/login',
+      //   templateUrl: './app/routes/home/truckLogin.html',
+      //   controller: 'homeController'
+      // })
       // log in / sign up states End //
 
       .state('restaurants', {
