@@ -18,8 +18,31 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         //   }
         // }
       })
+      // .state('home.userSignup', {
+      //   url: '/usersignup',
+      //   templateUrl: './app/routes/home/userSignup.html',
+      //   controller: 'homeController',
+      // })
+      // .state('home.userlogin', {
+      //   url: '/userlogin',
+      //   templateUrl: './app/routes/home/userlogin.html',
+      //   controller: 'homeController',
+      // })
+      // .state('home.truckSignup', {
+      //   url: '/trucksignup',
+      //   templateUrl: './app/routes/home/truckSignup.html',
+      //   controller: 'homeController',
+      // })
+      // .state('home.trucklogin', {
+      //   url: '/trucklogin',
+      //   templateUrl: './app/routes/home/truckLogin.html',
+      //   controller: 'homeController',
+      // })
 
-    .state('usersignup', {
+
+
+      // log in / sign up states //
+      .state('usersignup', {
         url: '/user/signup',
         templateUrl: './app/routes/home/userSignup.html',
         controller: 'homeController'
@@ -39,6 +62,8 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/home/truckLogin.html',
         controller: 'homeController'
       })
+      // log in / sign up states End //
+
       .state('restaurants', {
         url: '/restaurants',
         templateUrl: './app/routes/restaurant/restaurant.html',
@@ -100,17 +125,16 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         controller: 'cartController'
       })
       .state('order', {
-        // url: '/restaurant/:restaurantID',
         url: '/order',
         templateUrl: './app/routes/order/order.html',
         controller: 'orderController'
       })
       .state('dashboard', {
-        url: '/dashboard',
+        url: '/dashboard/:id',
         templateUrl: './app/routes/dashboard/dashboard.html',
       })
       .state('dashboard.map', {
-        url: '/map',
+        url: '/map/:id',
         templateUrl: './app/routes/dashboard/map.html',
         controller: 'mapController'
       })
