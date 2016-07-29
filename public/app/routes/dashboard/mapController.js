@@ -8,7 +8,7 @@ angular.module("foodie").controller("mapController", function($scope) {
               function(pos) {
                 $scope.lat = (pos.coords.longitude).toFixed(2);
                 $scope.lon = (pos.coords.latitude).toFixed(2);
-                $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+                $scope.location = '[' + $scope.lon + ', ' + $scope.lat + ']';
                 console.log($scope.location);
               },
               function(error) {
