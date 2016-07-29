@@ -28,8 +28,10 @@
         </div>
     </section>
     <aside class="menu-side-cart">
+
         <ul class="menu-side-cart-products" ng-repeat="item in cart">
-            <li>{{item.name}}</li>
+
+            <li ng-repeat="name in item">{{name.name}}</li>
         </ul>
     <div ng-if="!cart.items.length">Your Cart is Empty</div>
     <button class="menu-checkout-button" type="button" name="button" ui-sref="cart">Checkout</button>

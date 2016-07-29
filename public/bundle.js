@@ -718,6 +718,458 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
             $scope.quantity--;
         }
     };
+
+    $scope.cart = [{
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawdaw",
+        "_id": "579b911e12f59fb50f375e99"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 5,
+        "specialInstructions": "awdawdawdawdaw",
+        "_id": "579b912612f59fb50f375e9a"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b919e49bd10f30f56651d"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "dawdaw",
+        "_id": "579b922000053d45104f9dfd"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9245c007ed5b10e5e9cd"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b92a6b732519510c553f0"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b92d5005c12bd1084d9a1"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b93a1f6dc78f4106a7218"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b96a4cec21ed511015c8d"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b99caec25c6ea134f8a6e"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b99e6ec25c6ea134f8a6f"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9a19b1b1d4021421cfa6"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9b071f25b35f1424c5fd"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9b547870dc811480916e"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9b7b5ffb229b14056970"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9c06e31379af14a0741e"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdadw",
+        "_id": "579b9c1fe31379af14a0741f"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9c6ee31379af14a07420"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9c98e31379af14a07421"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9cb0e31379af14a07422"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awdawd",
+        "_id": "579b9d07e31379af14a07423"
+    }, {
+        "item": {
+            "_id": "579b8892117f0fa0c3878d86",
+            "name": "Carne Asada",
+            "price": 4.99,
+            "description": "Yummy steak tacos",
+            "allergyInfo": "Steak",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": false,
+                "medium": true,
+                "small": true
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "adawdaw",
+        "_id": "579b9d63e31379af14a07424"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "cehes",
+        "_id": "579b9e28cf09df1b15d18fc6"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "cdhes",
+        "_id": "579b9e6ecf09df1b15d18fc7"
+    }, {
+        "item": {
+            "_id": "579a67fef4b191aabf3c44bf",
+            "name": "Cheese",
+            "price": 4.99,
+            "description": "Burrito with mucho Cheese",
+            "allergyInfo": "Monterrey-Jack",
+            "restaurant": "5797cff7dd80b7d4b60c04df",
+            "__v": 0,
+            "size": {
+                "large": true,
+                "medium": false,
+                "small": false
+            }
+        },
+        "quantity": 1,
+        "specialInstructions": "awd",
+        "_id": "579b9f03cf09df1b15d18fc8"
+    }];
 }]);
 angular.module("foodie").controller("orderController", ["$scope", "$http", "orderService", function ($scope, $http, orderService) {
 
