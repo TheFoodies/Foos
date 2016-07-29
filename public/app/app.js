@@ -7,8 +7,8 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/home/home.html',
         controller: 'homeController',
         // resolve: {
-        //   user: function(authService, $state) {
-        //     return authService.getCurrentUser().then(function(response) {
+        //   user: function(userService, $state) {
+        //     return restaurantService.getRestaurantInfo().then(function(response) {
         //       if (!response.data)
         //         $state.go('login');
         //       return response.data;
@@ -38,6 +38,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
       //   templateUrl: './app/routes/home/truckLogin.html',
       //   controller: 'homeController',
       // })
+
 
 
       // log in / sign up states //
@@ -71,7 +72,21 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
       .state('menu', {
         url: '/restaurant/:restaurantID',
         templateUrl: './app/routes/menu/menu.html',
-        controller: 'menuController'
+        controller: 'menuController',
+        resolve: {
+          user: function(userService, $state) {
+            return userService.getCurrentUser().then(function(response) {
+              console.log(response, 'cupcake');
+              if (!response) {
+                // $state.go('login');
+              }
+
+              return response;
+            }).catch(function(err) {
+              // $state.go('login');
+            });
+          }
+        }
       })
       .state('menu.information', {
         url: '/info',
@@ -91,7 +106,18 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
       .state('cart', {
         url: '/cart',
         templateUrl: './app/routes/cart/cart.html',
-        controller: 'cartController'
+        controller: 'cartController',
+        resolve: {
+          user: function(userService, $state) {
+            return userService.getCurrentUser().then(function(response) {
+              if (!response.data)
+                $state.go('login');
+              return response.data;
+            }).catch(function(err) {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('cartSuccess', {
         url: '/success',
@@ -122,6 +148,6 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         templateUrl: './app/routes/faq/faq.html'
       })
 
-$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
-})
+  })
