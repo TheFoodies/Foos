@@ -49,9 +49,7 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
         })
     }
 
-
     $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
-
 
     $scope.clickToOpen = function(item) {
         var newScope = $scope.$new();

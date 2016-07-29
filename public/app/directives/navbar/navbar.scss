@@ -9,9 +9,9 @@
 .navbar-header-everypage nav {
   height: 80px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 75%;
   margin: auto;
   // button{
   //   width: 40px;
@@ -22,7 +22,11 @@
 .navbar-header-everypage nav a {
   color: white;
 }
-
+.spacer{
+  display: inline-block;
+  width: 400px;
+  height: auto;
+}
 .nav-logo {
   img{
   width: 82px;
