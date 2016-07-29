@@ -146,7 +146,6 @@ app.get('/allusers', function (req, res, next) {
 })
 
 
-
 //make user - need to put this in sigh up function
 app.post('/user', function (req, res) { // THIS IS HOW I'VE BEEN MAKING NEW USERS
   var newUser = new User(req.body);
