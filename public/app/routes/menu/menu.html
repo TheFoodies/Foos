@@ -13,7 +13,7 @@
             <a ui-sref="menu.yelp"><img src="../app/routes/images/yelp.svg" width="30px" height="30px" alt="" /></a>
         </div>
         <div class="menu-menu">
-            <h3>{{restaurant.name}} Menu</h3>
+            <h3>{{restaurant.name}} Menu </h3>
             <hr>
             <div class="menu-menu-category" ng-repeat="category in menu">
                 <h4>{{category.name}}</h4>
@@ -28,8 +28,8 @@
         </div>
     </section>
     <aside class="menu-side-cart">
-        <ul class="menu-side-cart-products" ng-repeat="item in cart">
-            <li>{{item.name}}</li>
+        <ul class="menu-side-cart-products" ng-repeat="items in cart">
+            <li ng-repeat="item in items">{{item.name}}</li>
         </ul>
     <div ng-if="!cart.items.length">Your Cart is Empty</div>
     <button class="menu-checkout-button" type="button" name="button" ui-sref="cart">Checkout</button>

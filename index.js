@@ -90,11 +90,11 @@ app.get('/logout/restaurant', function(req, res, next) {
 //**************Endpoints***************
 
 //Cart
-app.get('/api/cart/:id', cartController.show)
+app.get('/api/cart/:restaurant/:user', cartController.show)
 
 app.post('/api/cart/', cartController.create)
 
-// app.put('/api/cart/:restauant/:user', cartController.update)
+app.put('/api/cart/:restauant/:user', cartController.update)
 
 // app.delete('/api/cart/:id', cartController.destroy)
 

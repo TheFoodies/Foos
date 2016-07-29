@@ -48,17 +48,20 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"])
         url: '/restaurant/:restaurantID',
         templateUrl: './app/routes/menu/menu.html',
         controller: 'menuController',
-        // resolve: {
-        //   user: function(rest, $state) {
-        //     return restaurantService.getRestaurantInfo().then(function(response) {
-        //       if (!response.data)
-        //         $state.go('login');
-        //       return response.data;
-        //     }).catch(function(err) {
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        resolve: {
+          user: function(userService, $state) {
+            return userService.getCurrentUser().then(function(response) {
+              console.log(response, 'cupcake');
+              if (!response) {
+                // $state.go('login');
+              }
+
+              return response;
+            }).catch(function(err) {
+              // $state.go('login');
+            });
+          }
+        }
       })
       .state('menu.information', {
         url: '/info',
