@@ -1,15 +1,15 @@
 <section class="cart-main-container">
     <div class="cart-listing">
-        <h3>Your Cart for {{cart.restaurant}}</h3>
-        <ul class="cart-items" ng-repeat="item in cart.items">
+        <h3>Your Cart for {{restaurant.name}}</h3>
+        <ul class="cart-items" ng-repeat="items in cart">
             <ul class="cart-product-info">
-                <li>Name: {{item.item.name}}</li>
-                <li>Description: {{item.item.description}}</li>
-                <li ng-if="item.item.size.length">Size: {{item.item.size}}</li>
-                <li ng-if="item.item.allergyInfo.length">Allergy Info: {{item.item.allergyInfo}}</li>
+                <li>Name: {{items.item.name}}</li>
+                <li>Description: {{items.item.description}}</li>
+                <li ng-if="item.item.size.length">Size: {{items.item.size}}</li>
+                <li ng-if="item.item.allergyInfo.length">Allergy Info: {{items.item.allergyInfo}}</li>
             </ul>
-        <li><input type="number" name="name" value="{{item.quantity}}" min="0"></li>
-        <li>{{item.item.price | currency}}</li>
+        <li><input type="number" name="name" value="{{items.quantity}}" min="0"></li>
+        <li>{{items.item.price | currency}}</li>
         <li class="cart-order-controls">
             <button ng-click="updateCart(item.item._id)">Update</button>
             <button ng-click="removeFromCart(item.item._id)">Remove</button>
@@ -39,7 +39,7 @@
           <li><input type="text" name="name" value=""></li>
         </ul>
         <hr>
-        <button type="button" name="button" class="cart-place-order"><h3>Place Order</h3></button>
+        <button type="button" name="button" class="cart-place-order" ng-click="submitOrder()"><h3>Place Order</h3></button>
     </div>
 </aside>
 </section>

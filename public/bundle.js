@@ -4,7 +4,31 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
-  }).state('usersignup', {
+  })
+  // .state('home.userSignup', {
+  //   url: '/usersignup',
+  //   templateUrl: './app/routes/home/userSignup.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.userlogin', {
+  //   url: '/userlogin',
+  //   templateUrl: './app/routes/home/userlogin.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.truckSignup', {
+  //   url: '/trucksignup',
+  //   templateUrl: './app/routes/home/truckSignup.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.trucklogin', {
+  //   url: '/trucklogin',
+  //   templateUrl: './app/routes/home/truckLogin.html',
+  //   controller: 'homeController',
+  // })
+
+
+  // log in / sign up states //
+  .state('usersignup', {
     url: '/user/signup',
     templateUrl: './app/routes/home/userSignup.html',
     controller: 'homeController'
@@ -20,7 +44,10 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/truck/login',
     templateUrl: './app/routes/home/truckLogin.html',
     controller: 'homeController'
-  }).state('restaurants', {
+  })
+  // log in / sign up states End //
+
+  .state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
     controller: 'restaurantController'
@@ -55,16 +82,20 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     templateUrl: './app/routes/menu/menu-map.html',
     controller: 'menuController'
   }).state('cart', {
-    url: '/cart',
+    url: '/cart/:restaurantID',
     templateUrl: './app/routes/cart/cart.html',
     controller: 'cartController',
     resolve: {
       user: ["userService", "$state", function (userService, $state) {
         return userService.getCurrentUser().then(function (response) {
-          if (!response.data) $state.go('login');
-          return response.data;
+          console.log(response, 'cupcake');
+          if (!response) {
+            // $state.go('login');
+          }
+
+          return response;
         }).catch(function (err) {
-          $state.go('login');
+          // $state.go('login');
         });
       }]
     }
@@ -73,15 +104,14 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     templateUrl: './app/routes/success/success.html',
     controller: 'cartController'
   }).state('order', {
-    // url: '/restaurant/:restaurantID',
     url: '/order',
     templateUrl: './app/routes/order/order.html',
     controller: 'orderController'
   }).state('dashboard', {
-    url: '/dashboard',
+    url: '/dashboard/:id',
     templateUrl: './app/routes/dashboard/dashboard.html'
   }).state('dashboard.map', {
-    url: '/map',
+    url: '/map/:id',
     templateUrl: './app/routes/dashboard/map.html',
     controller: 'mapController'
   }).state('dashboard.menu', {
@@ -141,6 +171,15 @@ angular.module("foodie").service("cartService", ["$http", "$q", function ($http,
         "product": product,
         "quantity": quantity
       }
+    }).then(function (cart) {
+      return cart.data;
+    });
+  };
+
+  this.emptyCart = function (restaurant, user) {
+    return $http({
+      method: 'PUT',
+      url: '/api/cart/empty/' + restaurant + '/' + user
     }).then(function (cart) {
       return cart.data;
     });
@@ -232,6 +271,7 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   //     return response.data;
   //   })
   // }
+
 
 }]);
 
@@ -335,6 +375,17 @@ angular.module("foodie").service("restaurantService", ["$http", function ($http)
       return response;
     });
   };
+
+  this.editCategory = function (category, newCategory) {
+    console.log(category);
+    return $http({
+      method: "PUT",
+      url: '/api/restaurant/' + category,
+      data: { newCategory }
+    }).then(function (response) {
+      return response;
+    });
+  };
 }]);
 angular.module('foodie').service('userService', ["$http", function ($http) {
 
@@ -396,53 +447,72 @@ angular.module('foodie').directive('navbar', function () {
     controller: 'homeController'
   };
 });
-angular.module("foodie").controller("cartController", ["$scope", "cartService", function ($scope, cartService) {
+angular.module("foodie").controller("cartController", ["$scope", "$stateParams", "orderService", "cartService", "restaurantService", "user", function ($scope, $stateParams, orderService, cartService, restaurantService, user) {
 
-    $scope.cart = {
-        items: [{
-            item: {
-                name: "tacos",
-                price: 25,
-                description: "yummy tacos",
-                allergyInfo: "nuts"
-            },
-            quantity: 5,
-            specialInstructions: "make em good boy"
-        }, {
-            item: {
-                name: "more tacos",
-                price: 5,
-                description: "yummier tacos",
-                size: "L"
-            },
-            quantity: 300,
-            specialInstructions: "make em even better"
-        }],
-        restaurant: "BIG BOI TACOS"
-    };
+  // $scope.cart = {
+  //         items: [
+  //           {
+  //             item: {
+  //                 name: "tacos",
+  //                 price: 25,
+  //                 description: "yummy tacos",
+  //                 allergyInfo: "nuts"
+  //             },
+  //             quantity: 5,
+  //             specialInstructions: "make em good boy"
+  //         },
+  //         {
+  //             item: {
+  //                 name: "more tacos",
+  //                 price: 5,
+  //                 description: "yummier tacos",
+  //                 size: "L"
+  //             },
+  //             quantity: 300,
+  //             specialInstructions: "make em even better"
+  //         }
+  //       ],
+  //         restaurant: "BIG BOI TACOS"
+  //     };
 
-    $scope.getTotal = function () {
-        $scope.total = 0;
-        for (var i = 0; i < $scope.cart.items.length; i++) {
-            $scope.total += $scope.cart.items[i].item.price * $scope.cart.items[i].quantity;
-        }
-    };
 
-    $scope.getTotal();
+  $scope.getRestaurant = function () {
+    restaurantService.getRestaurantInfo($stateParams.restaurantID).then(function (restaurant) {
+      $scope.restaurant = restaurant;
+      console.log(restaurant);
+      $scope.menu = restaurant.menu;
+    });
+  };
 
-    // $scope.getCart = function() {
-    //   cartService.getCart($scope.user._id).then(function(cart) {
-    //     $scope.cart = cart;
-    //   })
-    // }
-    //
-    // $scope.getCart();
-    //
-    // $scope.updateCart = function(products, quantity) {
-    //   cartService.updateCart(products, quantity, $scope.user._id).then(function(cart) {
-    //     $scope.cart = cart;
-    //   })
-    // }
+  $scope.getRestaurant();
+
+  $scope.emptyCart = function () {
+    cartService.emptyCart($stateParams.restaurantID, user._id).then(function (cart) {
+      $scope.getCart();
+    });
+  };
+
+  $scope.getCart = function () {
+    cartService.getCart($stateParams.restaurantID, user._id).then(function (cart) {
+      console.log('this is the getCart', cart);
+      $scope.order = cart;
+      $scope.cart = cart.items;
+      $scope.total = 0;
+      for (var i = 0; i < $scope.cart.length; i++) {
+        $scope.total += $scope.cart[i].item.price * $scope.cart[i].quantity;
+      }
+    });
+  };
+
+  $scope.getCart();
+
+  $scope.submitOrder = function () {
+    delete $scope.order._id;
+    orderService.submitOrder($scope.order).then(function (order) {
+      console.log(order);
+      $scope.emptyCart();
+    });
+  };
 }]);
 angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
@@ -526,6 +596,13 @@ angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stat
     });
   };
 
+  $scope.editCategory = function (category, updatedCategoryName) {
+    console.log(category, $scope.updatedCategoryName);
+    restaurantService.editCategory(category, updatedCategoryName).then(function (response) {
+      $scope.restaurantInfo();
+    });
+  };
+
   //ending
 }]);
 angular.module('foodie').service('dashboardService', ["$http", function ($http) {
@@ -567,7 +644,7 @@ angular.module("foodie").controller("mapController", ["$scope", function ($scope
       navigator.geolocation.getCurrentPosition(function (pos) {
         $scope.lat = pos.coords.longitude.toFixed(2);
         $scope.lon = pos.coords.latitude.toFixed(2);
-        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+        $scope.location = '[' + $scope.lon + ', ' + $scope.lat + ']';
         console.log($scope.location);
       }, function (error) {
         $scope.lat = $scope.user.location[1];
@@ -622,6 +699,7 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
   };
 
   ///////////
+
 
   $scope.loginRest = function (restaurant) {
     restaurantService.loginRest(restaurant).then(function (response) {
@@ -719,7 +797,7 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
     $scope.getCart = function () {
         cartService.getCart($stateParams.restaurantID, user._id).then(function (cart) {
             console.log('this is the getCart', cart);
-            $scope.cart = cart;
+            $scope.cart = cart.items;
         });
     };
 
@@ -762,118 +840,42 @@ angular.module("foodie").controller("menuController", ["$scope", "ngDialog", "ye
         }
     };
 }]);
-// angular.module("foodie").controller("menuController2", function($scope, ngDialog, yelpService, cartService, restaurantService, $stateParams, userService, $state) {
-//
-//     // $scope.getYelpData = function() {
-//     //   yelpService.getYelpData($scope.restaurant).then(function(data) {
-//     //     $scope.yelpData = data;
-//     //   })
-//     // }
-//     //
-//     // $scope.getYelpData();
-//
-//     var getUser = function() {
-//       return userService.getCurrentUser().then(function(response) {
-//         console.log(response, 'cupcake');
-//         if (!response)
-//           // $state.go('login');
-//         $scope.user = response;
-//       }).catch(function(err) {
-//         // $state.go('login');
-//       });
-//     }
-//     getUser();
-//     console.log($scope.user)
-//
-//     $scope.getRestaurant = function() {
-//       restaurantService.getRestaurantInfo($stateParams.restaurantID).then(function(restaurant) {
-//         $scope.restaurant = restaurant;
-//         $scope.menu = restaurant.menu;
-//       })
-//     }
-//
-//     $scope.getRestaurant();
-//
-//
-//     $scope.findAveragePrice = function() {
-//         var sum = 0;
-//         var items = 0;
-//         var average = 0;
-//         for (var i = 0; i < menu.length; i++) {
-//
-//             for (var j = 0; j < menu[i].items.length; j++) {
-//                 sum += menu[i].items[j].price;
-//                 items += 1;
-//             }
-//
-//         }
-//         average = sum / items;
-//         if (average > 0 && average <= 10) {
-//             $scope.averagePrice = "$";
-//         } else if (average > 10 && average <= 20) {
-//             $scope.averagePrice = "$$";
-//         } else if (average > 20 && average <= 30) {
-//             $scope.averagePrice = "$$$";
-//         } else {
-//             $scope.averagePrice = "$$$$";
-//         }
-//     }
-//
-//     $scope.addToCart = function(item, quantity, specialInstructions) {
-//       var itemsObj = new Object();
-//       itemsObj.item = item;
-//       itemsObj.quantity = quantity;
-//       itemsObj.specialInstructions = specialInstructions;
-//       console.log(itemsObj, "this is the itemObj")
-//         cartService.addToCart(itemsObj, $stateParams.restaurantID, user._id).then(function(cart) {
-//             $scope.cart = cart;
-//         })
-//     }
-//
-//
-//     $scope.restaurantImage = 'https://i.kinja-img.com/gawker-media/image/upload/wafswectpmbr0zmug9ly.jpg';
-//
-//
-//     $scope.clickToOpen = function(item) {
-//         var newScope = $scope.$new();
-//         newScope.item = item;
-//         ngDialog.open({
-//             template: './app/routes/menu/item-modal.html',
-//             scope: newScope,
-//         });
-//     };
-//
-//     $scope.quantity = 1;
-//
-//     $scope.addQuantity = function() {
-//         $scope.quantity++;
-//     }
-//
-//     $scope.removeQuantity = function() {
-//         if ($scope.quantity > 1) {
-//             $scope.quantity--;
-//         }
-//     }
-//
-//
-//
-//
-//
-//
-// })
 angular.module("foodie").controller("orderController", ["$scope", "$http", "orderService", function ($scope, $http, orderService) {
 
-  $scope.orderFeed = function () {
-    service.getOrder().then(function (response) {
-      $scope.orderFeed = response;
-      console.log(response);
+  // $scope.orderFeed = function(){
+  //   service.getOrder().then(function (response){
+  //     $scope.orderFeed = response;
+  //     console.log(response);
+  //   })
+  //   console.log(response);
+
+  $scope.getOrders = function () {
+    orderService.getOrders().then(function (orders) {
+
+      console.log("here are the orders", orders.items);
+      console.log("here are the orders", orders);
+      $scope.orders = orders.data;
     });
-    console.log(response);
+  };
+
+  $scope.getOrders();
+
+  $scope.completeOrder = function (id) {
+    orderService.completeOrder(id).then(function (orders) {
+      $scope.getOrders();
+    });
+  };
+
+  $scope.finishedOrder = function (id) {
+    orderService.finishedOrder(id).then(function (orders) {
+      $scope.getOrders();
+    });
   };
 }]);
 angular.module("foodie").service("orderService", ["$http", function ($http) {
 
-  this.getOrder = function () {
+  this.getOrders = function () {
+    console.log("running getOrders service");
     return $http({
       method: 'GET',
       url: '/api/order/'
@@ -882,12 +884,69 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
       return response;
     });
   };
-}]);
-angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
-  $scope.getRestaurantInfo = function () {
-    restaurantService.getAllRestaurantInfo().then(function (response) {
-      $scope.restaurants = response;
+
+  this.submitOrder = function (order) {
+    return $http({
+      method: 'POST',
+      url: '/api/order/',
+      data: order
+    }).then(function (response) {
+      console.log(response);
+      return response;
     });
   };
-  $scope.getRestaurantInfo();
+
+  this.completeOrder = function (id) {
+    console.log(id);
+    return $http({
+      method: 'PUT',
+      url: '/api/order/completed/' + id,
+      data: { completed: true }
+    }).then(function (response) {
+      return response;
+    });
+  };
+
+  this.finishedOrder = function (id) {
+    console.log(id);
+    return $http({
+      method: 'PUT',
+      url: '/api/order/completed/' + id,
+      data: { pickup: true }
+    }).then(function (response) {
+      return response;
+    });
+  };
+}]);
+angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
+    $scope.getRestaurantInfo = function () {
+        restaurantService.getAllRestaurantInfo().then(function (response) {
+            $scope.restaurants = response;
+            console.log(response);
+        });
+    };
+    $scope.getRestaurantInfo();
+
+    $scope.findAveragePrice = function () {
+        var sum = 0;
+        var items = 0;
+        var average = 0;
+        for (var i = 0; i < $scope.restaurants.menu.length; i++) {
+
+            for (var j = 0; j < menu[i].items.length; j++) {
+                sum += menu[i].items[j].price;
+                items += 1;
+            }
+        }
+        average = sum / items;
+        if (average > 0 && average <= 10) {
+            $scope.averagePrice = "$";
+        } else if (average > 10 && average <= 20) {
+            $scope.averagePrice = "$$";
+        } else if (average > 20 && average <= 30) {
+            $scope.averagePrice = "$$$";
+        } else {
+            $scope.averagePrice = "$$$$";
+        }
+    };
 }]);
