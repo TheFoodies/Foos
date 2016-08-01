@@ -4,7 +4,31 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/',
     templateUrl: './app/routes/home/home.html',
     controller: 'homeController'
-  }).state('usersignup', {
+  })
+  // .state('home.userSignup', {
+  //   url: '/usersignup',
+  //   templateUrl: './app/routes/home/userSignup.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.userlogin', {
+  //   url: '/userlogin',
+  //   templateUrl: './app/routes/home/userlogin.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.truckSignup', {
+  //   url: '/trucksignup',
+  //   templateUrl: './app/routes/home/truckSignup.html',
+  //   controller: 'homeController',
+  // })
+  // .state('home.trucklogin', {
+  //   url: '/trucklogin',
+  //   templateUrl: './app/routes/home/truckLogin.html',
+  //   controller: 'homeController',
+  // })
+
+
+  // log in / sign up states //
+  .state('usersignup', {
     url: '/user/signup',
     templateUrl: './app/routes/home/userSignup.html',
     controller: 'homeController'
@@ -20,7 +44,10 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     url: '/truck/login',
     templateUrl: './app/routes/home/truckLogin.html',
     controller: 'homeController'
-  }).state('restaurants', {
+  })
+  // log in / sign up states End //
+
+  .state('restaurants', {
     url: '/restaurants',
     templateUrl: './app/routes/restaurant/restaurant.html',
     controller: 'restaurantController'
@@ -73,15 +100,14 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap"]).config(["$stateProv
     templateUrl: './app/routes/success/success.html',
     controller: 'cartController'
   }).state('order', {
-    // url: '/restaurant/:restaurantID',
     url: '/order',
     templateUrl: './app/routes/order/order.html',
     controller: 'orderController'
   }).state('dashboard', {
-    url: '/dashboard',
+    url: '/dashboard/:id',
     templateUrl: './app/routes/dashboard/dashboard.html'
   }).state('dashboard.map', {
-    url: '/map',
+    url: '/map/:id',
     templateUrl: './app/routes/dashboard/map.html',
     controller: 'mapController'
   }).state('dashboard.menu', {
@@ -232,6 +258,7 @@ angular.module('foodie').service('googleService', ["$q", "$http", function ($q, 
   //     return response.data;
   //   })
   // }
+
 
 }]);
 
@@ -567,7 +594,7 @@ angular.module("foodie").controller("mapController", ["$scope", function ($scope
       navigator.geolocation.getCurrentPosition(function (pos) {
         $scope.lat = pos.coords.longitude.toFixed(2);
         $scope.lon = pos.coords.latitude.toFixed(2);
-        $scope.location = '{' + $scope.lat + ', ' + $scope.lon + '}';
+        $scope.location = '[' + $scope.lon + ', ' + $scope.lat + ']';
         console.log($scope.location);
       }, function (error) {
         $scope.lat = $scope.user.location[1];
@@ -622,6 +649,7 @@ angular.module('foodie').controller('homeController', ["$scope", "userService", 
   };
 
   ///////////
+
 
   $scope.loginRest = function (restaurant) {
     restaurantService.loginRest(restaurant).then(function (response) {
@@ -887,6 +915,7 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
   $scope.getRestaurantInfo = function () {
     restaurantService.getAllRestaurantInfo().then(function (response) {
       $scope.restaurants = response;
+      console.log(response);
     });
   };
   $scope.getRestaurantInfo();
