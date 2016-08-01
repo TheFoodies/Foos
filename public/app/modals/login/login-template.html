@@ -1,9 +1,9 @@
 <div class="overlay">
   <div class="center-box">
-    <a href ng-click="userlogin = !userlogin" >1</a>
-    <a href ng-click="usersignup = !usersignup" >2</a>
-    <a href ng-click="show = !show" >3</a>
-    <a href ng-click="show = !show" >4</a>
+    <a href ng-click="userlogin = !userlogin" ></a>
+    <a href ng-click="usersignup = !usersignup" ></a>
+    <a href ng-click="restlogin = !restlogin" ></a>
+    <a href ng-click="restsignup = !restsignup" ></a>
 
     <!-- ///////////div number one ////////// -->
     <div ng-show="userlogin" class="one">
@@ -26,15 +26,14 @@
         <button class="login-button" type="submit">User login</button>
       </form>
       <section class="user-box">
-          <a ui-sref="usersignup">User Sign Up</a>
+          <a href ng-click="signupView()">User Sign Up</a>
       </section>
-          <p>Looking for <a ui-sref="trucklogin">Restaurant Login?</a></p>
+          <p>Looking for <a href ng-click="restLoginView()">Restaurant Login?</a></p>
 
       </div>
 
       <!-- ///////////div number two ////////// -->
       <div ng-show="usersignup" class="two">
-        <div class="center-box">
           <h1>USER SIGN UP</h1>
 
           <form class="login-form" ng-submit="register(newUser)">
@@ -70,17 +69,15 @@
             <button class="login-button" type="submit">User Signup</button>
           </form>
             <section class="user-box">
-                <a ui-sref="userlogin">User Log In</a>
-            </section>
-                <p>Looking for <a ui-sref="trucksignup">Restaurant Sign Up?</a></p>
+                <a href ng-click="loginView()" >User Log In</a>
 
-        </div>
+            </section>
+                <p>Looking for <a href ng-click="restSignupView()">Restaurant Sign Up?</a></p>
 
       </div>
 
       <!-- ///////////div number three ////////// -->
-      <!-- <div class="three">
-        <div class="center-box">
+      <div ng-show="restlogin" class="three">
           <h1>RESTAURANT LOG IN</h1>
 
           <form  class="login-form" ng-submit="loginRest(restaurant)">
@@ -99,17 +96,14 @@
             <button class="login-button" type="submit">Restaurant login</button>
           </form>
           <section class="user-box">
-              <a ui-sref="trucksignup">Restaurant Sign Up</a>
+              <a href ng-click="restSignupView()">Restaurant Sign Up</a>
           </section>
-              <p>Looking for <a ui-sref="userlogin">User Login?</a></p>
+              <p>Looking for <a href ng-click="loginView()">User Login?</a></p>
 
-        </div>
-
-      </div> -->
+      </div>
 
       <!-- ///////////div number four////////// -->
-      <!-- <div class="four">
-        <div class="center-box">
+      <div ng-show="restsignup" class="four">
           <h1>RESTAURANT SIGN UP</h1>
 
           <form class="login-form" ng-submit="registerRest(newRestaurant)">
@@ -145,13 +139,11 @@
             <button class="login-button" type="submit">Restaurant Signup</button>
           </form>
             <section class="user-box">
-                <a ui-sref="trucklogin">Restaurant Log In</a>
+                <a href ng-click="restLoginView()">Restaurant Log In</a>
             </section>
-                <p>Looking for <a ui-sref="usersignup">User Sign Up?</a></p>
+                <p>Looking for <a href ng-click="signupView()">User Sign Up?</a></p>
 
-        </div>
-
-      </div> -->
+      </div>
 
     </div>
 </div>
