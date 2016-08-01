@@ -85,17 +85,20 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
         controller: 'menuController'
       })
       .state('cart', {
-        url: '/cart',
+        url: '/cart/:restaurantID',
         templateUrl: './app/routes/cart/cart.html',
         controller: 'cartController',
         resolve: {
           user: function(userService, $state) {
             return userService.getCurrentUser().then(function(response) {
-              if (!response.data)
-                $state.go('login');
-              return response.data;
+              console.log(response, 'cupcake');
+              if (!response) {
+                // $state.go('login');
+              }
+
+              return response;
             }).catch(function(err) {
-              $state.go('login');
+              // $state.go('login');
             });
           }
         }

@@ -20,7 +20,12 @@
     <h3>{{restaurant.name}}Edit Menu</h3>
     <hr>
     <div class="menu-menu-category" ng-repeat="category in menu">
-        <div><input ng-if="showCategoryEdit" placeholder="{{category.name}}" ng-model="updateCategory">
+        <div>
+          <div ng-if="showCategoryEdit">
+            <input type="text" placeholder="{{category.name}}" ng-model="updatedCategoryName">
+            <button type="button" name="button" ng-click="editCategory(category.name, updatedCategoryName)">Update</button>
+
+          </div>
             <h4 ng-click="showCategoryEdit = !showCategoryEdit">{{category.name}}</h4>
             <div>
                 <ul>

@@ -108,6 +108,23 @@ module.exports = {
     })
   },
 
+  editCategory: function(req, res, next) {
+    var restaurant = req.user;
+    for (var i = 0; i < restaurant.menu.length; i++) {
+      if (req.params.category === restaurant.menu[i].name) {
+        restaurant[i].menu.name._id === req.params.newCategory;
+      }
+    }
+    restaurant.save(function(err, restaurantResponse) {
+      if(err) {
+        console.log(err)
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(restaurantResponse)
+      }
+    })
+  },
+
   getAllRestaurantInfo: function(req, res, next){
     Restaurant.find({}, function(err, response){
       if(err) {

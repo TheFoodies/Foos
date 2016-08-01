@@ -33,4 +33,13 @@ angular.module("foodie").service("cartService", function($http, $q) {
     })
   }
 
+  this.emptyCart = function(restaurant, user) {
+    return $http({
+      method: 'PUT',
+      url: '/api/cart/empty/' +  restaurant + '/' + user
+    }).then(function(cart) {
+      return cart.data;
+    })
+  }
+
 })
