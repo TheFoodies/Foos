@@ -20,28 +20,29 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
         // }
       })
 
-
       // log in / sign up states //
-      // .state('usersignup', {
-      //   url: '/user/signup',
-      //   templateUrl: './app/routes/home/userSignup.html',
-      //   controller: 'homeController'
-      // })
-      // .state('userlogin', {
-      //   url: '/user/login',
-      //   templateUrl: './app/routes/home/userLogin.html',
-      //   controller: 'homeController'
-      // })
-      // .state('trucksignup', {
-      //   url: '/truck/signup',
-      //   templateUrl: './app/routes/home/truckSignup.html',
-      //   controller: 'homeController'
-      // })
-      // .state('trucklogin', {
-      //   url: '/truck/login',
-      //   templateUrl: './app/routes/home/truckLogin.html',
-      //   controller: 'homeController'
-      // })
+      // This is the only place that is linking the loginController to these views.
+      
+      .state('usersignup', {
+        url: '/user/signup',
+        templateUrl: './app/routes/home/userSignup.html',
+        controller: 'homeController'
+      })
+      .state('userlogin', {
+        url: '/user/login',
+        templateUrl: './app/routes/home/userLogin.html',
+        controller: 'homeController'
+      })
+      .state('trucksignup', {
+        url: '/truck/signup',
+        templateUrl: './app/routes/home/truckSignup.html',
+        controller: 'homeController'
+      })
+      .state('trucklogin', {
+        url: '/truck/login',
+        templateUrl: './app/routes/home/truckLogin.html',
+        controller: 'homeController'
+      })
       // log in / sign up states End //
 
       .state('restaurants', {
