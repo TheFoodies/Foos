@@ -69,5 +69,15 @@ angular.module("foodie").controller("cartController", function($scope, $statePar
           })
         }
 
+        $scope.removeFromCart = function(item) {
+          cartService.removeFromCart(item, $stateParams.restaurantID, user._id).then(function(cart) {
+            $scope.getCart();
+          })
+        }
+
+        $scope.user = user;
+
+        console.log(user)
+
 
 })

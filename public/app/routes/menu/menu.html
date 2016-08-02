@@ -8,9 +8,9 @@
             <button type="button" name="button" ui-sref="menu.yelp">Yelp</button> -->
 
             <a ui-sref="menu.information"><img src="../app/routes/images/info.svg" width="30px" height="30px" alt=""/></a>
-            <a ui-sref="menu.photos"><img src="../app/routes/images/photo.svg" width="30px" height="30px" alt="" /></a>
+            <!-- <a ui-sref="menu.photos"><img src="../app/routes/images/photo.svg" width="30px" height="30px" alt="" /></a> -->
             <a ui-sref="menu.map"><img src="../app/routes/images/map.svg" width="30px" height="30px" alt="" /></a>
-            <a ui-sref="menu.yelp"><img src="../app/routes/images/yelp.svg" width="30px" height="30px" alt="" /></a>
+            <!-- <a ui-sref="menu.yelp"><img src="../app/routes/images/yelp.svg" width="30px" height="30px" alt="" /></a> -->
         </div>
         <div class="menu-menu">
             <h3>{{restaurant.name}} Menu </h3>
@@ -30,11 +30,14 @@
     <aside class="menu-side-cart">
 
         <ul class="menu-side-cart-products" >
-            <li ng-repeat="items in cart">{{items.item.name}}</li>
+            <li ng-repeat="items in cart">{{items.item.name}} x {{items.quantity}}</li>
         </ul>
 
 
     <div ng-if="cart.items.length < 1">Your Cart is Empty</div>
+    <!-- <div class="menu-cart-total">{{total}}
+
+    </div> -->
     <button class="menu-checkout-button" type="button" name="button" ui-sref="cart({restaurantID: restaurant._id})">Checkout</button>
 </aside>
 </section>

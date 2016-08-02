@@ -98,7 +98,7 @@ app.put('/api/cart/:restaurant/:user', cartController.update)
 
 app.put('/api/cart/empty/:restaurant/:user', cartController.empty)
 
-// app.delete('/api/cart/:id', cartController.destroy)
+app.put('/api/cart/removeItem/:restaurant/:user', cartController.destroy)
 
 
 //Food

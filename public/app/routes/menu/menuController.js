@@ -54,6 +54,10 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
     cartService.getCart($stateParams.restaurantID, user._id).then(function(cart) {
       console.log('this is the getCart', cart)
       $scope.cart = cart.items;
+      $scope.total = 0;
+      for (var i = 0; i < $scope.cart.length; i++) {
+        $scope.total += ($scope.cart[i].item.price * $scope.cart[i].quantity);
+      }
     })
   }
 
