@@ -1,18 +1,21 @@
 <div class="display-info-class">
-    {{restaurantObj.name}}
-    {{restaurantObj.email}}
-    {{restaurantObj.phone}}
+    <h2>{{restaurantObj.name}}</h2>
+    <h3>Email: {{restaurantObj.email}}</h3>
+    <h4>Phone: {{restaurantObj.phone}}</h4>
+    <hr>
 </div>
+<h2 id="edit-rest-info-header">Edit Restaurant Info</h2>
 
 <div class="">
-    <form ng-submit="updateRestaurantInfo(restaurantObj)">
-        <input placeholder="Restaurant Name" ng-model="restaurantObj.name">
-        <input placeholder="Category" ng-model="restaurantObj.category">
+    <form ng-submit="updateRestaurantInfo(restaurantObj)" class="updateRestaurantInfoContainer">
+        <div>Restaurant <input placeholder="Restaurant Name" ng-model="restaurantObj.name"></div>
+        <div>Category <input placeholder="Category" ng-model="restaurantObj.category"></div>
         <!-- <input placeholder="location" ng-model="restaurantObj.location"> -->
-        <input placeholder="Phone" ng-model="restaurantObj.phone">
+        <div>Phone <input placeholder="Phone" ng-model="restaurantObj.phone"></div>
         <!-- location thing that updates it and says that in user feed -->
-        <input placeholder="Photos" ng-model="restaurantObj.restaurantImage">
-        <button type="submit">Update Restaurant Information</button>
+        <div>IMG <input placeholder="Photos" ng-model="restaurantObj.restaurantImage"></div>
+        <div><button type="submit">Update</button></div>
+        <hr>
     </form>
 </div>
 
