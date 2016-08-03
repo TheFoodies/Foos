@@ -113,6 +113,7 @@ input button {
   background: rgba(0,0,0,.6);
   padding: 20px 20px;
   border-radius: 5px;
+  text-align: center;
 }
 
 .menu-restaurant-header-info {
@@ -120,6 +121,10 @@ input button {
   h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin-right: 10px;
   }
 
 }
@@ -135,7 +140,10 @@ input button {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .menu-side-cart ul {
@@ -186,8 +194,8 @@ input button {
 
 .menu-modal-close {
   position: absolute;
-  top: 100px;
-  right: 262px;
+  top: 20px;
+  right: 30px;
   font-size: 1.5rem;
   padding: 10px 12px;
 }

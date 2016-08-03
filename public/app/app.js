@@ -22,7 +22,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
 
       // log in / sign up states //
       // This is the only place that is linking the loginController to these views.
-      
+
       .state('usersignup', {
         url: '/user/signup',
         templateUrl: './app/routes/home/userSignup.html',
@@ -104,11 +104,25 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
         }
       })
       .state('cartSuccess', {
-        url: '/success',
+        url: '/success/:orderID',
         templateUrl: './app/routes/success/success.html',
-        controller: 'cartController'
+        controller: 'successController',
+        resolve: {
+          user: function(userService, $state) {
+            return userService.getCurrentUser().then(function(response) {
+              console.log(response, 'cupcake');
+              if (!response) {
+                // $state.go('login');
+              }
+
+              return response;
+            }).catch(function(err) {
+              // $state.go('login');
+            });
+          }
+        }
       })
-      .state('order', {
+      .state('dashboard.order', {
         url: '/order',
         templateUrl: './app/routes/order/order.html',
         controller: 'orderController'

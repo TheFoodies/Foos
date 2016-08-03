@@ -46,4 +46,14 @@ angular.module("foodie")
       })
     }
 
+    this.getOneOrder = function(id) {
+      console.log("success order id is", id)
+      return $http({
+        method: 'GET',
+        url: '/api/order/' + id
+      }).then(function(response) {
+        return response.data;
+      })
+    }
+
   });

@@ -87,16 +87,31 @@ module.exports = {
           });
         }
       })
+  },
+
+  destroy: function(req, res, next) {
+
+    Cart.findOne({customer: req.params.user, restaurant: req.params.restaurant}, function(err, cartResponse) {
+      if (err) {
+        console.log(err)
+      } else {
+        for (var i = 0; i < cartResponse.items.length; i++) {
+          if (cartResponse.items[i].item + '' === req.body._id) {
+            cartResponse.items.splice(i,1);
+            cartResponse.save(function(err, saved) {
+              console.log(saved);
+              if (err) {
+                console.log(err)
+              }
+              else {
+                console.log(saved);
+                res.status(200).send(saved);
+              }
+            })
+          }
+        }
+      }
+    })
   }
-  //
-  // destroy: function(req, res, next) {
-  //   Cart.find({user: req.params.user, restaurant: req.params.restauant} function(err, cartResponse) {
-  //     if (err) {
-  //       console.log(err)
-  //     } else {
-  //       res.status(200).json(cartResponse)
-  //     }
-  //   })
-  // }
 
 }

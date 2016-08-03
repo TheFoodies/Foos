@@ -42,4 +42,15 @@ angular.module("foodie").service("cartService", function($http, $q) {
     })
   }
 
+  this.removeFromCart = function(item, restaurant, user) {
+    console.log(item)
+    return $http({
+      method: 'PUT',
+      url: '/api/cart/removeItem/' + restaurant + '/' + user,
+      data: item
+    }).then(function(response) {
+      return response.data;
+    })
+  }
+
 })

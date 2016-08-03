@@ -16,6 +16,18 @@ module.exports = {
     })
   },
 
+  find: function(req, res, next) {
+    console.log("got the success order request")
+    Order.findById(req.params.orderID).populate("items.item").populate("restaurant").exec(function(err, orderResponse) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(orderResponse)
+        res.status(200).json(orderResponse)
+      }
+    })
+  },
+
   create: function(req, res, next) {
       var newOrder = new Order(req.body);
       newOrder.save(function(err, saved) {

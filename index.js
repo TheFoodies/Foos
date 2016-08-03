@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var cors = require('cors');
+// var cors = require('cors');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var secret = require('./secrets/nodeSecrets.js');
@@ -21,14 +21,15 @@ var orderController = require('./serverControllers/orderController');
 var restaurantController = require('./serverControllers/restaurantController');
 var userController = require('./serverControllers/userController');
 
-//mongoose setup
-
-mongoose.connect(secret);
 
 //express setup
 
 //***************Local Auth Requires****************************
 var config = require('./config');
+var mongoURI = config.MONGO_URI;
+
+//mongoose setup
+mongoose.connect(mongoURI);
 
 //*************Local Auth Controller****************************
 var UserCtrl = require('./serverControllers/userController');
@@ -51,7 +52,7 @@ app.use(session({
   saveUninitialized: false,
   resave: false
 }));
-app.use(cors());
+// app.use(cors());
 app.use(express.static('public'));
 
 //***********Local Auth*************************
@@ -98,7 +99,7 @@ app.put('/api/cart/:restaurant/:user', cartController.update)
 
 app.put('/api/cart/empty/:restaurant/:user', cartController.empty)
 
-// app.delete('/api/cart/:id', cartController.destroy)
+app.put('/api/cart/removeItem/:restaurant/:user', cartController.destroy)
 
 
 //Food
@@ -113,6 +114,8 @@ app.delete('/api/food/:id', foodController.destroy)
 //Order
 app.get('/api/order/', orderController.show)
 
+app.get('/api/order/:orderID', orderController.find)
+
 app.put('/api/order/completed/:id', orderController.completed)
 
 app.post('/api/order/', isAuthed, orderController.create)
@@ -120,6 +123,8 @@ app.post('/api/order/', isAuthed, orderController.create)
 app.put('/api/order/:id', isAuthed, orderController.update)
 
 app.delete('/api/order/:id', isAuthed, orderController.destroy)
+
+
 
 
 //Restaurant
@@ -167,7 +172,7 @@ app.post('/user', function (req, res) { // THIS IS HOW I'VE BEEN MAKING NEW USER
 
 //port
 
-var port = 3000;
+var port = config.PORT;
 app.listen(port, function() {
   console.log('listening to port',port);
 })

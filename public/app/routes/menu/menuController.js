@@ -1,19 +1,5 @@
 angular.module("foodie").controller("menuController", function($scope, ngDialog, yelpService, cartService, restaurantService, $stateParams, userService, $state, user) {
 
-  // $scope.getUser = function() {
-  //   userService.getCurrentUser().then(function(response) {
-  //     console.log(response, 'cupcake');
-  //     $scope.user = response;
-  //     if (!response) {
-  //       // $state.go('login');
-  //     }
-  //     $scope.user = response;
-  //   }).catch(function(err) {
-  //     // $state.go('login');
-  //   });
-  // }
-  // $scope.getUser();
-
   $scope.user = user;
 
   $scope.getRestaurant = function() {
@@ -54,6 +40,10 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
     cartService.getCart($stateParams.restaurantID, user._id).then(function(cart) {
       console.log('this is the getCart', cart)
       $scope.cart = cart.items;
+      $scope.total = 0;
+      for (var i = 0; i < $scope.cart.length; i++) {
+        $scope.total += ($scope.cart[i].item.price * $scope.cart[i].quantity);
+      }
     })
   }
 
@@ -97,7 +87,6 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
           $scope.quantity--;
       }
   }
-
 
 
 
