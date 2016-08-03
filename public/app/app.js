@@ -104,9 +104,23 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
         }
       })
       .state('cartSuccess', {
-        url: '/success',
+        url: '/success/:orderID',
         templateUrl: './app/routes/success/success.html',
-        controller: 'cartController'
+        controller: 'successController',
+        resolve: {
+          user: function(userService, $state) {
+            return userService.getCurrentUser().then(function(response) {
+              console.log(response, 'cupcake');
+              if (!response) {
+                // $state.go('login');
+              }
+
+              return response;
+            }).catch(function(err) {
+              // $state.go('login');
+            });
+          }
+        }
       })
       .state('order', {
         url: '/order',

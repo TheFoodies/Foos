@@ -82,9 +82,23 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
       }]
     }
   }).state('cartSuccess', {
-    url: '/success',
+    url: '/success/:orderID',
     templateUrl: './app/routes/success/success.html',
-    controller: 'cartController'
+    controller: 'successController',
+    resolve: {
+      user: ["userService", "$state", function (userService, $state) {
+        return userService.getCurrentUser().then(function (response) {
+          console.log(response, 'cupcake');
+          if (!response) {
+            // $state.go('login');
+          }
+
+          return response;
+        }).catch(function (err) {
+          // $state.go('login');
+        });
+      }]
+    }
   }).state('order', {
     url: '/order',
     templateUrl: './app/routes/order/order.html',
@@ -653,41 +667,7 @@ angular.module('foodie').directive('navbar', function () {
     controller: 'homeController'
   };
 });
-angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
-
-  $scope.close = close;
-  $scope.userlogin = true;
-
-  $scope.loginView = function () {
-    if ($scope.userlogin = true) {
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.signupView = function () {
-    if ($scope.usersignup = true) {
-      $scope.userlogin = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.restLoginView = function () {
-    if ($scope.restlogin = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.restSignupView = function () {
-    if ($scope.restsignup = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-    }
-  };
-}]);
-angular.module("foodie").controller("cartController", ["$scope", "$stateParams", "orderService", "cartService", "restaurantService", "user", function ($scope, $stateParams, orderService, cartService, restaurantService, user) {
+angular.module("foodie").controller("cartController", ["$scope", "$state", "$stateParams", "orderService", "cartService", "restaurantService", "user", function ($scope, $state, $stateParams, orderService, cartService, restaurantService, user) {
 
   // $scope.cart = {
   //         items: [
@@ -751,6 +731,7 @@ angular.module("foodie").controller("cartController", ["$scope", "$stateParams",
     orderService.submitOrder($scope.order).then(function (order) {
       console.log(order);
       $scope.emptyCart();
+      $state.go('cartSuccess', { orderID: order.data._id });
     });
   };
 }]);
@@ -1148,6 +1129,16 @@ angular.module("foodie").service("orderService", ["$http", function ($http) {
       return response;
     });
   };
+
+  this.getOneOrder = function (id) {
+    console.log("success order id is", id);
+    return $http({
+      method: 'GET',
+      url: '/api/order/' + id
+    }).then(function (response) {
+      return response.data;
+    });
+  };
 }]);
 angular.module('foodie').controller('restaurantController', ["$scope", "restaurantService", function ($scope, restaurantService) {
     $scope.getRestaurantInfo = function () {
@@ -1180,4 +1171,52 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
             $scope.averagePrice = "$$$$";
         }
     };
+}]);
+angular.module("foodie").controller("successController", ["$scope", "$stateParams", "user", "orderService", function ($scope, $stateParams, user, orderService) {
+
+  $scope.getOneOrder = function () {
+    orderService.getOneOrder($stateParams.orderID).then(function (order) {
+      $scope.order = order.items;
+      $scope.baseOrder = order;
+      console.log("success order is ", order);
+    });
+  };
+
+  $scope.getOneOrder();
+
+  $scope.user = user;
+}]);
+angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
+
+  $scope.close = close;
+  $scope.userlogin = true;
+
+  $scope.loginView = function () {
+    if ($scope.userlogin = true) {
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.signupView = function () {
+    if ($scope.usersignup = true) {
+      $scope.userlogin = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restLoginView = function () {
+    if ($scope.restlogin = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restSignupView = function () {
+    if ($scope.restsignup = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+    }
+  };
 }]);
