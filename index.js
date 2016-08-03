@@ -23,12 +23,13 @@ var userController = require('./serverControllers/userController');
 
 //mongoose setup
 
-mongoose.connect(secret);
+mongoose.connect(mongoURI);
 
 //express setup
 
 //***************Local Auth Requires****************************
 var config = require('./config');
+var mongoURI = config.MONGO_URI;
 
 //*************Local Auth Controller****************************
 var UserCtrl = require('./serverControllers/userController');
@@ -171,7 +172,7 @@ app.post('/user', function (req, res) { // THIS IS HOW I'VE BEEN MAKING NEW USER
 
 //port
 
-var port = 3000;
+var port = config.port;
 app.listen(port, function() {
   console.log('listening to port',port);
 })
