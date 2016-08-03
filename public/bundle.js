@@ -678,39 +678,83 @@ angular.module('foodie').directive('navbar', function () {
     controller: 'homeController'
   };
 });
-angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
+angular.module("foodie").controller("cartController", ["$scope", "$state", "$stateParams", "orderService", "cartService", "restaurantService", "user", function ($scope, $state, $stateParams, orderService, cartService, restaurantService, user) {
 
-  $scope.close = close;
-  $scope.userlogin = true;
+  // $scope.cart = {
+  //         items: [
+  //           {
+  //             item: {
+  //                 name: "tacos",
+  //                 price: 25,
+  //                 description: "yummy tacos",
+  //                 allergyInfo: "nuts"
+  //             },
+  //             quantity: 5,
+  //             specialInstructions: "make em good boy"
+  //         },
+  //         {
+  //             item: {
+  //                 name: "more tacos",
+  //                 price: 5,
+  //                 description: "yummier tacos",
+  //                 size: "L"
+  //             },
+  //             quantity: 300,
+  //             specialInstructions: "make em even better"
+  //         }
+  //       ],
+  //         restaurant: "BIG BOI TACOS"
+  //     };
 
-  $scope.loginView = function () {
-    if ($scope.userlogin = true) {
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
+
+  $scope.getRestaurant = function () {
+    restaurantService.getRestaurantInfo($stateParams.restaurantID).then(function (restaurant) {
+      $scope.restaurant = restaurant;
+      console.log(restaurant);
+      $scope.menu = restaurant.menu;
+    });
   };
-  $scope.signupView = function () {
-    if ($scope.usersignup = true) {
-      $scope.userlogin = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
+
+  $scope.getRestaurant();
+
+  $scope.emptyCart = function () {
+    cartService.emptyCart($stateParams.restaurantID, user._id).then(function (cart) {
+      $scope.getCart();
+    });
   };
-  $scope.restLoginView = function () {
-    if ($scope.restlogin = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restsignup = false;
-    }
+
+  $scope.getCart = function () {
+    cartService.getCart($stateParams.restaurantID, user._id).then(function (cart) {
+      console.log('this is the getCart', cart);
+      $scope.order = cart;
+      $scope.cart = cart.items;
+      $scope.total = 0;
+      for (var i = 0; i < $scope.cart.length; i++) {
+        $scope.total += $scope.cart[i].item.price * $scope.cart[i].quantity;
+      }
+    });
   };
-  $scope.restSignupView = function () {
-    if ($scope.restsignup = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-    }
+
+  $scope.getCart();
+
+  $scope.submitOrder = function () {
+    delete $scope.order._id;
+    orderService.submitOrder($scope.order).then(function (order) {
+      console.log(order);
+      $scope.emptyCart();
+      $state.go('cartSuccess', { orderID: order.data._id });
+    });
   };
+
+  $scope.removeFromCart = function (item) {
+    cartService.removeFromCart(item, $stateParams.restaurantID, user._id).then(function (cart) {
+      $scope.getCart();
+    });
+  };
+
+  $scope.user = user;
+
+  console.log(user);
 }]);
 angular.module('foodie').controller('dashboardMenuController', ["$scope", "$stateParams", "ngDialog", "restaurantService", "foodService", function ($scope, $stateParams, ngDialog, restaurantService, foodService) {
 
@@ -855,84 +899,6 @@ angular.module("foodie").controller("mapController", ["$scope", function ($scope
     }
   };
   $scope.getUserLocation();
-}]);
-angular.module("foodie").controller("cartController", ["$scope", "$state", "$stateParams", "orderService", "cartService", "restaurantService", "user", function ($scope, $state, $stateParams, orderService, cartService, restaurantService, user) {
-
-  // $scope.cart = {
-  //         items: [
-  //           {
-  //             item: {
-  //                 name: "tacos",
-  //                 price: 25,
-  //                 description: "yummy tacos",
-  //                 allergyInfo: "nuts"
-  //             },
-  //             quantity: 5,
-  //             specialInstructions: "make em good boy"
-  //         },
-  //         {
-  //             item: {
-  //                 name: "more tacos",
-  //                 price: 5,
-  //                 description: "yummier tacos",
-  //                 size: "L"
-  //             },
-  //             quantity: 300,
-  //             specialInstructions: "make em even better"
-  //         }
-  //       ],
-  //         restaurant: "BIG BOI TACOS"
-  //     };
-
-
-  $scope.getRestaurant = function () {
-    restaurantService.getRestaurantInfo($stateParams.restaurantID).then(function (restaurant) {
-      $scope.restaurant = restaurant;
-      console.log(restaurant);
-      $scope.menu = restaurant.menu;
-    });
-  };
-
-  $scope.getRestaurant();
-
-  $scope.emptyCart = function () {
-    cartService.emptyCart($stateParams.restaurantID, user._id).then(function (cart) {
-      $scope.getCart();
-    });
-  };
-
-  $scope.getCart = function () {
-    cartService.getCart($stateParams.restaurantID, user._id).then(function (cart) {
-      console.log('this is the getCart', cart);
-      $scope.order = cart;
-      $scope.cart = cart.items;
-      $scope.total = 0;
-      for (var i = 0; i < $scope.cart.length; i++) {
-        $scope.total += $scope.cart[i].item.price * $scope.cart[i].quantity;
-      }
-    });
-  };
-
-  $scope.getCart();
-
-  $scope.submitOrder = function () {
-    delete $scope.order._id;
-    orderService.submitOrder($scope.order).then(function (order) {
-      console.log(order);
-      $scope.emptyCart();
-      $state.go('cartSuccess', { orderID: order.data._id });
-    });
-  };
-
-  $scope.removeFromCart = function (item) {
-    cartService.removeFromCart(item, $stateParams.restaurantID, user._id).then(function (cart) {
-      $scope.getCart();
-    });
-  };
-
-  $scope.user = user;
-
-  console.log(user);
 }]);
 angular.module('foodie').controller('homeController', ["$scope", "userService", "restaurantService", "$state", "ngDialog", "ModalService", function ($scope, userService, restaurantService, $state, ngDialog, ModalService) {
 
@@ -1244,4 +1210,38 @@ angular.module("foodie").controller("successController", ["$scope", "$stateParam
   $scope.getOneOrder();
 
   $scope.user = user;
+}]);
+angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
+
+  $scope.close = close;
+  $scope.userlogin = true;
+
+  $scope.loginView = function () {
+    if ($scope.userlogin = true) {
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.signupView = function () {
+    if ($scope.usersignup = true) {
+      $scope.userlogin = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restLoginView = function () {
+    if ($scope.restlogin = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restSignupView = function () {
+    if ($scope.restsignup = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+    }
+  };
 }]);
