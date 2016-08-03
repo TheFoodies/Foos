@@ -3,3 +3,26 @@
   justify-content: center;
   margin: 30px;
 }
+
+.dashboard-top-nav-container {
+  margin: 10px auto;
+  // border: 2px solid green;
+  width: 40%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  button {
+    background:#00b3a1;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    border-radius: 5px;
+    font-family: Rokkitt;
+    padding: 6px 15px 6px 15px;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}

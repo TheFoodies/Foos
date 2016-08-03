@@ -645,40 +645,6 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
 }
 /******/]);
 //# sourceMappingURL=angular-modal-service.js.map
-angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
-
-  $scope.close = close;
-  $scope.userlogin = true;
-
-  $scope.loginView = function () {
-    if ($scope.userlogin = true) {
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.signupView = function () {
-    if ($scope.usersignup = true) {
-      $scope.userlogin = false;
-      $scope.restlogin = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.restLoginView = function () {
-    if ($scope.restlogin = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restsignup = false;
-    }
-  };
-  $scope.restSignupView = function () {
-    if ($scope.restsignup = true) {
-      $scope.userlogin = false;
-      $scope.usersignup = false;
-      $scope.restlogin = false;
-    }
-  };
-}]);
 angular.module('foodie').directive('navbar', function () {
   return {
     restrict: 'EA',
@@ -1191,4 +1157,38 @@ angular.module('foodie').controller('restaurantController', ["$scope", "restaura
             $scope.averagePrice = "$$$$";
         }
     };
+}]);
+angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
+
+  $scope.close = close;
+  $scope.userlogin = true;
+
+  $scope.loginView = function () {
+    if ($scope.userlogin = true) {
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.signupView = function () {
+    if ($scope.usersignup = true) {
+      $scope.userlogin = false;
+      $scope.restlogin = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restLoginView = function () {
+    if ($scope.restlogin = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restsignup = false;
+    }
+  };
+  $scope.restSignupView = function () {
+    if ($scope.restsignup = true) {
+      $scope.userlogin = false;
+      $scope.usersignup = false;
+      $scope.restlogin = false;
+    }
+  };
 }]);
