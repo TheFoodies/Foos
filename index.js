@@ -172,7 +172,7 @@ app.post('/user', function (req, res) { // THIS IS HOW I'VE BEEN MAKING NEW USER
 
 //port
 
-var port = config.port;
+var port = config.PORT;
 app.listen(port, function() {
   console.log('listening to port',port);
 })
