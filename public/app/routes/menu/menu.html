@@ -32,12 +32,16 @@
 
         <ul class="menu-side-cart-products" >
 
-            <li ng-repeat="items in cart">{{items.item.name}}</li>
 
+            <li ng-repeat="items in cart">{{items.item.name}} x {{items.quantity}}</li>
         </ul>
 
 
-    <div ng-if="cart.items.length > 1">Your Cart is Empty</div>
+    <div ng-if="cart.items.length < 1">Your Cart is Empty</div>
+    <!-- <div class="menu-cart-total">{{total}}
+
+    </div> -->
+
     <button class="menu-checkout-button" type="button" name="button" ui-sref="cart({restaurantID: restaurant._id})">Checkout</button>
 </aside>
 </section>
