@@ -11,8 +11,8 @@
         <li><input type="number" name="name" value="{{items.quantity}}" min="0"></li>
         <li>{{items.item.price | currency}}</li>
         <li class="cart-order-controls">
-            <button ng-click="updateCart(item.item._id)">Update</button>
-            <button ng-click="removeFromCart(item.item._id)">Remove</button>
+            <button ng-click="updateCart(items.item._id)">Update</button>
+            <button ng-click="removeFromCart(items.item)">Remove</button>
         </li>
     </ul>
     <hr>
@@ -28,7 +28,7 @@
         <input type="text" name="name" placeholder="Enter Promo Code">
         <button type="button" name="button">Submit</button>
         <hr>
-        <ul>
+        <!-- <ul>
           <li>First Name</li>
           <li><input type="text" name="name"></li>
           <li>Last Name</li>
@@ -38,7 +38,7 @@
           <li>Credit Card Info</li>
           <li><input type="text" name="name" value=""></li>
         </ul>
-        <hr>
+        <hr> -->
         <button type="button" name="button" class="cart-place-order" ng-click="submitOrder()"><h3>Place Order</h3></button>
     </div>
 </aside>

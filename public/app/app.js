@@ -122,7 +122,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
           }
         }
       })
-      .state('order', {
+      .state('dashboard.order', {
         url: '/order',
         templateUrl: './app/routes/order/order.html',
         controller: 'orderController'

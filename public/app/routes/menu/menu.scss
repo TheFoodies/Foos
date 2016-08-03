@@ -140,7 +140,10 @@ input button {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .menu-side-cart ul {
@@ -191,8 +194,8 @@ input button {
 
 .menu-modal-close {
   position: absolute;
-  top: 100px;
-  right: 262px;
+  top: 20px;
+  right: 30px;
   font-size: 1.5rem;
   padding: 10px 12px;
 }
