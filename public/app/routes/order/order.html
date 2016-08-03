@@ -1,87 +1,85 @@
 <section class="order-main-container">
-  <section class="order-content">
-    <section class="left-col">
-    <h2 class="order-title">ORDERS</h2>
+    <section class="order-content">
+        <section class="left-col">
+            <h2 class="order-title">ORDERS</h2>
 
-            <table class="order-table">
-              <tr><td class="tdata">ORDER#:</td><td> 237</td></tr><br>
-              <tr><td class="tdata">PICKUP:</td><td> 5:05p</td></tr><br>
-              <tr><td class="tdata">NAME:</td><td>John Stamos</td></tr><br>
-                <tr><td class="tdata">ITEMS:</td>
-                  <td>
-                    <table>
-                      <tr><td class="mini-data">Greek Fries with a side</td><td>QTY:2</td></tr>
-                      <tr><td class="mini-data">Gyros</td><td>QTY:3</td></tr>
-                    </table>
-                    <button class="order-button" type="button" name="button">COMPLETE</button>
-                  </td>
-                </tr>
-              </tr>
-            </table>
+            <div class="order-table" ng-repeat="order in orders | filter: {completed: !'true'}">
+                <table>
 
-          <table class="order-table">
-            <tr><td class="tdata">ORDER#:</td><td> 237</td></tr><br>
-            <tr><td class="tdata">PICKUP:</td><td> 5:05p</td></tr><br>
-            <tr><td class="tdata">NAME:</td><td>John Stamos</td></tr><br>
-              <tr><td class="tdata">ITEMS:</td>
-                <td>
-                  <table>
-                    <tr><td class="mini-data">Greek Fries with a side</td><td>QTY:2</td></tr>
-                    <tr><td class="mini-data">Gyros</td><td>QTY:3</td></tr>
-                  </table>
-                  <button class="order-button" type="button" name="button">COMPLETE</button>
-                </td>
-              </tr>
-            </tr>
-          </table>
+                    <tr>
+                        <!-- <td class="tdata">ORDER#:</td> -->
+                        <td>{{item.item.name}}</td>
+                    </tr><br>
+                    <tr>
+                        <!-- <td class="tdata">PICKUP:</td>
+                        <td>
+                            5:05p</td>
+                    </tr><br> -->
+                    <tr>
+                        <td class="tdata">NAME:</td>
+                        <td>{{order.customer.firstName}} {{order.customer.lastName}}</td>
+                    </tr><br>
+                    <tr>
+                        <td class="tdata">ITEMS:
+                        </td>
+                        <td>
 
-          <table class="order-table">
-            <tr><td class="tdata">ORDER#:</td><td class="mini-data"> 237</td></tr><br>
-            <tr><td class="tdata">PICKUP:</td><td class="mini-data"> 5:05p</td></tr><br>
-            <tr><td class="tdata">NAME:</td><td class="mini-data">John Stamos</td></tr><br>
-              <tr><td class="tdata">ITEMS:</td>
-                <td>
-                  <table>
-                    <tr><td class="mini-data">{{data}}</td><td>QTY:2</td></tr>
-                    <tr><td class="mini-data">Gyros</td><td>QTY:3</td></tr>
-                  </table>
-                  <button class="order-button" type="button" name="button">COMPLETE</button>
-                </td>
-              </tr>
-            </tr>
-          </table>
+                            <div ng-repeat="item in order.items">
 
+                                <table>
+                                    <tr>
+                                        <td class="mini-data">{{item.item.name}}</td>
+                                        <td>QTY:{{item.quantity}}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <button class="order-button" type="button" name="button" ng-click="completeOrder(order._id)">Started</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </section>
+        <section class="right-col">
+            <h2 class="order-title">COMPLETED ORDERS</h2>
+
+            <div class="complete-orders" ng-repeat="order in orders | filter: {completed: 'true'}">
+                <table class="info-bar">
+                  <tr>
+                      <!-- <td class="tdata">ORDER#:</td> -->
+                      <td>{{item.item.name}}</td>
+                  </tr><br>
+                  <tr>
+                      <!-- <td class="tdata">PICKUP:</td>
+                      <td>
+                          5:05p</td>
+                  </tr><br> -->
+                  <tr>
+                      <td class="tdata">NAME:</td>
+                      <td>{{order.customer.firstName}} {{order.customer.lastName}}</td>
+                  </tr><br>
+                  <tr>
+                      <td class="tdata">ITEMS:
+                      </td>
+                      <td>
+
+                          <div ng-repeat="item in order.items">
+
+                              <table>
+                                  <tr>
+                                      <td class="mini-data">{{item.item.name}}</td>
+                                      <td>QTY:{{item.quantity}}</td>
+                                  </tr>
+
+                              </table>
+                          </div>
+                      </td>
+                  </tr>
+                </table>
+                <button class="remove-button" type="button" name="button" ng-click="finishedOrder(order._id)">Completed</button>
+            </div>
+
+        </section>
     </section>
-    <section class="right-col">
-      <h2 class="order-title">COMPLETED ORDERS</h2>
-
-          <div class="complete-orders">
-            <table class="info-bar">
-                <tr><td class="order-data">4:58p</td></tr>
-                <tr><td class="order-data">{{test}}</td></tr>
-                <tr><td class="order-data">Donut Kings</td></tr>
-            </table>
-            <button class="remove-button" type="button" name="button">REMOVE</button>
-          </div>
-
-          <div class="complete-orders">
-            <table class="info-bar">
-                <tr><td class="order-data">4:58p</td></tr>
-                <tr><td class="order-data">{{test}}</td></tr>
-                <tr><td class="order-data">Donut Kings</td></tr>
-            </table>
-            <button class="remove-button" type="button" name="button">REMOVE</button>
-          </div>
-
-          <div class="complete-orders" ng-repeat="data in orderFeed">
-            <table class="info-bar">
-                <tr><td class="order-data">4:58p</td></tr>
-                <tr><td class="order-data">Chuck Stanley</td></tr>
-                <tr><td class="order-data">Donut Kings</td></tr>
-            </table>
-            <button class="remove-button" type="button" name="button">REMOVE</button>
-          </div>
-
-    </section>
-  </section>
 </section>

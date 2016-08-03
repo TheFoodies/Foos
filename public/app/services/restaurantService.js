@@ -91,6 +91,16 @@ this.addCategory = function(category) {
   });
 };
 
+this.editCategory = function(category, newCategory) {
+  console.log(category)
+  return $http({
+    method: "PUT",
+    url: '/api/restaurant/' + category,
+    data: {newCategory}
+  }).then(function(response) {
+    return response;
+  });
+};
 
 
 });

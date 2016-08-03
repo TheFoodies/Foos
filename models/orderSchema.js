@@ -17,12 +17,20 @@ var orderSchema = new Schema({
   }],
   customer: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   },
   restaurant: {
     type: Schema.Types.ObjectId,
     ref: "restaurant"
   },
+  completed: {
+    type: Boolean,
+    default: false
+  },
+  pickup: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model('order', orderSchema);
