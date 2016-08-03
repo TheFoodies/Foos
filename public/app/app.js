@@ -22,7 +22,7 @@ angular.module("foodie", ["ui.router", "ngDialog", "ngMap", "angularModalService
 
       // log in / sign up states //
       // This is the only place that is linking the loginController to these views.
-      
+
       .state('usersignup', {
         url: '/user/signup',
         templateUrl: './app/routes/home/userSignup.html',

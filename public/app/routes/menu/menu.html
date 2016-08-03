@@ -29,20 +29,14 @@
     </section>
     <aside class="menu-side-cart">
 
-<<<<<<< HEAD
 
-        <ul class="menu-side-cart-products" ng-repeat="item in cart">
-
-            <li ng-repeat="name in item">{{name.name}}</li>
-
-=======
         <ul class="menu-side-cart-products" >
             <li ng-repeat="items in cart">{{items.item.name}}</li>
->>>>>>> e1965dfa4fb710107ab49a2e37d92f389ba9a686
+
         </ul>
 
 
-    <div ng-if="cart.items.length < 1">Your Cart is Empty</div>
+    <div ng-if="cart.items.length > 1">Your Cart is Empty</div>
     <button class="menu-checkout-button" type="button" name="button" ui-sref="cart({restaurantID: restaurant._id})">Checkout</button>
 </aside>
 </section>
