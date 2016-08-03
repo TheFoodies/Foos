@@ -1,19 +1,5 @@
 angular.module("foodie").controller("menuController", function($scope, ngDialog, yelpService, cartService, restaurantService, $stateParams, userService, $state, user) {
 
-  // $scope.getUser = function() {
-  //   userService.getCurrentUser().then(function(response) {
-  //     console.log(response, 'cupcake');
-  //     $scope.user = response;
-  //     if (!response) {
-  //       // $state.go('login');
-  //     }
-  //     $scope.user = response;
-  //   }).catch(function(err) {
-  //     // $state.go('login');
-  //   });
-  // }
-  // $scope.getUser();
-
   $scope.user = user;
 
   $scope.getRestaurant = function() {
@@ -97,7 +83,6 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
           $scope.quantity--;
       }
   }
-
 
 
 
