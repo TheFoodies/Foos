@@ -138,6 +138,15 @@ input button {
   position: fixed;
 }
 
+.menu-side-cart ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-side-cart ul li {
+  margin: 5px auto;
+}
+
 .menu-checkout-button {
   position: absolute;
   bottom: 10%;

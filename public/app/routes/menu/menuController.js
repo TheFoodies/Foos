@@ -53,7 +53,7 @@ angular.module("foodie").controller("menuController", function($scope, ngDialog,
   $scope.getCart = function() {
     cartService.getCart($stateParams.restaurantID, user._id).then(function(cart) {
       console.log('this is the getCart', cart)
-      $scope.cart = cart;
+      $scope.cart = cart.items;
     })
   }
 

@@ -94,7 +94,9 @@ app.get('/api/cart/:restaurant/:user', cartController.show)
 
 app.post('/api/cart/', cartController.create)
 
-app.put('/api/cart/:restauant/:user', cartController.update)
+app.put('/api/cart/:restaurant/:user', cartController.update)
+
+app.put('/api/cart/empty/:restaurant/:user', cartController.empty)
 
 // app.delete('/api/cart/:id', cartController.destroy)
 
@@ -109,13 +111,16 @@ app.put('/api/food/', foodController.update)
 app.delete('/api/food/:id', foodController.destroy)
 
 //Order
-app.get('/api/order/restaurant/', isAuthed, orderController.show)
+app.get('/api/order/', orderController.show)
+
+app.put('/api/order/completed/:id', orderController.completed)
 
 app.post('/api/order/', isAuthed, orderController.create)
 
 app.put('/api/order/:id', isAuthed, orderController.update)
 
 app.delete('/api/order/:id', isAuthed, orderController.destroy)
+
 
 //Restaurant
 app.get('/api/restaurant/:id', restaurantController.show)
@@ -145,7 +150,6 @@ app.get('/allusers', function (req, res, next) {
     }
   })
 })
-
 
 
 //make user - need to put this in sigh up function

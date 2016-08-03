@@ -1,5 +1,5 @@
 angular.module('foodie')
-  .controller('homeController', function($scope, userService, restaurantService, $state, ngDialog) {
+  .controller('homeController', function($scope, userService, restaurantService, $state, ngDialog, ModalService) {
 
 // $scope.user = user;
 
@@ -80,13 +80,16 @@ angular.module('foodie')
       })
     }
 
-
-
-    $scope.openLogin = function() {
-        ngDialog.open({
-          template: './app/routes/home/authModal.html',
+    $scope.openLogin = function (){
+      ModalService.showModal({
+        templateUrl: "./app/modals/login/login-template.html",
+        controller: "loginModalController"
+      }).then(function(modal) {
+        // Function that runs when modal closes
+        modal.close.then(function(then) {
+          $scope.confirmationAnswer = then;
         });
-        $state.go('userlogin');
-    };
+      });
+    }
 
   });
