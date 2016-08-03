@@ -436,6 +436,13 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
     });
   };
 }]);
+angular.module('foodie').directive('navbar', function () {
+  return {
+    restrict: 'EA',
+    templateUrl: './app/directives/navbar/navbar.html',
+    controller: 'homeController'
+  };
+});
 /******/(function (modules) {
 	// webpackBootstrap
 	/******/ // The module cache
@@ -660,13 +667,6 @@ angular.module("foodie").service("yelpService", ["$q", "$http", function ($q, $h
 }
 /******/]);
 //# sourceMappingURL=angular-modal-service.js.map
-angular.module('foodie').directive('navbar', function () {
-  return {
-    restrict: 'EA',
-    templateUrl: './app/directives/navbar/navbar.html',
-    controller: 'homeController'
-  };
-});
 angular.module("foodie").controller("loginModalController", ["$scope", "close", function ($scope, close) {
 
   $scope.close = close;
