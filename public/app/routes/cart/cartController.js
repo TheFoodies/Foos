@@ -1,4 +1,4 @@
-angular.module("foodie").controller("cartController", function($scope, $stateParams, orderService, cartService, restaurantService, user) {
+angular.module("foodie").controller("cartController", function($scope, $state, $stateParams, orderService, cartService, restaurantService, user) {
 
     // $scope.cart = {
     //         items: [
@@ -66,6 +66,7 @@ angular.module("foodie").controller("cartController", function($scope, $statePar
           orderService.submitOrder($scope.order).then(function(order) {
             console.log(order);
             $scope.emptyCart()
+            $state.go('cartSuccess', {orderID: order.data._id})
           })
         }
 
